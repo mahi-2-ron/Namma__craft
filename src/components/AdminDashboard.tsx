@@ -275,12 +275,12 @@ export const AdminDashboard = ({ onNavigate }: any) => {
                             </td>
                             <td className="px-8 py-5">
                               <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest ${auc.status === 'Active' ? 'bg-emerald-50 text-emerald-600' :
-                                  auc.status === 'Flagged' ? 'bg-rose-50 text-rose-600' :
-                                    'bg-slate-50 text-slate-600'
+                                auc.status === 'Flagged' ? 'bg-rose-50 text-rose-600' :
+                                  'bg-slate-50 text-slate-600'
                                 }`}>
                                 <div className={`w-1 h-1 rounded-full ${auc.status === 'Active' ? 'bg-emerald-600' :
-                                    auc.status === 'Flagged' ? 'bg-rose-600' :
-                                      'bg-slate-600'
+                                  auc.status === 'Flagged' ? 'bg-rose-600' :
+                                    'bg-slate-600'
                                   }`} />
                                 {auc.status}
                               </span>
@@ -295,17 +295,20 @@ export const AdminDashboard = ({ onNavigate }: any) => {
                                 </button>
                                 {auc.status === 'Active' && (
                                   <>
-                                    <button className="p-2 hover:bg-amber-500 hover:text-white rounded-lg transition-all text-text-soft">
+                                    <button
+                                      onClick={() => alert(`Auction ${auc.id} paused.`)}
+                                      className="p-2 hover:bg-amber-500 hover:text-white rounded-lg transition-all text-text-soft"
+                                    >
                                       <Pause className="w-4 h-4" />
                                     </button>
-                                    <button className="p-2 hover:bg-emerald-500 hover:text-white rounded-lg transition-all text-text-soft">
-                                      <CheckCircle2 className="w-4 h-4" />
+                                    <button
+                                      onClick={() => alert(`Auction ${auc.id} flagged for review.`)}
+                                      className="p-2 hover:bg-rose-500 hover:text-white rounded-lg transition-all text-text-soft"
+                                    >
+                                      <XCircle className="w-4 h-4" />
                                     </button>
                                   </>
                                 )}
-                                <button className="p-2 hover:bg-rose-500 hover:text-white rounded-lg transition-all text-text-soft">
-                                  <XCircle className="w-4 h-4" />
-                                </button>
                               </div>
                             </td>
                           </tr>
