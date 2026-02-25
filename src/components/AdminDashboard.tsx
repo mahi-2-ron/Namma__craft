@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import {
   Users,
@@ -70,7 +71,8 @@ const StatCard = ({ title, value, change, icon: Icon, trend }: any) => (
   </motion.div>
 );
 
-export const AdminDashboard = ({ onNavigate }: any) => {
+export const AdminDashboard = () => {
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('dashboard');
   const [selectedAuction, setSelectedAuction] = useState<any>(null);
 
@@ -229,7 +231,7 @@ export const AdminDashboard = ({ onNavigate }: any) => {
                     <div className="flex gap-3">
                       <button className="btn-secondary !py-2 !px-4 text-xs">Export CSV</button>
                       <button
-                        onClick={() => onNavigate('create-auction')}
+                        onClick={() => navigate('/admin/create-auction')}
                         className="btn-primary !py-2 !px-6 text-xs"
                       >
                         Create Auction
