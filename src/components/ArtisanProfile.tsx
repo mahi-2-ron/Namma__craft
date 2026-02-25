@@ -219,7 +219,7 @@ export const ArtisanProfile = () => {
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
                 {artisanProducts.map(product => (
-                  <ProductCard key={product.id} {...product} onNavigate={onNavigate} />
+                  <ProductCard key={product.id} {...product} />
                 ))}
               </div>
             </section>
