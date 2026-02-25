@@ -110,11 +110,13 @@ export const Marketplace = ({ onNavigate }: any) => {
 
   const [searchQuery, setSearchQuery] = useState('');
 
-  const filteredProducts = activeProducts.filter(p =>
-    p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    (p.artisan || p.creator)?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    p.region.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const filteredProducts = activeProducts.filter(p => {
+    const searchStr = searchQuery.toLowerCase();
+    const nameMatch = p.name.toLowerCase().includes(searchStr);
+    const regionMatch = p.region.toLowerCase().includes(searchStr);
+    const creatorMatch = (('artisan' in p ? p.artisan : p.creator) as string).toLowerCase().includes(searchStr);
+    return nameMatch || regionMatch || creatorMatch;
+  });
 
   return (
     <div className="bg-cream min-h-screen mandala-bg">
