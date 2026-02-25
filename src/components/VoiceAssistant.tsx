@@ -37,7 +37,7 @@ export const VoiceAssistant = ({ onDataExtracted }: VoiceAssistantProps) => {
   const processWithAI = async (text: string) => {
     setIsProcessing(true);
     try {
-      // Local processing logic to simulate extraction without Gemini
+      // Local processing logic to simulate extraction
       await new Promise(resolve => setTimeout(resolve, 1500));
 
       const mockData: Record<string, any> = {
