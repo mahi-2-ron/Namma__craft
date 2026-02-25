@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { Mail, Lock, ArrowRight, Github, Chrome, User, ShieldCheck } from 'lucide-react';
 
-export const Login = ({ onNavigate }: any) => {
+export const Login = () => {
+  const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(true);
   const [role, setRole] = useState('buyer'); // buyer, seller, admin
 
@@ -50,9 +52,9 @@ export const Login = ({ onNavigate }: any) => {
 
           <form className="space-y-5" onSubmit={(e) => {
             e.preventDefault();
-            if (role === 'admin') onNavigate('admin');
-            else if (role === 'seller') onNavigate('creator');
-            else onNavigate('home');
+            if (role === 'admin') navigate('/admin');
+            else if (role === 'seller') navigate('/seller');
+            else navigate('/');
           }}>
             <div className="space-y-2">
               <label className="text-[10px] font-bold uppercase tracking-widest text-text-soft ml-4">Email Address</label>
