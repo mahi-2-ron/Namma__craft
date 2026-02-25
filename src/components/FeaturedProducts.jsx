@@ -1,11 +1,12 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Heart, ShoppingCart, ChevronRight, Gavel, Sparkles } from 'lucide-react';
+import { Heart, ShoppingCart, ChevronRight, Gavel } from 'lucide-react';
 import { motion } from 'motion/react';
+import { craftProducts } from '../data/db';
 
-export const ProductCard = ({ id, image, name, artisan, price, region, rarity, stock, isPopularInAuction }: any) => {
+export const ProductCard = ({ id, image, name, artisan, price, region, rarity, stock, isPopularInAuction }) => {
   const navigate = useNavigate();
-  const getRarityColor = (level: string) => {
+  const getRarityColor = (level) => {
     switch (level?.toLowerCase()) {
       case 'one-of-a-kind': return 'bg-purple-500 text-white';
       case 'limited edition': return 'bg-[#CD7F32] text-white'; // Bronze
@@ -14,7 +15,7 @@ export const ProductCard = ({ id, image, name, artisan, price, region, rarity, s
     }
   };
 
-  const getRarityBar = (level: string) => {
+  const getRarityBar = (level) => {
     switch (level?.toLowerCase()) {
       case 'one-of-a-kind': return 'w-full bg-purple-500';
       case 'limited edition': return 'w-3/4 bg-[#CD7F32]';
@@ -122,12 +123,7 @@ export const ProductCard = ({ id, image, name, artisan, price, region, rarity, s
 
 export const FeaturedProducts = () => {
   const navigate = useNavigate();
-  const products = [
-    { id: 1, name: 'Hand-Painted Blue Pottery Vase', artisan: 'Ananya Sharma', price: 2450, region: 'Jaipur, Rajasthan', image: 'https://picsum.photos/seed/jaipur-pottery/600/800', rarity: 'Rare', stock: 5, isPopularInAuction: true },
-    { id: 2, name: 'Hand-Woven Banarasi Silk Stole', artisan: 'Rajesh Kumar', price: 4500, region: 'Varanasi, UP', image: 'https://picsum.photos/seed/silk/600/800', rarity: 'Limited Edition', stock: 2, isPopularInAuction: false },
-    { id: 3, name: 'Intricate Teak Wood Carving', artisan: 'Vikram Singh', price: 3200, region: 'Saharanpur, UP', image: 'https://picsum.photos/seed/wood/600/800', rarity: 'One-of-a-kind', stock: 1, isPopularInAuction: true },
-    { id: 4, name: 'Traditional Meenakari Jhumkas', artisan: 'Priya Das', price: 1800, region: 'Bikaner, Rajasthan', image: 'https://picsum.photos/seed/jewelry-india/600/800', rarity: 'Common', stock: 12, isPopularInAuction: false },
-  ];
+  const products = craftProducts.slice(0, 4);
 
   return (
     <section className="section-spacing bg-cream-dark relative overflow-hidden">
