@@ -1,18 +1,31 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'motion/react';
-import { 
-  CreditCard, 
-  Truck, 
-  MapPin, 
-  ShieldCheck, 
-  ChevronRight, 
-  CheckCircle2, 
-  Package, 
+import {
+  CreditCard,
+  Truck,
+  MapPin,
+  ShieldCheck,
+  ChevronRight,
+  CheckCircle2,
+  Package,
   Clock,
   ArrowLeft
+} from 'lucide-center';
+import {
+  CreditCard as CreditCardIcon,
+  Truck as TruckIcon,
+  MapPin as MapPinIcon,
+  ShieldCheck as ShieldCheckIcon,
+  ChevronRight as ChevronRightIcon,
+  CheckCircle2 as CheckCircle2Icon,
+  Package as PackageIcon,
+  Clock as ClockIcon,
+  ArrowLeft as ArrowLeftIcon
 } from 'lucide-react';
 
-export const Checkout = ({ onNavigate }: any) => {
+export const Checkout = () => {
+  const navigate = useNavigate();
   const [step, setStep] = useState(1); // 1: Shipping, 2: Payment, 3: Success
   const [isTracking, setIsTracking] = useState(false);
 
@@ -31,18 +44,18 @@ export const Checkout = ({ onNavigate }: any) => {
     return (
       <div className="min-h-screen bg-cream flex items-center justify-center p-6">
         <div className="absolute inset-0 mandala-bg opacity-[0.05] pointer-events-none" />
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           className="max-w-2xl w-full bg-white rounded-[60px] p-12 md:p-20 shadow-premium text-center relative overflow-hidden"
         >
           <div className="absolute top-0 left-0 w-full h-2 bg-emerald-500" />
           <div className="w-24 h-24 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-8">
-            <CheckCircle2 className="w-12 h-12" />
+            <CheckCircle2Icon className="w-12 h-12" />
           </div>
           <h1 className="text-4xl font-display font-bold text-primary mb-4">Payment Successful!</h1>
           <p className="text-text-soft text-lg mb-12">Your order <span className="text-primary font-bold">#NC-84291</span> has been placed successfully. The artisan has been notified.</p>
-          
+
           <div className="bg-cream/30 rounded-3xl p-8 mb-12 border border-highlight/10 text-left">
             <h3 className="text-xs font-bold uppercase tracking-widest text-text-soft mb-6">Delivery Tracking</h3>
             <div className="space-y-8">
@@ -55,7 +68,7 @@ export const Checkout = ({ onNavigate }: any) => {
                 <div key={i} className="flex gap-4 relative">
                   {i < 3 && <div className={`absolute left-[11px] top-6 w-[2px] h-8 ${item.done ? 'bg-emerald-500' : 'bg-highlight/20'}`} />}
                   <div className={`w-6 h-6 rounded-full flex items-center justify-center shrink-0 z-10 ${item.done ? 'bg-emerald-500 text-white' : 'bg-highlight/20 text-white'}`}>
-                    <CheckCircle2 className="w-3.5 h-3.5" />
+                    <CheckCircle2Icon className="w-3.5 h-3.5" />
                   </div>
                   <div>
                     <p className={`text-sm font-bold ${item.done ? 'text-primary' : 'text-text-soft'}`}>{item.status}</p>
@@ -67,8 +80,8 @@ export const Checkout = ({ onNavigate }: any) => {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4">
-            <button 
-              onClick={() => onNavigate('home')}
+            <button
+              onClick={() => navigate('/')}
               className="btn-primary flex-1 py-4 shadow-xl shadow-primary/20"
             >
               Back to Home
@@ -83,11 +96,11 @@ export const Checkout = ({ onNavigate }: any) => {
   return (
     <div className="min-h-screen bg-cream pt-32 pb-20 px-6">
       <div className="container-custom max-w-6xl mx-auto">
-        <button 
-          onClick={() => onNavigate('auction')}
+        <button
+          onClick={() => navigate('/auction/1')}
           className="flex items-center gap-2 text-text-soft hover:text-accent transition-all text-xs font-bold uppercase tracking-widest mb-10"
         >
-          <ArrowLeft className="w-4 h-4" /> Back to Auction
+          <ArrowLeftIcon className="w-4 h-4" /> Back to Auction
         </button>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
@@ -96,13 +109,13 @@ export const Checkout = ({ onNavigate }: any) => {
             <div className="bg-white rounded-[40px] p-10 border border-highlight/10 shadow-sm">
               <div className="flex items-center gap-6 mb-10">
                 <div className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-colors ${step >= 1 ? 'bg-accent text-white' : 'bg-cream text-text-soft'}`}>
-                  <MapPin className="w-6 h-6" />
+                  <MapPinIcon className="w-6 h-6" />
                 </div>
                 <div className="h-[2px] flex-1 bg-highlight/10 relative">
                   <div className={`absolute inset-0 bg-accent transition-all duration-500 ${step >= 2 ? 'w-full' : 'w-0'}`} />
                 </div>
                 <div className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-colors ${step >= 2 ? 'bg-accent text-white' : 'bg-cream text-text-soft'}`}>
-                  <CreditCard className="w-6 h-6" />
+                  <CreditCardIcon className="w-6 h-6" />
                 </div>
               </div>
 
@@ -135,7 +148,7 @@ export const Checkout = ({ onNavigate }: any) => {
                   </div>
                   <button onClick={() => setStep(2)} className="w-full btn-primary !py-5 text-sm shadow-xl shadow-primary/20 flex items-center justify-center gap-3 group">
                     Continue to Payment
-                    <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    <ChevronRightIcon className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </button>
                 </div>
               ) : (
@@ -157,7 +170,7 @@ export const Checkout = ({ onNavigate }: any) => {
                     ))}
                   </div>
                   <div className="bg-emerald-50 p-6 rounded-2xl border border-emerald-100 flex items-start gap-4">
-                    <ShieldCheck className="w-6 h-6 text-emerald-600 shrink-0" />
+                    <ShieldCheckIcon className="w-6 h-6 text-emerald-600 shrink-0" />
                     <div>
                       <p className="text-sm font-bold text-emerald-900">Secure Transaction</p>
                       <p className="text-xs text-emerald-700 mt-1 leading-relaxed">Your payment is protected by our artisan trust guarantee. Funds are held in escrow until delivery is confirmed.</p>
@@ -176,14 +189,14 @@ export const Checkout = ({ onNavigate }: any) => {
           <div className="lg:col-span-5">
             <div className="bg-white rounded-[40px] p-10 border border-highlight/10 shadow-sm sticky top-32">
               <h3 className="text-xl font-display font-bold text-primary mb-8">Order Summary</h3>
-              
+
               <div className="flex gap-6 mb-8">
                 <img src={product.image} alt={product.name} className="w-24 h-24 rounded-2xl object-cover" />
                 <div>
                   <h4 className="font-bold text-primary mb-1">{product.name}</h4>
                   <p className="text-xs text-text-soft mb-2">Artisan: {product.artisan}</p>
                   <div className="flex items-center gap-2 text-accent">
-                    <Clock className="w-3.5 h-3.5" />
+                    <ClockIcon className="w-3.5 h-3.5" />
                     <span className="text-[10px] font-bold uppercase tracking-widest">Auction Item</span>
                   </div>
                 </div>
@@ -211,11 +224,11 @@ export const Checkout = ({ onNavigate }: any) => {
 
               <div className="space-y-4">
                 <div className="flex items-center gap-3 text-[10px] font-bold uppercase tracking-widest text-text-soft/60">
-                  <Truck className="w-4 h-4" />
+                  <TruckIcon className="w-4 h-4" />
                   Estimated Delivery: Feb 28, 2024
                 </div>
                 <div className="flex items-center gap-3 text-[10px] font-bold uppercase tracking-widest text-text-soft/60">
-                  <Package className="w-4 h-4" />
+                  <PackageIcon className="w-4 h-4" />
                   Eco-friendly Packaging Included
                 </div>
               </div>
