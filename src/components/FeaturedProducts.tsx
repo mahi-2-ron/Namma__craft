@@ -1,8 +1,10 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Heart, ShoppingCart, ChevronRight, Gavel, Sparkles } from 'lucide-react';
 import { motion } from 'motion/react';
 
-export const ProductCard = ({ image, name, artisan, price, region, rarity, stock, isPopularInAuction, onNavigate }: any) => {
+export const ProductCard = ({ id, image, name, artisan, price, region, rarity, stock, isPopularInAuction }: any) => {
+  const navigate = useNavigate();
   const getRarityColor = (level: string) => {
     switch (level?.toLowerCase()) {
       case 'one-of-a-kind': return 'bg-purple-500 text-white';
@@ -27,7 +29,7 @@ export const ProductCard = ({ image, name, artisan, price, region, rarity, stock
     <motion.div
       whileHover={{ y: -8 }}
       transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-      onClick={() => onNavigate && onNavigate('product')}
+      onClick={() => navigate(`/product/${id || 1}`)}
       className="group cursor-pointer relative bg-white rounded-[32px] p-4 shadow-sm hover:shadow-premium transition-all duration-500 border border-highlight/10"
     >
       <div className="relative aspect-[4/5] rounded-[24px] overflow-hidden mb-6">
@@ -118,7 +120,8 @@ export const ProductCard = ({ image, name, artisan, price, region, rarity, stock
   );
 };
 
-export const FeaturedProducts = ({ onNavigate }: any) => {
+export const FeaturedProducts = () => {
+  const navigate = useNavigate();
   const products = [
     { id: 1, name: 'Hand-Painted Blue Pottery Vase', artisan: 'Ananya Sharma', price: 2450, region: 'Jaipur, Rajasthan', image: 'https://picsum.photos/seed/jaipur-pottery/600/800', rarity: 'Rare', stock: 5, isPopularInAuction: true },
     { id: 2, name: 'Hand-Woven Banarasi Silk Stole', artisan: 'Rajesh Kumar', price: 4500, region: 'Varanasi, UP', image: 'https://picsum.photos/seed/silk/600/800', rarity: 'Limited Edition', stock: 2, isPopularInAuction: false },
@@ -147,7 +150,7 @@ export const FeaturedProducts = ({ onNavigate }: any) => {
             </p>
           </div>
           <button
-            onClick={() => onNavigate('marketplace')}
+            onClick={() => navigate('/marketplace')}
             className="btn-secondary group flex items-center gap-2"
           >
             View Full Collection
@@ -157,7 +160,7 @@ export const FeaturedProducts = ({ onNavigate }: any) => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {products.map(product => (
-            <ProductCard key={product.id} {...product} onNavigate={onNavigate} />
+            <ProductCard key={product.id} {...product} />
           ))}
         </div>
       </div>
