@@ -9,22 +9,24 @@ const regions = ['All India', 'Jaipur, Rajasthan', 'Varanasi, UP', 'Kutch, Gujar
 const foodSpecialties = ['All', 'Homemade', 'Festival Special', 'Organic', 'Vegan'];
 
 const FoodCard = ({ image, name, creator, price, region, tag, onNavigate }: any) => {
+  const [isFavorite, setIsFavorite] = useState(false);
+
   return (
-    <motion.div 
+    <motion.div
       whileHover={{ y: -8 }}
       transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
       onClick={() => onNavigate && onNavigate('food-detail')}
       className="group cursor-pointer relative bg-white rounded-[32px] p-4 shadow-sm hover:shadow-premium transition-all duration-500 border border-highlight/10"
     >
       <div className="relative aspect-[4/5] rounded-[24px] overflow-hidden mb-6">
-        <img 
-          src={image} 
-          alt={name} 
+        <img
+          src={image}
+          alt={name}
           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
           referrerPolicy="no-referrer"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-        
+
         <div className="absolute top-4 left-4 z-10 flex flex-col gap-2">
           <span className="badge-indian shadow-lg backdrop-blur-md bg-white/80 border-white/50 text-[10px]">
             {region}
@@ -34,15 +36,24 @@ const FoodCard = ({ image, name, creator, price, region, tag, onNavigate }: any)
           </span>
         </div>
 
-        <button 
-          onClick={(e) => { e.stopPropagation(); }}
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            setIsFavorite(!isFavorite);
+          }}
           className="absolute top-4 right-4 p-3 bg-white/90 backdrop-blur-md rounded-full hover:bg-white transition-all z-10 shadow-lg hover:scale-110"
         >
-          <Heart className="w-4 h-4 text-primary hover:text-accent transition-colors" />
+          <Heart className={`w-4 h-4 transition-colors ${isFavorite ? 'fill-accent text-accent' : 'text-primary hover:text-accent'}`} />
         </button>
 
         <div className="absolute bottom-4 left-4 right-4 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
-          <button className="w-full btn-primary !py-3 text-xs flex items-center justify-center gap-2 shadow-xl">
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              alert(`${name} added to your cart!`);
+            }}
+            className="w-full btn-primary !py-3 text-xs flex items-center justify-center gap-2 shadow-xl"
+          >
             <ShoppingBag className="w-4 h-4" /> Add to Cart
           </button>
         </div>
@@ -111,23 +122,21 @@ export const Marketplace = ({ onNavigate }: any) => {
             </div>
             <div className="h-[1px] w-12 bg-accent/30" />
           </div>
-          
+
           {/* Tabs */}
           <div className="flex justify-center mb-12">
             <div className="bg-white/50 backdrop-blur-md p-1.5 rounded-[24px] border border-primary/5 flex gap-2">
-              <button 
+              <button
                 onClick={() => setActiveTab('crafts')}
-                className={`px-10 py-3 rounded-[20px] text-xs font-bold uppercase tracking-widest transition-all ${
-                  activeTab === 'crafts' ? 'bg-primary text-white shadow-lg' : 'text-text-soft hover:text-primary'
-                }`}
+                className={`px-10 py-3 rounded-[20px] text-xs font-bold uppercase tracking-widest transition-all ${activeTab === 'crafts' ? 'bg-primary text-white shadow-lg' : 'text-text-soft hover:text-primary'
+                  }`}
               >
                 Handmade Crafts
               </button>
-              <button 
+              <button
                 onClick={() => setActiveTab('foods')}
-                className={`px-10 py-3 rounded-[20px] text-xs font-bold uppercase tracking-widest transition-all ${
-                  activeTab === 'foods' ? 'bg-primary text-white shadow-lg' : 'text-text-soft hover:text-primary'
-                }`}
+                className={`px-10 py-3 rounded-[20px] text-xs font-bold uppercase tracking-widest transition-all ${activeTab === 'foods' ? 'bg-primary text-white shadow-lg' : 'text-text-soft hover:text-primary'
+                  }`}
               >
                 Traditional Foods
               </button>
@@ -135,7 +144,7 @@ export const Marketplace = ({ onNavigate }: any) => {
           </div>
 
           <p className="text-text-soft max-w-2xl mx-auto text-lg">
-            {activeTab === 'crafts' 
+            {activeTab === 'crafts'
               ? 'Browse our curated collection of authentic Indian crafts, direct from the hands of master artisans.'
               : 'Discover homemade delicacies and regional specialties crafted using traditional recipes.'}
           </p>
@@ -145,21 +154,21 @@ export const Marketplace = ({ onNavigate }: any) => {
         <div className="flex flex-col lg:flex-row justify-between items-center gap-6 mb-12 bg-white/40 backdrop-blur-sm p-4 rounded-3xl border border-primary/5">
           <div className="relative w-full lg:w-96">
             <Search className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-text-soft" />
-            <input 
-              type="text" 
-              placeholder={`Search by ${activeTab === 'crafts' ? 'craft' : 'food'}, region or creator...`} 
+            <input
+              type="text"
+              placeholder={`Search by ${activeTab === 'crafts' ? 'craft' : 'food'}, region or creator...`}
               className="search-bar w-full pl-12 pr-6 !h-[50px] !bg-white/60"
             />
           </div>
-          
+
           <div className="flex items-center gap-4 w-full lg:w-auto">
-            <button 
+            <button
               onClick={() => setIsSidebarOpen(true)}
               className="lg:hidden flex items-center gap-2 btn-secondary !py-2.5 !px-6 text-sm"
             >
               <Filter className="w-4 h-4" /> Filters
             </button>
-            
+
             <div className="relative flex-1 lg:flex-none">
               <select className="w-full appearance-none input-field !py-3 pl-6 pr-12 text-sm font-bold text-primary cursor-pointer !bg-white/60">
                 <option>Sort by: Popular</option>
@@ -195,10 +204,10 @@ export const Marketplace = ({ onNavigate }: any) => {
               {/* Price Range */}
               <div>
                 <h4 className="text-sm font-bold uppercase tracking-widest text-primary mb-6">Price Range</h4>
-                <input 
-                  type="range" 
-                  min="0" 
-                  max={activeTab === 'crafts' ? 10000 : 2000} 
+                <input
+                  type="range"
+                  min="0"
+                  max={activeTab === 'crafts' ? 10000 : 2000}
                   value={priceRange}
                   onChange={(e) => setPriceRange(parseInt(e.target.value))}
                   className="w-full accent-accent h-1.5 bg-primary/5 rounded-full appearance-none cursor-pointer"
@@ -243,19 +252,19 @@ export const Marketplace = ({ onNavigate }: any) => {
           <div className="flex-1">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {activeProducts.map(product => (
-                activeTab === 'crafts' 
+                activeTab === 'crafts'
                   ? <ProductCard key={product.id} {...product} onNavigate={onNavigate} />
                   : <FoodCard key={product.id} {...product} onNavigate={onNavigate} />
               ))}
             </div>
-            
+
             {/* Pagination */}
             <div className="mt-20 flex justify-center items-center gap-4">
               <button className="w-12 h-12 rounded-full flex items-center justify-center border border-primary/10 text-primary hover:bg-primary hover:text-white transition-all">←</button>
               <div className="flex gap-2">
                 {[1, 2, 3].map(n => (
-                  <button 
-                    key={n} 
+                  <button
+                    key={n}
                     className={`w-12 h-12 rounded-full flex items-center justify-center font-bold text-sm transition-all ${n === 1 ? 'bg-primary text-white shadow-lg' : 'bg-white text-primary border border-primary/5 hover:border-accent'}`}
                   >
                     {n}
@@ -298,14 +307,14 @@ export const Marketplace = ({ onNavigate }: any) => {
       <AnimatePresence>
         {isSidebarOpen && (
           <>
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsSidebarOpen(false)}
               className="fixed inset-0 bg-primary/40 backdrop-blur-md z-[60]"
             />
-            <motion.aside 
+            <motion.aside
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
@@ -317,7 +326,7 @@ export const Marketplace = ({ onNavigate }: any) => {
                   <X className="w-6 h-6 text-primary" />
                 </button>
               </div>
-              
+
               <div className="space-y-12">
                 <div>
                   <h4 className="text-xs font-bold uppercase tracking-widest text-primary mb-6">Category</h4>
@@ -330,7 +339,7 @@ export const Marketplace = ({ onNavigate }: any) => {
                     ))}
                   </div>
                 </div>
-                <button 
+                <button
                   onClick={() => setIsSidebarOpen(false)}
                   className="w-full btn-primary"
                 >
