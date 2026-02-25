@@ -108,6 +108,14 @@ export const Marketplace = ({ onNavigate }: any) => {
   const activeProducts = activeTab === 'crafts' ? craftProducts : foodProducts;
   const activeCategories = activeTab === 'crafts' ? craftCategories : foodCategories;
 
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const filteredProducts = activeProducts.filter(p =>
+    p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    (p.artisan || p.creator)?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    p.region.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <div className="bg-cream min-h-screen mandala-bg">
       <div className="container-custom py-20">
@@ -158,6 +166,8 @@ export const Marketplace = ({ onNavigate }: any) => {
               type="text"
               placeholder={`Search by ${activeTab === 'crafts' ? 'craft' : 'food'}, region or creator...`}
               className="search-bar w-full pl-12 pr-6 !h-[50px] !bg-white/60"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
             />
           </div>
 
