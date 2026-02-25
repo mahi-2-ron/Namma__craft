@@ -263,12 +263,22 @@ export const Marketplace = ({ onNavigate }: any) => {
           {/* Product Grid */}
           <div className="flex-1">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-              {activeProducts.map(product => (
+              {filteredProducts.map(product => (
                 activeTab === 'crafts'
                   ? <ProductCard key={product.id} {...product} onNavigate={onNavigate} />
                   : <FoodCard key={product.id} {...product} onNavigate={onNavigate} />
               ))}
             </div>
+
+            {filteredProducts.length === 0 && (
+              <div className="text-center py-20 bg-white/40 rounded-[40px] border border-dashed border-primary/10">
+                <div className="w-16 h-16 bg-cream rounded-full flex items-center justify-center mx-auto mb-6 text-text-soft/40">
+                  <Search className="w-8 h-8" />
+                </div>
+                <h3 className="text-2xl font-display font-bold text-primary mb-2">No treasures found</h3>
+                <p className="text-text-soft">We couldn't find anything matching "{searchQuery}".<br />Try adjusting your search or filters.</p>
+              </div>
+            )}
 
             {/* Pagination */}
             <div className="mt-20 flex justify-center items-center gap-4">
