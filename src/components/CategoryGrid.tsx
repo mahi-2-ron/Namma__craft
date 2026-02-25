@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { Coffee, Scissors, Hammer, Gem, Palette } from 'lucide-react';
 
@@ -10,11 +11,12 @@ const categories = [
   { name: 'Paintings', icon: Palette, image: 'https://picsum.photos/seed/indian-painting/400/400' },
 ];
 
-export const CategoryGrid = ({ onNavigate }: any) => {
+export const CategoryGrid = () => {
+  const navigate = useNavigate();
   return (
     <section className="section-spacing bg-cream relative overflow-hidden">
       <div className="absolute inset-0 mandala-bg opacity-[0.03] pointer-events-none" />
-      
+
       <div className="container-custom relative z-10">
         <div className="text-center mb-20 max-w-2xl mx-auto">
           <div className="flex items-center justify-center gap-3 mb-6">
@@ -37,26 +39,26 @@ export const CategoryGrid = ({ onNavigate }: any) => {
               viewport={{ once: true }}
               transition={{ delay: idx * 0.1 }}
               whileHover={{ y: -12 }}
-              onClick={() => onNavigate('marketplace')}
+              onClick={() => navigate('/marketplace')}
               className="group flex flex-col items-center gap-8 cursor-pointer"
             >
               <div className="relative w-full aspect-square rounded-[48px] overflow-hidden bg-white border border-highlight/10 flex items-center justify-center transition-all duration-700 group-hover:shadow-premium group-hover:border-accent/30">
-                <img 
-                  src={cat.image} 
-                  alt={cat.name} 
+                <img
+                  src={cat.image}
+                  alt={cat.name}
                   className="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:opacity-40 transition-opacity duration-700"
                   referrerPolicy="no-referrer"
                 />
                 <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                
+
                 {/* Decorative Pattern Overlay */}
                 <div className="absolute inset-0 mandala-bg opacity-[0.02] group-hover:opacity-[0.05] transition-opacity duration-700" />
-                
+
                 <div className="relative z-10 p-8 rounded-[32px] bg-cream/50 backdrop-blur-sm shadow-sm group-hover:scale-110 group-hover:bg-white transition-all duration-700">
                   <cat.icon className="w-10 h-10 text-primary group-hover:text-accent transition-colors duration-500" />
                 </div>
               </div>
-              
+
               <div className="text-center">
                 <h3 className="font-display font-bold text-2xl text-primary group-hover:text-accent transition-colors duration-500 mb-2">{cat.name}</h3>
                 <div className="flex flex-col items-center">
@@ -69,6 +71,5 @@ export const CategoryGrid = ({ onNavigate }: any) => {
         </div>
       </div>
     </section>
-
   );
 };
