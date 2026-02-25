@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
-import { 
-  Search, 
-  MapPin, 
-  Sparkles, 
-  ChevronRight, 
-  Heart, 
-  ShoppingBag, 
-  Utensils, 
-  Palette, 
-  Gift, 
+import {
+  Search,
+  MapPin,
+  Sparkles,
+  ChevronRight,
+  Heart,
+  ShoppingBag,
+  Utensils,
+  Palette,
+  Gift,
   Star,
   Quote,
   Filter,
@@ -42,33 +43,34 @@ const discoveryData = {
     { id: 2, name: 'Rajasthani Ghevar', creator: 'Shanti Devi', price: 650, region: 'Jaipur, Rajasthan', tag: 'Festival Special', image: 'https://picsum.photos/seed/ghevar/600/800' },
   ],
   artisans: [
-    { 
-      id: 1, 
-      name: 'Suresh Murmu', 
-      craft: 'Dhokra Art', 
-      region: 'Bastar, Chhattisgarh', 
+    {
+      id: 1,
+      name: 'Suresh Murmu',
+      craft: 'Dhokra Art',
+      region: 'Bastar, Chhattisgarh',
       image: 'https://picsum.photos/seed/artisan-suresh/400/400',
       story: 'Preserving the 4,000-year-old lost wax casting technique passed down through generations in his tribe.'
     },
-    { 
-      id: 2, 
-      name: 'Ananya Sharma', 
-      craft: 'Blue Pottery', 
-      region: 'Jaipur, Rajasthan', 
+    {
+      id: 2,
+      name: 'Ananya Sharma',
+      craft: 'Blue Pottery',
+      region: 'Jaipur, Rajasthan',
       image: 'https://picsum.photos/seed/artisan-ananya/400/400',
       story: 'Reviving the Persian-influenced art of blue pottery with contemporary floral motifs.'
     }
   ]
 };
 
-export const CulturalDiscovery = ({ onNavigate }: any) => {
+export const CulturalDiscovery = () => {
+  const navigate = useNavigate();
   const [selectedRegion, setSelectedRegion] = useState('Rajasthan');
   const [selectedFestival, setSelectedFestival] = useState('Diwali');
   const [activeInterests, setActiveInterests] = useState<string[]>(['decor', 'foods']);
   const [searchQuery, setSearchQuery] = useState('');
 
   const toggleInterest = (id: string) => {
-    setActiveInterests(prev => 
+    setActiveInterests(prev =>
       prev.includes(id) ? prev.filter(i => i !== id) : [...prev, id]
     );
   };
@@ -76,7 +78,7 @@ export const CulturalDiscovery = ({ onNavigate }: any) => {
   return (
     <div className="min-h-screen bg-cream pt-32 pb-20 relative overflow-hidden">
       <div className="absolute inset-0 mandala-bg opacity-[0.03] pointer-events-none" />
-      
+
       <div className="container-custom relative z-10">
         {/* Header Section */}
         <div className="max-w-4xl mx-auto text-center mb-16">
@@ -99,7 +101,7 @@ export const CulturalDiscovery = ({ onNavigate }: any) => {
                 <MapPin className="w-3 h-3" /> Select Region
               </label>
               <div className="relative">
-                <select 
+                <select
                   value={selectedRegion}
                   onChange={(e) => setSelectedRegion(e.target.value)}
                   className="w-full appearance-none px-6 py-4 bg-cream/30 rounded-2xl border-2 border-transparent focus:border-accent focus:bg-white outline-none transition-all text-sm font-bold text-primary cursor-pointer"
@@ -116,7 +118,7 @@ export const CulturalDiscovery = ({ onNavigate }: any) => {
               </label>
               <div className="flex gap-3">
                 <div className="relative flex-1">
-                  <select 
+                  <select
                     value={selectedFestival}
                     onChange={(e) => setSelectedFestival(e.target.value)}
                     className="w-full appearance-none px-6 py-4 bg-cream/30 rounded-2xl border-2 border-transparent focus:border-accent focus:bg-white outline-none transition-all text-sm font-bold text-primary cursor-pointer"
@@ -125,8 +127,8 @@ export const CulturalDiscovery = ({ onNavigate }: any) => {
                   </select>
                   <ChevronRight className="absolute right-5 top-1/2 -translate-y-1/2 w-4 h-4 text-text-soft rotate-90 pointer-events-none" />
                 </div>
-                <button 
-                  onClick={() => onNavigate('festival-home')}
+                <button
+                  onClick={() => navigate('/festival-home')}
                   className="px-6 py-4 bg-accent text-white rounded-2xl hover:bg-accent-dark transition-all shadow-lg shadow-accent/20 flex items-center justify-center group"
                   title="View Festival Collection"
                 >
@@ -139,8 +141,8 @@ export const CulturalDiscovery = ({ onNavigate }: any) => {
               <label className="text-[10px] font-bold uppercase tracking-widest text-text-soft ml-4 flex items-center gap-2">
                 <Search className="w-3 h-3" /> Quick Search
               </label>
-              <input 
-                type="text" 
+              <input
+                type="text"
                 placeholder="Search anything cultural..."
                 className="w-full px-6 py-4 bg-cream/30 rounded-2xl border-2 border-transparent focus:border-accent focus:bg-white outline-none transition-all text-sm font-bold text-primary"
                 value={searchQuery}
@@ -156,11 +158,10 @@ export const CulturalDiscovery = ({ onNavigate }: any) => {
                 <button
                   key={interest.id}
                   onClick={() => toggleInterest(interest.id)}
-                  className={`flex items-center gap-3 px-8 py-4 rounded-2xl text-xs font-bold uppercase tracking-widest transition-all border-2 ${
-                    activeInterests.includes(interest.id)
+                  className={`flex items-center gap-3 px-8 py-4 rounded-2xl text-xs font-bold uppercase tracking-widest transition-all border-2 ${activeInterests.includes(interest.id)
                       ? 'bg-primary text-white border-primary shadow-lg'
                       : 'bg-cream/30 text-text-soft border-transparent hover:bg-cream/50'
-                  }`}
+                    }`}
                 >
                   <interest.icon className="w-4 h-4" />
                   {interest.label}
@@ -182,14 +183,14 @@ export const CulturalDiscovery = ({ onNavigate }: any) => {
                 </div>
                 <h2 className="text-4xl font-display font-bold text-primary">Masterpieces from {selectedRegion}</h2>
               </div>
-              <button onClick={() => onNavigate('marketplace')} className="text-accent font-bold text-[10px] uppercase tracking-widest hover:tracking-[0.2em] transition-all flex items-center gap-2">
+              <button onClick={() => navigate('/marketplace')} className="text-accent font-bold text-[10px] uppercase tracking-widest hover:tracking-[0.2em] transition-all flex items-center gap-2">
                 Explore All <ChevronRight className="w-4 h-4" />
               </button>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {discoveryData.crafts.map(craft => (
-                <ProductCard key={craft.id} {...craft} onNavigate={onNavigate} />
+                <ProductCard key={craft.id} {...craft} />
               ))}
             </div>
           </section>
@@ -204,7 +205,7 @@ export const CulturalDiscovery = ({ onNavigate }: any) => {
                 </div>
                 <h2 className="text-4xl font-display font-bold text-primary">Traditional Flavors</h2>
               </div>
-              <button onClick={() => onNavigate('marketplace')} className="text-accent font-bold text-[10px] uppercase tracking-widest hover:tracking-[0.2em] transition-all flex items-center gap-2">
+              <button onClick={() => navigate('/marketplace')} className="text-accent font-bold text-[10px] uppercase tracking-widest hover:tracking-[0.2em] transition-all flex items-center gap-2">
                 Explore All <ChevronRight className="w-4 h-4" />
               </button>
             </div>
@@ -233,8 +234,8 @@ export const CulturalDiscovery = ({ onNavigate }: any) => {
                     <p className="text-text-soft text-sm mb-6 italic">Handcrafted by {food.creator}</p>
                     <div className="flex justify-between items-center">
                       <span className="text-2xl font-display font-bold text-accent">₹{food.price}</span>
-                      <button 
-                        onClick={() => onNavigate('food-detail')}
+                      <button
+                        onClick={() => navigate('/food/1')}
                         className="px-6 py-3 bg-cream rounded-xl text-[10px] font-bold uppercase tracking-widest text-primary hover:bg-primary hover:text-white transition-all"
                       >
                         View Details
@@ -252,7 +253,7 @@ export const CulturalDiscovery = ({ onNavigate }: any) => {
               <div className="h-[1px] w-8 bg-accent/30" />
               <span className="text-accent font-bold text-[10px] uppercase tracking-widest">The Hands Behind the Craft</span>
             </div>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
               {discoveryData.artisans.map(artisan => (
                 <motion.div
@@ -274,8 +275,8 @@ export const CulturalDiscovery = ({ onNavigate }: any) => {
                       <Quote className="w-4 h-4 inline-block mr-2 text-accent/30" />
                       {artisan.story}
                     </p>
-                    <button 
-                      onClick={() => onNavigate('artisan')}
+                    <button
+                      onClick={() => navigate('/artisan/1')}
                       className="text-primary font-bold text-[10px] uppercase tracking-widest hover:text-accent transition-colors flex items-center gap-2"
                     >
                       Read Full Story <ChevronRight className="w-4 h-4" />
