@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Mic, MicOff, Sparkles, RefreshCw, Check, X, Languages, Volume2 } from 'lucide-react';
-import { GoogleGenAI, Type } from "@google/genai";
 
 interface VoiceAssistantProps {
   onDataExtracted: (data: any) => void;
@@ -107,7 +106,7 @@ export const VoiceAssistant = ({ onDataExtracted }: VoiceAssistantProps) => {
             <h4 className="font-display font-bold text-xl">Voice Upload Assistant</h4>
           </div>
           <p className="text-text-soft text-sm max-w-md">
-            Describe your product naturally. Our AI will detect the details, region, and story for you.
+            Describe your product naturally. Our system will detect the details, region, and story for you.
           </p>
         </div>
 
@@ -144,7 +143,7 @@ export const VoiceAssistant = ({ onDataExtracted }: VoiceAssistantProps) => {
                 <div className="w-24 h-24 bg-primary/5 text-primary rounded-full flex items-center justify-center">
                   <RefreshCw className="w-10 h-10 animate-spin" />
                 </div>
-                <p className="mt-6 text-primary font-bold uppercase tracking-widest text-[10px]">AI is crafting your listing...</p>
+                <p className="mt-6 text-primary font-bold uppercase tracking-widest text-[10px]">Processing your listing...</p>
               </motion.div>
             ) : (
               <motion.div
@@ -189,7 +188,7 @@ export const VoiceAssistant = ({ onDataExtracted }: VoiceAssistantProps) => {
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2 text-emerald-600">
                   <Check className="w-4 h-4" />
-                  <span className="text-[10px] font-bold uppercase tracking-widest">AI Extraction Successful</span>
+                  <span className="text-[10px] font-bold uppercase tracking-widest">Extraction Successful</span>
                 </div>
                 {extractedData.language && (
                   <div className="flex items-center gap-1.5 px-2 py-1 bg-white rounded-lg text-[9px] font-bold text-text-soft uppercase tracking-widest shadow-sm">
