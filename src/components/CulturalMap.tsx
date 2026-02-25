@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { MapPin, Utensils, Palette, User, X, ChevronRight, Sparkles, Star } from 'lucide-react';
 
@@ -40,7 +41,8 @@ const regionData: Record<string, any> = {
   }
 };
 
-export const CulturalMap = ({ onNavigate }: any) => {
+export const CulturalMap = () => {
+  const navigate = useNavigate();
   const [selectedRegion, setSelectedRegion] = useState<string | null>(null);
 
   // Simplified India Map SVG paths (Representative)
@@ -55,7 +57,7 @@ export const CulturalMap = ({ onNavigate }: any) => {
   return (
     <section className="section-spacing bg-cream-dark relative overflow-hidden">
       <div className="absolute inset-0 mandala-bg opacity-[0.03] pointer-events-none" />
-      
+
       <div className="container-custom relative z-10">
         <div className="text-center mb-16">
           <motion.div
@@ -105,7 +107,7 @@ export const CulturalMap = ({ onNavigate }: any) => {
                 </text>
               ))}
             </svg>
-            
+
             <div className="absolute bottom-8 left-8 flex items-center gap-4">
               <div className="flex items-center gap-2">
                 <div className="w-3 h-3 rounded-full bg-accent" />
@@ -129,11 +131,11 @@ export const CulturalMap = ({ onNavigate }: any) => {
                   exit={{ opacity: 0, x: -20 }}
                   className="bg-white rounded-[40px] p-10 border border-highlight/10 shadow-premium space-y-8 relative overflow-hidden"
                 >
-                  <div 
+                  <div
                     className="absolute top-0 right-0 w-32 h-32 opacity-[0.05] -mr-16 -mt-16 rounded-full"
                     style={{ backgroundColor: regionData[selectedRegion].color }}
                   />
-                  
+
                   <div className="flex justify-between items-start">
                     <div>
                       <div className="flex items-center gap-2 text-accent mb-2">
@@ -142,7 +144,7 @@ export const CulturalMap = ({ onNavigate }: any) => {
                       </div>
                       <h3 className="text-4xl font-display font-bold text-primary">{selectedRegion}</h3>
                     </div>
-                    <button 
+                    <button
                       onClick={() => setSelectedRegion(null)}
                       className="p-2 hover:bg-cream rounded-full transition-colors"
                     >
@@ -193,7 +195,11 @@ export const CulturalMap = ({ onNavigate }: any) => {
                       </div>
                       <div className="space-y-2">
                         {regionData[selectedRegion].artisans.map((artisan: string) => (
-                          <div key={artisan} className="flex items-center justify-between p-3 bg-cream/30 rounded-xl hover:bg-cream transition-colors cursor-pointer group">
+                          <div
+                            key={artisan}
+                            onClick={() => navigate('/artisan/1')}
+                            className="flex items-center justify-between p-3 bg-cream/30 rounded-xl hover:bg-cream transition-colors cursor-pointer group"
+                          >
                             <div className="flex items-center gap-3">
                               <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center text-accent shadow-sm">
                                 <Star className="w-4 h-4 fill-current" />
@@ -207,8 +213,8 @@ export const CulturalMap = ({ onNavigate }: any) => {
                     </div>
                   </div>
 
-                  <button 
-                    onClick={() => onNavigate('marketplace')}
+                  <button
+                    onClick={() => navigate('/marketplace')}
                     className="w-full btn-primary !py-4 text-xs uppercase tracking-widest flex items-center justify-center gap-2"
                   >
                     Explore {selectedRegion} Collection <ChevronRight className="w-4 h-4" />
