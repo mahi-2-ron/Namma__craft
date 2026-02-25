@@ -7,7 +7,7 @@ A premium marketplace for authentic handmade crafts, empowering local artisans g
 - **Artisan Showcase**: High-quality visual displays of handmade crafts.
 - **Story-Driven Commerce**: Learn about the history and technique behind every piece.
 - **Secure Auctions**: Real-time bidding system for exclusive items.
-- **Voice-Powered Listings**: AI-assisted product upload for artisans.
+- **Smart Listings**: Assisted product upload for artisans.
 - **Modern UI**: Clean, responsive design inspired by traditional Indian aesthetics.
 
 ## Tech Stack
@@ -15,7 +15,7 @@ A premium marketplace for authentic handmade crafts, empowering local artisans g
 - **Frontend**: React 19, Vite, Tailwind CSS
 - **Animations**: Framer Motion
 - **Icons**: Lucide React
-- **AI Integration**: Google Gemini (for processing voice descriptions)
+- **Smart Integration**: Automated processing for voice descriptions.
 
 ## Getting Started
 
