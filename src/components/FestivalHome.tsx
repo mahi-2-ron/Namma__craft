@@ -1,13 +1,14 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'motion/react';
-import { 
-  Sparkles, 
-  ChevronRight, 
-  Heart, 
-  ShoppingBag, 
-  Gift, 
-  Star, 
-  Palette, 
+import {
+  Sparkles,
+  ChevronRight,
+  Heart,
+  ShoppingBag,
+  Gift,
+  Star,
+  Palette,
   Utensils,
   ArrowLeft
 } from 'lucide-react';
@@ -35,23 +36,24 @@ const giftBundles = [
   { id: 2, name: 'Artisan Decor Bundle', items: 'Lantern + Toran + Incense', price: 1999, image: 'https://picsum.photos/seed/hamper2/600/800' },
 ];
 
-export const FestivalHome = ({ onNavigate }: any) => {
+export const FestivalHome = () => {
+  const navigate = useNavigate();
   return (
     <div className="min-h-screen bg-cream pb-20 relative overflow-hidden">
       {/* Subtle Festive Patterns */}
       <div className="absolute inset-0 mandala-bg opacity-[0.05] pointer-events-none" />
-      
+
       {/* Hero Banner */}
       <section className="relative h-[70vh] flex items-center overflow-hidden bg-primary">
         <div className="absolute inset-0">
-          <img 
-            src="https://picsum.photos/seed/diwali-hero/1920/1080?blur=2" 
-            alt="Diwali Banner" 
+          <img
+            src="https://picsum.photos/seed/diwali-hero/1920/1080?blur=2"
+            alt="Diwali Banner"
             className="w-full h-full object-cover opacity-40"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/60 to-transparent" />
         </div>
-        
+
         <div className="container-custom relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -59,8 +61,8 @@ export const FestivalHome = ({ onNavigate }: any) => {
             transition={{ duration: 0.8 }}
             className="max-w-3xl"
           >
-            <button 
-              onClick={() => onNavigate('discovery')}
+            <button
+              onClick={() => navigate('/discovery')}
               className="flex items-center gap-2 text-accent font-bold text-[10px] uppercase tracking-widest mb-8 hover:gap-4 transition-all"
             >
               <ArrowLeft className="w-4 h-4" /> Back to Discovery
@@ -161,7 +163,7 @@ export const FestivalHome = ({ onNavigate }: any) => {
                 Explore All Foods <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </button>
             </div>
-            
+
             <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-8">
               {festivalFoods.map((food, idx) => (
                 <motion.div
@@ -191,7 +193,7 @@ export const FestivalHome = ({ onNavigate }: any) => {
         <section className="mb-32 bg-primary rounded-[64px] p-16 text-white relative overflow-hidden">
           <div className="absolute top-0 right-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl -mr-48 -mt-48" />
           <div className="absolute bottom-0 left-0 w-64 h-64 bg-accent/5 rounded-full blur-2xl -ml-32 -mb-32" />
-          
+
           <div className="relative z-10">
             <div className="text-center max-w-2xl mx-auto mb-16">
               <div className="flex items-center justify-center gap-3 mb-4">
@@ -230,9 +232,9 @@ export const FestivalHome = ({ onNavigate }: any) => {
             <div className="flex flex-col lg:flex-row items-center gap-16">
               <div className="w-full lg:w-1/2">
                 <div className="relative">
-                  <img 
-                    src="https://picsum.photos/seed/artisan-fest/800/800" 
-                    alt="Featured Artisan" 
+                  <img
+                    src="https://picsum.photos/seed/artisan-fest/800/800"
+                    alt="Featured Artisan"
                     className="w-full aspect-square rounded-[48px] object-cover shadow-premium"
                   />
                   <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-accent rounded-[32px] flex items-center justify-center text-white shadow-2xl">
