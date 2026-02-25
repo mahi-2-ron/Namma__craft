@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Search, ChevronDown, Filter, X, ShoppingBag, Heart, ChevronRight, Utensils, Leaf } from 'lucide-react';
 import { ProductCard } from './FeaturedProducts';
 import { motion, AnimatePresence } from 'motion/react';
@@ -8,14 +9,15 @@ const foodCategories = ['All', 'Sweets', 'Savories', 'Spices', 'Pickles', 'Bever
 const regions = ['All India', 'Jaipur, Rajasthan', 'Varanasi, UP', 'Kutch, Gujarat', 'Bhubaneswar, Odisha', 'Mysore, Karnataka'];
 const foodSpecialties = ['All', 'Homemade', 'Festival Special', 'Organic', 'Vegan'];
 
-const FoodCard = ({ image, name, creator, price, region, tag, onNavigate }: any) => {
+const FoodCard = ({ id, image, name, creator, price, region, tag }: any) => {
+  const navigate = useNavigate();
   const [isFavorite, setIsFavorite] = useState(false);
 
   return (
     <motion.div
       whileHover={{ y: -8 }}
       transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-      onClick={() => onNavigate && onNavigate('food-detail')}
+      onClick={() => navigate(`/food-detail/${id || 1}`)}
       className="group cursor-pointer relative bg-white rounded-[32px] p-4 shadow-sm hover:shadow-premium transition-all duration-500 border border-highlight/10"
     >
       <div className="relative aspect-[4/5] rounded-[24px] overflow-hidden mb-6">
@@ -78,7 +80,7 @@ const FoodCard = ({ image, name, creator, price, region, tag, onNavigate }: any)
   );
 };
 
-export const Marketplace = ({ onNavigate }: any) => {
+export const Marketplace = () => {
   const [activeTab, setActiveTab] = useState<'crafts' | 'foods'>('crafts');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [priceRange, setPriceRange] = useState(5000);
@@ -265,8 +267,8 @@ export const Marketplace = ({ onNavigate }: any) => {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredProducts.map(product => (
                 activeTab === 'crafts'
-                  ? <ProductCard key={product.id} {...product} onNavigate={onNavigate} />
-                  : <FoodCard key={product.id} {...product} onNavigate={onNavigate} />
+                  ? <ProductCard key={product.id} {...product} />
+                  : <FoodCard key={product.id} {...product} />
               ))}
             </div>
 
