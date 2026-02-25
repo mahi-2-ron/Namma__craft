@@ -38,34 +38,52 @@ export const VoiceAssistant = ({ onDataExtracted }: VoiceAssistantProps) => {
   const processWithAI = async (text: string) => {
     setIsProcessing(true);
     try {
-      const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY! });
-      const response = await ai.models.generateContent({
-        model: "gemini-1.5-flash",
-        contents: `Extract product details from this voice description: "${text}". 
-        Return a JSON object with: name, category (one of: Pottery, Textiles, Woodwork, Jewelry, Paintings), origin, startPrice (number), duration (e.g. "3 days"), craftStory.
-        If a field is missing, provide a reasonable default based on the context.`,
-        config: {
-          responseMimeType: "application/json",
-          responseSchema: {
-            type: Type.OBJECT,
-            properties: {
-              name: { type: Type.STRING },
-              category: { type: Type.STRING },
-              origin: { type: Type.STRING },
-              startPrice: { type: Type.NUMBER },
-              duration: { type: Type.STRING },
-              craftStory: { type: Type.STRING },
-              language: { type: Type.STRING, description: "Detected language" }
-            },
-            required: ["name", "category", "origin", "startPrice", "duration", "craftStory"]
-          }
-        }
-      });
+      // Local processing logic to simulate extraction without Gemini
+      await new Promise(resolve => setTimeout(resolve, 1500));
 
-      const data = JSON.parse(response.text || '{}');
+      const mockData: Record<string, any> = {
+        "I want to sell a hand-painted blue pottery vase from Jaipur. It's a traditional craft with floral motifs. I want to start the auction at 2500 rupees and it should last for 5 days.": {
+          name: "Hand-Painted Blue Pottery Vase",
+          category: "Pottery",
+          origin: "Jaipur, Rajasthan",
+          startPrice: 2500,
+          duration: "5 days",
+          craftStory: "Traditional Blue Pottery from Jaipur using specialized Egyptian paste.",
+          language: "English"
+        },
+        "This is a hand-woven Banarasi silk stole made by master weavers in Varanasi. It's very high quality. Let's start the bidding at 4000 rupees.": {
+          name: "Banarasi Silk Stole",
+          category: "Textiles",
+          origin: "Varanasi, UP",
+          startPrice: 4000,
+          duration: "3 days",
+          craftStory: "Exquisite hand-woven silk from the heritage looms of Kashi.",
+          language: "English"
+        },
+        "I have an intricate teak wood carving from Saharanpur. It's a one-of-a-kind piece showing a forest scene. The starting price is 5000 rupees.": {
+          name: "Teak Wood Forest Carving",
+          category: "Woodwork",
+          origin: "Saharanpur, UP",
+          startPrice: 5000,
+          duration: "7 days",
+          craftStory: "Highly detailed relief carving on premium seasoned teak wood.",
+          language: "English"
+        }
+      };
+
+      const data = mockData[text] || {
+        name: "Unknown Craft",
+        category: "Other",
+        origin: "Unknown",
+        startPrice: 0,
+        duration: "3 days",
+        craftStory: "Extracted from voice description.",
+        language: "Detected"
+      };
+
       setExtractedData(data);
     } catch (err) {
-      console.error("AI Processing Error:", err);
+      console.error("Processing Error:", err);
       setError("Failed to process voice input. Please try again.");
     } finally {
       setIsProcessing(false);
