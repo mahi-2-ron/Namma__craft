@@ -71,8 +71,21 @@ export const CreateAuction = ({ onNavigate }: any) => {
             <span className="text-xs font-bold uppercase tracking-widest">Back to Studio</span>
           </button>
           <div className="flex gap-4">
-            <button className="btn-secondary !py-3 !px-8 text-xs uppercase tracking-widest">Save Draft</button>
-            <button className="btn-primary !py-3 !px-10 text-xs uppercase tracking-widest shadow-xl shadow-primary/20">Publish Auction</button>
+            <button
+              onClick={() => alert('Auction project saved as draft!')}
+              className="btn-secondary !py-3 !px-8 text-xs uppercase tracking-widest"
+            >
+              Save Draft
+            </button>
+            <button
+              onClick={() => {
+                alert('Auction published successfully! Your craft is now live.');
+                onNavigate('creator');
+              }}
+              className="btn-primary !py-3 !px-10 text-xs uppercase tracking-widest shadow-xl shadow-primary/20"
+            >
+              Publish Auction
+            </button>
           </div>
         </div>
 
@@ -326,8 +339,8 @@ export const CreateAuction = ({ onNavigate }: any) => {
                         key={badge}
                         onClick={() => setFormData({ ...formData, badge })}
                         className={`px-6 py-3 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all border-2 ${formData.badge === badge
-                            ? 'bg-primary text-white border-primary shadow-lg shadow-primary/20'
-                            : 'bg-cream/50 text-text-soft border-transparent hover:border-accent/20'
+                          ? 'bg-primary text-white border-primary shadow-lg shadow-primary/20'
+                          : 'bg-cream/50 text-text-soft border-transparent hover:border-accent/20'
                           }`}
                       >
                         {badge}
