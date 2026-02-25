@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { 
-  Upload, 
-  X, 
-  ChevronRight, 
-  Utensils, 
-  Clock, 
-  Leaf, 
-  MapPin, 
-  IndianRupee, 
+import {
+  Upload,
+  X,
+  ChevronRight,
+  Utensils,
+  Clock,
+  Leaf,
+  MapPin,
+  IndianRupee,
   Package,
   Sparkles,
   ArrowLeft,
   CheckCircle2
 } from 'lucide-react';
-import { AIPricingPanel } from './AIPricingPanel';
+import { SmartPricingPanel } from './SmartPricingPanel';
 import { VoiceAssistant } from './VoiceAssistant';
 
 export const AddFoodItem = ({ onNavigate }: any) => {
@@ -68,7 +68,7 @@ export const AddFoodItem = ({ onNavigate }: any) => {
   if (isSuccess) {
     return (
       <div className="min-h-screen bg-cream flex items-center justify-center p-6">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           className="max-w-md w-full bg-white rounded-[48px] p-12 text-center shadow-premium relative overflow-hidden"
@@ -91,9 +91,9 @@ export const AddFoodItem = ({ onNavigate }: any) => {
   return (
     <div className="min-h-screen bg-cream pt-32 pb-20 px-6 relative overflow-hidden">
       <div className="absolute inset-0 mandala-bg opacity-[0.03] pointer-events-none" />
-      
+
       <div className="container-custom max-w-6xl mx-auto relative z-10">
-        <button 
+        <button
           onClick={() => onNavigate('creator')}
           className="flex items-center gap-2 text-text-soft hover:text-accent transition-all text-xs font-bold uppercase tracking-widest mb-10"
         >
@@ -104,7 +104,7 @@ export const AddFoodItem = ({ onNavigate }: any) => {
           {/* Form Section */}
           <div className="lg:col-span-7 space-y-10">
             <VoiceAssistant onDataExtracted={handleVoiceData} />
-            
+
             <div className="bg-white rounded-[48px] p-10 md:p-12 shadow-premium border border-highlight/10">
               <div className="mb-10">
                 <h1 className="text-4xl font-display font-bold text-primary mb-2">Add Traditional Food Item</h1>
@@ -119,7 +119,7 @@ export const AddFoodItem = ({ onNavigate }: any) => {
                     {image ? (
                       <div className="relative aspect-video rounded-3xl overflow-hidden border-2 border-accent/20">
                         <img src={image} alt="Preview" className="w-full h-full object-cover" />
-                        <button 
+                        <button
                           onClick={() => setImage(null)}
                           className="absolute top-4 right-4 w-10 h-10 bg-white/90 backdrop-blur-md rounded-full flex items-center justify-center text-rose-500 shadow-lg hover:bg-rose-500 hover:text-white transition-all"
                         >
@@ -144,12 +144,12 @@ export const AddFoodItem = ({ onNavigate }: any) => {
                     <label className="text-[10px] font-bold uppercase tracking-widest text-text-soft ml-4">Food Name</label>
                     <div className="relative">
                       <Utensils className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-text-soft" />
-                      <input 
-                        type="text" 
+                      <input
+                        type="text"
                         placeholder="e.g. Mysore Pak"
                         className="w-full pl-14 pr-6 py-4 bg-cream/30 rounded-2xl border-2 border-transparent focus:border-accent focus:bg-white outline-none transition-all text-sm font-medium"
                         value={formData.name}
-                        onChange={(e) => setFormData({...formData, name: e.target.value})}
+                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                         required
                       />
                     </div>
@@ -158,12 +158,12 @@ export const AddFoodItem = ({ onNavigate }: any) => {
                     <label className="text-[10px] font-bold uppercase tracking-widest text-text-soft ml-4">Region / State</label>
                     <div className="relative">
                       <MapPin className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-text-soft" />
-                      <input 
-                        type="text" 
+                      <input
+                        type="text"
                         placeholder="e.g. Karnataka"
                         className="w-full pl-14 pr-6 py-4 bg-cream/30 rounded-2xl border-2 border-transparent focus:border-accent focus:bg-white outline-none transition-all text-sm font-medium"
                         value={formData.region}
-                        onChange={(e) => setFormData({...formData, region: e.target.value})}
+                        onChange={(e) => setFormData({ ...formData, region: e.target.value })}
                         required
                       />
                     </div>
@@ -172,11 +172,11 @@ export const AddFoodItem = ({ onNavigate }: any) => {
 
                 <div className="space-y-2">
                   <label className="text-[10px] font-bold uppercase tracking-widest text-text-soft ml-4">Ingredients</label>
-                  <textarea 
+                  <textarea
                     placeholder="List the main ingredients used..."
                     className="w-full px-6 py-4 bg-cream/30 rounded-2xl border-2 border-transparent focus:border-accent focus:bg-white outline-none transition-all text-sm font-medium min-h-[100px] resize-none"
                     value={formData.ingredients}
-                    onChange={(e) => setFormData({...formData, ingredients: e.target.value})}
+                    onChange={(e) => setFormData({ ...formData, ingredients: e.target.value })}
                     required
                   />
                 </div>
@@ -186,12 +186,12 @@ export const AddFoodItem = ({ onNavigate }: any) => {
                     <label className="text-[10px] font-bold uppercase tracking-widest text-text-soft ml-4">Shelf Life</label>
                     <div className="relative">
                       <Clock className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-text-soft" />
-                      <input 
-                        type="text" 
+                      <input
+                        type="text"
                         placeholder="e.g. 15 Days"
                         className="w-full pl-14 pr-6 py-4 bg-cream/30 rounded-2xl border-2 border-transparent focus:border-accent focus:bg-white outline-none transition-all text-sm font-medium"
                         value={formData.shelfLife}
-                        onChange={(e) => setFormData({...formData, shelfLife: e.target.value})}
+                        onChange={(e) => setFormData({ ...formData, shelfLife: e.target.value })}
                         required
                       />
                     </div>
@@ -200,12 +200,12 @@ export const AddFoodItem = ({ onNavigate }: any) => {
                     <label className="text-[10px] font-bold uppercase tracking-widest text-text-soft ml-4">Price (₹)</label>
                     <div className="relative">
                       <IndianRupee className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-text-soft" />
-                      <input 
-                        type="number" 
+                      <input
+                        type="number"
                         placeholder="450"
                         className="w-full pl-14 pr-6 py-4 bg-cream/30 rounded-2xl border-2 border-transparent focus:border-accent focus:bg-white outline-none transition-all text-sm font-medium"
                         value={formData.price}
-                        onChange={(e) => setFormData({...formData, price: e.target.value})}
+                        onChange={(e) => setFormData({ ...formData, price: e.target.value })}
                         required
                       />
                     </div>
@@ -214,12 +214,12 @@ export const AddFoodItem = ({ onNavigate }: any) => {
                     <label className="text-[10px] font-bold uppercase tracking-widest text-text-soft ml-4">Quantity</label>
                     <div className="relative">
                       <Package className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-text-soft" />
-                      <input 
-                        type="text" 
+                      <input
+                        type="text"
                         placeholder="e.g. 10 Boxes"
                         className="w-full pl-14 pr-6 py-4 bg-cream/30 rounded-2xl border-2 border-transparent focus:border-accent focus:bg-white outline-none transition-all text-sm font-medium"
                         value={formData.quantity}
-                        onChange={(e) => setFormData({...formData, quantity: e.target.value})}
+                        onChange={(e) => setFormData({ ...formData, quantity: e.target.value })}
                         required
                       />
                     </div>
@@ -230,23 +230,23 @@ export const AddFoodItem = ({ onNavigate }: any) => {
                   <label className="text-[10px] font-bold uppercase tracking-widest text-text-soft ml-4">Festival Tag (Optional)</label>
                   <div className="relative">
                     <Sparkles className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-text-soft" />
-                    <input 
-                      type="text" 
+                    <input
+                      type="text"
                       placeholder="e.g. Diwali Special"
                       className="w-full pl-14 pr-6 py-4 bg-cream/30 rounded-2xl border-2 border-transparent focus:border-accent focus:bg-white outline-none transition-all text-sm font-medium"
                       value={formData.festival}
-                      onChange={(e) => setFormData({...formData, festival: e.target.value})}
+                      onChange={(e) => setFormData({ ...formData, festival: e.target.value })}
                     />
                   </div>
                 </div>
 
                 <div className="space-y-2">
                   <label className="text-[10px] font-bold uppercase tracking-widest text-text-soft ml-4">Story behind this recipe</label>
-                  <textarea 
+                  <textarea
                     placeholder="Tell the tradition, the memory, or the heritage of this food..."
                     className="w-full px-6 py-4 bg-cream/30 rounded-2xl border-2 border-transparent focus:border-accent focus:bg-white outline-none transition-all text-sm font-medium min-h-[120px] resize-none"
                     value={formData.story}
-                    onChange={(e) => setFormData({...formData, story: e.target.value})}
+                    onChange={(e) => setFormData({ ...formData, story: e.target.value })}
                     required
                   />
                 </div>
@@ -258,12 +258,11 @@ export const AddFoodItem = ({ onNavigate }: any) => {
                       <button
                         key={t}
                         type="button"
-                        onClick={() => setFormData({...formData, type: t})}
-                        className={`flex-1 py-4 rounded-2xl text-xs font-bold uppercase tracking-widest transition-all border-2 ${
-                          formData.type === t 
-                            ? 'bg-primary text-white border-primary shadow-lg' 
+                        onClick={() => setFormData({ ...formData, type: t })}
+                        className={`flex-1 py-4 rounded-2xl text-xs font-bold uppercase tracking-widest transition-all border-2 ${formData.type === t
+                            ? 'bg-primary text-white border-primary shadow-lg'
                             : 'bg-cream/30 text-text-soft border-transparent hover:bg-cream/50'
-                        }`}
+                          }`}
                       >
                         {t === 'Veg' && <Leaf className="w-3 h-3 inline-block mr-2" />}
                         {t}
@@ -272,8 +271,8 @@ export const AddFoodItem = ({ onNavigate }: any) => {
                   </div>
                 </div>
 
-                <button 
-                  type="submit" 
+                <button
+                  type="submit"
                   disabled={isSubmitting}
                   className="w-full btn-primary !py-6 text-sm shadow-2xl shadow-primary/20 flex items-center justify-center gap-3 group disabled:opacity-50"
                 >
@@ -292,7 +291,7 @@ export const AddFoodItem = ({ onNavigate }: any) => {
                 <span className="text-accent font-bold text-[10px] uppercase tracking-widest">Live Preview</span>
               </div>
 
-              <motion.div 
+              <motion.div
                 className="bg-white rounded-[40px] overflow-hidden border border-highlight/10 shadow-premium"
               >
                 <div className="relative h-72 bg-cream/30">
@@ -314,7 +313,7 @@ export const AddFoodItem = ({ onNavigate }: any) => {
                     )}
                   </div>
                 </div>
-                
+
                 <div className="p-8">
                   <div className="flex justify-between items-start mb-4">
                     <div>
@@ -346,16 +345,16 @@ export const AddFoodItem = ({ onNavigate }: any) => {
                   <p className="text-text-soft text-sm line-clamp-2 mb-8 italic leading-relaxed">
                     "{formData.story || 'The story of your recipe will appear here...'}"
                   </p>
-                  
+
                   <button className="w-full py-4 bg-cream/50 rounded-2xl text-primary font-bold text-[10px] uppercase tracking-widest cursor-default">
                     View Details
                   </button>
                 </div>
               </motion.div>
 
-              {/* AI Pricing Panel */}
+              {/* Smart Pricing Panel */}
               <div className="mt-8">
-                <AIPricingPanel name={formData.name} />
+                <SmartPricingPanel name={formData.name} />
               </div>
 
               <div className="mt-8 p-6 bg-accent/5 rounded-3xl border border-accent/10">
