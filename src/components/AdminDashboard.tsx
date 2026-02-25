@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { 
-  Users, 
-  ShoppingBag, 
-  TrendingUp, 
-  AlertCircle, 
-  CheckCircle2, 
+import {
+  Users,
+  ShoppingBag,
+  TrendingUp,
+  AlertCircle,
+  CheckCircle2,
   Clock,
   ArrowUpRight,
   ArrowDownRight,
@@ -29,13 +29,13 @@ import {
   MapPin,
   ChevronLeft
 } from 'lucide-react';
-import { 
-  BarChart, 
-  Bar, 
-  XAxis, 
-  YAxis, 
-  CartesianGrid, 
-  Tooltip, 
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
   ResponsiveContainer,
   AreaChart,
   Area
@@ -52,7 +52,7 @@ const data = [
 ];
 
 const StatCard = ({ title, value, change, icon: Icon, trend }: any) => (
-  <motion.div 
+  <motion.div
     whileHover={{ y: -5 }}
     className="bg-white p-6 rounded-3xl border border-highlight/10 shadow-sm relative overflow-hidden group"
   >
@@ -103,7 +103,7 @@ export const AdminDashboard = ({ onNavigate }: any) => {
             <span className="font-display font-bold text-2xl tracking-tight">Admin Hub</span>
           </div>
         </div>
-        
+
         <nav className="flex-1 p-6 space-y-2">
           {sidebarItems.map((item) => (
             <button
@@ -139,8 +139,8 @@ export const AdminDashboard = ({ onNavigate }: any) => {
         <header className="h-24 bg-white border-b border-highlight/10 flex items-center justify-between px-10 sticky top-0 z-30 shadow-sm">
           <div className="relative w-96">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-text-soft" />
-            <input 
-              type="text" 
+            <input
+              type="text"
               placeholder="Search auctions, artisans, or bids..."
               className="w-full pl-12 pr-6 py-3 bg-cream/30 rounded-xl text-sm border-transparent focus:border-accent focus:bg-white transition-all outline-none"
             />
@@ -192,13 +192,13 @@ export const AdminDashboard = ({ onNavigate }: any) => {
                             <AreaChart data={data}>
                               <defs>
                                 <linearGradient id="colorBids" x1="0" y1="0" x2="0" y2="1">
-                                  <stop offset="5%" stopColor="#E67E22" stopOpacity={0.1}/>
-                                  <stop offset="95%" stopColor="#E67E22" stopOpacity={0}/>
+                                  <stop offset="5%" stopColor="#E67E22" stopOpacity={0.1} />
+                                  <stop offset="95%" stopColor="#E67E22" stopOpacity={0} />
                                 </linearGradient>
                               </defs>
                               <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f0f0f0" />
-                              <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fontSize: 10}} />
-                              <YAxis axisLine={false} tickLine={false} tick={{fontSize: 10}} />
+                              <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fontSize: 10 }} />
+                              <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 10 }} />
                               <Tooltip />
                               <Area type="monotone" dataKey="bids" stroke="#E67E22" strokeWidth={3} fillOpacity={1} fill="url(#colorBids)" />
                             </AreaChart>
@@ -211,8 +211,8 @@ export const AdminDashboard = ({ onNavigate }: any) => {
                           <ResponsiveContainer width="100%" height="100%">
                             <BarChart data={data}>
                               <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f0f0f0" />
-                              <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fontSize: 10}} />
-                              <YAxis axisLine={false} tickLine={false} tick={{fontSize: 10}} />
+                              <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fontSize: 10 }} />
+                              <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 10 }} />
                               <Tooltip />
                               <Bar dataKey="revenue" fill="#6B1D1D" radius={[4, 4, 0, 0]} barSize={30} />
                             </BarChart>
@@ -228,7 +228,7 @@ export const AdminDashboard = ({ onNavigate }: any) => {
                     <h3 className="text-xl font-display font-bold text-primary">Auction Management</h3>
                     <div className="flex gap-3">
                       <button className="btn-secondary !py-2 !px-4 text-xs">Export CSV</button>
-                      <button 
+                      <button
                         onClick={() => onNavigate('create-auction')}
                         className="btn-primary !py-2 !px-6 text-xs"
                       >
@@ -274,22 +274,20 @@ export const AdminDashboard = ({ onNavigate }: any) => {
                               </div>
                             </td>
                             <td className="px-8 py-5">
-                              <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest ${
-                                auc.status === 'Active' ? 'bg-emerald-50 text-emerald-600' :
-                                auc.status === 'Flagged' ? 'bg-rose-50 text-rose-600' :
-                                'bg-slate-50 text-slate-600'
-                              }`}>
-                                <div className={`w-1 h-1 rounded-full ${
-                                  auc.status === 'Active' ? 'bg-emerald-600' :
-                                  auc.status === 'Flagged' ? 'bg-rose-600' :
-                                  'bg-slate-600'
-                                }`} />
+                              <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest ${auc.status === 'Active' ? 'bg-emerald-50 text-emerald-600' :
+                                  auc.status === 'Flagged' ? 'bg-rose-50 text-rose-600' :
+                                    'bg-slate-50 text-slate-600'
+                                }`}>
+                                <div className={`w-1 h-1 rounded-full ${auc.status === 'Active' ? 'bg-emerald-600' :
+                                    auc.status === 'Flagged' ? 'bg-rose-600' :
+                                      'bg-slate-600'
+                                  }`} />
                                 {auc.status}
                               </span>
                             </td>
                             <td className="px-8 py-5 text-right">
                               <div className="flex justify-end gap-2">
-                                <button 
+                                <button
                                   onClick={() => setSelectedAuction(auc)}
                                   className="p-2 hover:bg-primary hover:text-white rounded-lg transition-all text-text-soft"
                                 >
@@ -325,7 +323,7 @@ export const AdminDashboard = ({ onNavigate }: any) => {
                 exit={{ opacity: 0, x: -20 }}
                 className="space-y-8"
               >
-                <button 
+                <button
                   onClick={() => setSelectedAuction(null)}
                   className="flex items-center gap-2 text-text-soft hover:text-primary transition-all group"
                 >
@@ -437,7 +435,7 @@ export const AdminDashboard = ({ onNavigate }: any) => {
                         <h4 className="font-display font-bold">Trust & Safety</h4>
                       </div>
                       <p className="text-sm text-rose-700/80 leading-relaxed mb-6">
-                        Our AI has detected unusual bidding activity from 2 participants. Manual review is recommended before approval.
+                        Our system has detected unusual bidding activity from 2 participants. Manual review is recommended before approval.
                       </p>
                       <button className="w-full py-3 bg-rose-600 text-white rounded-xl text-xs font-bold uppercase tracking-widest shadow-lg shadow-rose-200">
                         Resolve Dispute
