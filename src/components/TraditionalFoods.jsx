@@ -2,44 +2,12 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { ChevronRight, Heart, Utensils } from 'lucide-react';
-
-const foods = [
-  {
-    id: 1,
-    name: 'Mysore Pak',
-    region: 'Karnataka Specialty',
-    tag: 'Homemade',
-    image: 'https://picsum.photos/seed/mysorepak/600/400',
-    desc: 'A rich, buttery sweet made from gram flour, ghee, and sugar.'
-  },
-  {
-    id: 2,
-    name: 'Rajasthani Ghevar',
-    region: 'Rajasthan Specialty',
-    tag: 'Festival Special',
-    image: 'https://picsum.photos/seed/ghevar/600/400',
-    desc: 'A disc-shaped honeycomb sweet made from all-purpose flour and soaked in sugar syrup.'
-  },
-  {
-    id: 3,
-    name: 'Malabar Parotta',
-    region: 'Kerala Specialty',
-    tag: 'Homemade',
-    image: 'https://picsum.photos/seed/parotta/600/400',
-    desc: 'Layered flatbread made from maida flour, popular in Southern India.'
-  },
-  {
-    id: 4,
-    name: 'Hyderabadi Biryani',
-    region: 'Telangana Specialty',
-    tag: 'Festival Special',
-    image: 'https://picsum.photos/seed/biryani/600/400',
-    desc: 'A world-famous aromatic rice dish cooked with exotic spices and tender meat.'
-  }
-];
+import { foodProducts } from '../data/db';
 
 export const TraditionalFoods = () => {
   const navigate = useNavigate();
+  const foods = foodProducts.slice(0, 4);
+
   return (
     <section className="py-24 bg-cream relative overflow-hidden">
       <div className="absolute inset-0 mandala-bg opacity-[0.03] pointer-events-none" />
@@ -101,7 +69,7 @@ export const TraditionalFoods = () => {
                   <span className="text-[10px] font-bold text-accent uppercase tracking-widest">{food.region}</span>
                 </div>
                 <h3 className="text-xl font-display font-bold text-primary mb-3 group-hover:text-accent transition-colors">{food.name}</h3>
-                <p className="text-text-soft text-sm line-clamp-2 mb-6 leading-relaxed italic">"{food.desc}"</p>
+                <p className="text-text-soft text-sm line-clamp-2 mb-6 leading-relaxed italic">"{food.desc || food.description}"</p>
 
                 <button
                   onClick={() => navigate(`/food-detail/${food.id}`)}
