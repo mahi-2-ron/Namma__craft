@@ -1,15 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Search, ChevronDown, Filter, X, ShoppingBag, Heart, ChevronRight, Utensils, Leaf } from 'lucide-react';
-import { ProductCard } from './FeaturedProducts';
+import { Search, ChevronDown, Filter, X, ShoppingBag, Heart, ChevronRight, Utensils } from 'lucide-react';
+import { ProductCard } from '../components/FeaturedProducts';
+import { craftCategories, foodCategories, regions, foodSpecialties, craftProducts, foodProducts } from '../data/db';
 import { motion, AnimatePresence } from 'motion/react';
 
-const craftCategories = ['All', 'Pottery', 'Textiles', 'Woodwork', 'Jewelry', 'Paintings'];
-const foodCategories = ['All', 'Sweets', 'Savories', 'Spices', 'Pickles', 'Beverages'];
-const regions = ['All India', 'Jaipur, Rajasthan', 'Varanasi, UP', 'Kutch, Gujarat', 'Bhubaneswar, Odisha', 'Mysore, Karnataka'];
-const foodSpecialties = ['All', 'Homemade', 'Festival Special', 'Organic', 'Vegan'];
-
-const FoodCard = ({ id, image, name, creator, price, region, tag }: any) => {
+const FoodCard = ({ id, image, name, creator, price, region, tag }) => {
   const navigate = useNavigate();
   const [isFavorite, setIsFavorite] = useState(false);
 
@@ -81,20 +77,20 @@ const FoodCard = ({ id, image, name, creator, price, region, tag }: any) => {
 };
 
 export const Marketplace = () => {
-  const [activeTab, setActiveTab] = useState<'crafts' | 'foods'>('crafts');
+  const [activeTab, setActiveTab] = useState('crafts');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [priceRange, setPriceRange] = useState(5000);
+  const [searchQuery, setSearchQuery] = useState('');
 
   const activeProducts = activeTab === 'crafts' ? craftProducts : foodProducts;
   const activeCategories = activeTab === 'crafts' ? craftCategories : foodCategories;
-
-  const [searchQuery, setSearchQuery] = useState('');
 
   const filteredProducts = activeProducts.filter(p => {
     const searchStr = searchQuery.toLowerCase();
     const nameMatch = p.name.toLowerCase().includes(searchStr);
     const regionMatch = p.region.toLowerCase().includes(searchStr);
-    const creatorMatch = (('artisan' in p ? p.artisan : p.creator) as string).toLowerCase().includes(searchStr);
+    const creator = p.artisan || p.creator;
+    const creatorMatch = creator.toLowerCase().includes(searchStr);
     return nameMatch || regionMatch || creatorMatch;
   });
 
@@ -113,20 +109,17 @@ export const Marketplace = () => {
             <div className="h-[1px] w-12 bg-accent/30" />
           </div>
 
-          {/* Tabs */}
           <div className="flex justify-center mb-12">
             <div className="bg-white/50 backdrop-blur-md p-1.5 rounded-[24px] border border-primary/5 flex gap-2">
               <button
                 onClick={() => setActiveTab('crafts')}
-                className={`px-10 py-3 rounded-[20px] text-xs font-bold uppercase tracking-widest transition-all ${activeTab === 'crafts' ? 'bg-primary text-white shadow-lg' : 'text-text-soft hover:text-primary'
-                  }`}
+                className={`px-10 py-3 rounded-[20px] text-xs font-bold uppercase tracking-widest transition-all ${activeTab === 'crafts' ? 'bg-primary text-white shadow-lg' : 'text-text-soft hover:text-primary'}`}
               >
                 Handmade Crafts
               </button>
               <button
                 onClick={() => setActiveTab('foods')}
-                className={`px-10 py-3 rounded-[20px] text-xs font-bold uppercase tracking-widest transition-all ${activeTab === 'foods' ? 'bg-primary text-white shadow-lg' : 'text-text-soft hover:text-primary'
-                  }`}
+                className={`px-10 py-3 rounded-[20px] text-xs font-bold uppercase tracking-widest transition-all ${activeTab === 'foods' ? 'bg-primary text-white shadow-lg' : 'text-text-soft hover:text-primary'}`}
               >
                 Traditional Foods
               </button>
@@ -140,7 +133,6 @@ export const Marketplace = () => {
           </p>
         </div>
 
-        {/* Top Bar */}
         <div className="flex flex-col lg:flex-row justify-between items-center gap-6 mb-12 bg-white/40 backdrop-blur-sm p-4 rounded-3xl border border-primary/5">
           <div className="relative w-full lg:w-96">
             <Search className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-text-soft" />
@@ -174,10 +166,8 @@ export const Marketplace = () => {
         </div>
 
         <div className="flex gap-12">
-          {/* Desktop Sidebar */}
           <aside className="hidden lg:block w-72 flex-shrink-0">
             <div className="sticky top-28 space-y-12">
-              {/* Category */}
               <div>
                 <h4 className="text-sm font-bold uppercase tracking-widest text-primary mb-6">Category</h4>
                 <div className="space-y-3">
@@ -193,7 +183,6 @@ export const Marketplace = () => {
                 </div>
               </div>
 
-              {/* Price Range */}
               <div>
                 <h4 className="text-sm font-bold uppercase tracking-widest text-primary mb-6">Price Range</h4>
                 <input
@@ -210,7 +199,6 @@ export const Marketplace = () => {
                 </div>
               </div>
 
-              {/* Region */}
               <div>
                 <h4 className="text-sm font-bold uppercase tracking-widest text-primary mb-6">Region</h4>
                 <div className="relative">
@@ -223,7 +211,6 @@ export const Marketplace = () => {
                 </div>
               </div>
 
-              {/* Specialty / Materials */}
               <div>
                 <h4 className="text-sm font-bold uppercase tracking-widest text-primary mb-6">
                   {activeTab === 'crafts' ? 'Material' : 'Specialty'}
@@ -240,7 +227,6 @@ export const Marketplace = () => {
             </div>
           </aside>
 
-          {/* Product Grid */}
           <div className="flex-1">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredProducts.map(product => (
@@ -259,38 +245,10 @@ export const Marketplace = () => {
                 <p className="text-text-soft">We couldn't find anything matching "{searchQuery}".<br />Try adjusting your search or filters.</p>
               </div>
             )}
-
-            {/* Pagination */}
-            <div className="mt-20 flex justify-center items-center gap-4">
-              <button
-                onClick={() => alert('Loading previous page...')}
-                className="w-12 h-12 rounded-full flex items-center justify-center border border-primary/10 text-primary hover:bg-primary hover:text-white transition-all"
-              >
-                ←
-              </button>
-              <div className="flex gap-2">
-                {[1, 2, 3].map(n => (
-                  <button
-                    key={n}
-                    onClick={() => alert(`Loading page ${n}...`)}
-                    className={`w-12 h-12 rounded-full flex items-center justify-center font-bold text-sm transition-all ${n === 1 ? 'bg-primary text-white shadow-lg' : 'bg-white text-primary border border-primary/5 hover:border-accent'}`}
-                  >
-                    {n}
-                  </button>
-                ))}
-              </div>
-              <button
-                onClick={() => alert('Loading next page...')}
-                className="w-12 h-12 rounded-full flex items-center justify-center border border-primary/10 text-primary hover:bg-primary hover:text-white transition-all"
-              >
-                →
-              </button>
-            </div>
           </div>
         </div>
       </div>
 
-      {/* CTA Section */}
       <section className="section-spacing bg-primary text-cream mandala-bg relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-primary via-transparent to-primary pointer-events-none" />
         <div className="absolute top-0 right-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
@@ -316,7 +274,6 @@ export const Marketplace = () => {
         </div>
       </section>
 
-      {/* Mobile Sidebar Overlay */}
       <AnimatePresence>
         {isSidebarOpen && (
           <>
