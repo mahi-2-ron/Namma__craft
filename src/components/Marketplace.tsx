@@ -260,18 +260,29 @@ export const Marketplace = ({ onNavigate }: any) => {
 
             {/* Pagination */}
             <div className="mt-20 flex justify-center items-center gap-4">
-              <button className="w-12 h-12 rounded-full flex items-center justify-center border border-primary/10 text-primary hover:bg-primary hover:text-white transition-all">←</button>
+              <button
+                onClick={() => alert('Loading previous page...')}
+                className="w-12 h-12 rounded-full flex items-center justify-center border border-primary/10 text-primary hover:bg-primary hover:text-white transition-all"
+              >
+                ←
+              </button>
               <div className="flex gap-2">
                 {[1, 2, 3].map(n => (
                   <button
                     key={n}
+                    onClick={() => alert(`Loading page ${n}...`)}
                     className={`w-12 h-12 rounded-full flex items-center justify-center font-bold text-sm transition-all ${n === 1 ? 'bg-primary text-white shadow-lg' : 'bg-white text-primary border border-primary/5 hover:border-accent'}`}
                   >
                     {n}
                   </button>
                 ))}
               </div>
-              <button className="w-12 h-12 rounded-full flex items-center justify-center border border-primary/10 text-primary hover:bg-primary hover:text-white transition-all">→</button>
+              <button
+                onClick={() => alert('Loading next page...')}
+                className="w-12 h-12 rounded-full flex items-center justify-center border border-primary/10 text-primary hover:bg-primary hover:text-white transition-all"
+              >
+                →
+              </button>
             </div>
           </div>
         </div>
