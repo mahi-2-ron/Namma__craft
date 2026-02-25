@@ -5,7 +5,7 @@ import { Rocket, Brain, Globe, Smartphone, Sparkles, ShieldCheck } from 'lucide-
 const plans = [
   {
     icon: Brain,
-    title: "AI-Driven Discovery",
+    title: "Smart Discovery",
     description: "Smarter recommendations that understand regional preferences and seasonal trends for a personalized experience."
   },
   {
@@ -39,7 +39,7 @@ export const FuturePlans = () => {
   return (
     <section className="section-spacing bg-cream relative overflow-hidden">
       <div className="absolute inset-0 mandala-bg opacity-[0.03] pointer-events-none" />
-      
+
       <div className="container-custom relative z-10">
         <div className="max-w-4xl mx-auto text-center mb-20">
           <motion.div
@@ -51,7 +51,7 @@ export const FuturePlans = () => {
           </motion.div>
           <h2 className="text-primary mb-8">Future Plans</h2>
           <p className="text-text-soft text-lg leading-relaxed">
-            Our platform is designed to grow into a comprehensive cultural marketplace that supports artisans, home food creators, and collectors worldwide. In the future, we plan to enhance the system with advanced AI features, broader global reach, and deeper cultural engagement.
+            Our platform is designed to grow into a comprehensive cultural marketplace that supports artisans, home food creators, and collectors worldwide. In the future, we plan to enhance the system with advanced smart features, broader global reach, and deeper cultural engagement.
           </p>
         </div>
 
