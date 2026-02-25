@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
-import { 
-  ShoppingBag, 
-  Heart, 
-  Share2, 
-  Clock, 
-  ShieldCheck, 
-  Leaf, 
-  Info, 
-  Truck, 
+import {
+  ShoppingBag,
+  Heart,
+  Share2,
+  Clock,
+  ShieldCheck,
+  Leaf,
+  Info,
+  Truck,
   Package,
   ChevronLeft,
   ChevronRight,
@@ -46,20 +47,21 @@ const similarFoods = [
   { id: 5, name: 'Holige', price: 350, img: 'https://picsum.photos/seed/holige/400/400', region: 'Karnataka' }
 ];
 
-export const FoodDetail = ({ onNavigate }: any) => {
+export const FoodDetail = () => {
+  const navigate = useNavigate();
   const [activeImg, setActiveImg] = useState(0);
   const [quantity, setQuantity] = useState(1);
 
   return (
     <div className="min-h-screen bg-cream pt-32 pb-20 selection:bg-accent/20">
       <div className="absolute inset-0 mandala-bg opacity-[0.03] pointer-events-none" />
-      
+
       <div className="container-custom relative z-10">
         {/* Breadcrumbs */}
         <nav className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-text-soft mb-12">
-          <button onClick={() => onNavigate('home')} className="hover:text-accent transition-colors">Home</button>
+          <button onClick={() => navigate('/')} className="hover:text-accent transition-colors">Home</button>
           <ChevronRight className="w-3 h-3" />
-          <button onClick={() => onNavigate('marketplace')} className="hover:text-accent transition-colors">Traditional Foods</button>
+          <button onClick={() => navigate('/marketplace')} className="hover:text-accent transition-colors">Traditional Foods</button>
           <ChevronRight className="w-3 h-3" />
           <span className="text-primary">{foodData.name}</span>
         </nav>
@@ -67,7 +69,7 @@ export const FoodDetail = ({ onNavigate }: any) => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 mb-24">
           {/* Left: Image Gallery */}
           <div className="lg:col-span-7 space-y-6">
-            <motion.div 
+            <motion.div
               layoutId={`food-img-${foodData.id}`}
               className="relative aspect-square rounded-[48px] overflow-hidden bg-white border border-highlight/10 shadow-premium"
             >
@@ -82,15 +84,15 @@ export const FoodDetail = ({ onNavigate }: any) => {
                   className="w-full h-full object-cover"
                 />
               </AnimatePresence>
-              
+
               <div className="absolute inset-0 flex items-center justify-between px-6 opacity-0 hover:opacity-100 transition-opacity">
-                <button 
+                <button
                   onClick={() => setActiveImg((prev) => (prev === 0 ? foodData.images.length - 1 : prev - 1))}
                   className="w-12 h-12 rounded-full bg-white/90 backdrop-blur-md flex items-center justify-center text-primary shadow-lg hover:bg-accent hover:text-white transition-all"
                 >
                   <ChevronLeft className="w-6 h-6" />
                 </button>
-                <button 
+                <button
                   onClick={() => setActiveImg((prev) => (prev === foodData.images.length - 1 ? 0 : prev + 1))}
                   className="w-12 h-12 rounded-full bg-white/90 backdrop-blur-md flex items-center justify-center text-primary shadow-lg hover:bg-accent hover:text-white transition-all"
                 >
@@ -104,9 +106,8 @@ export const FoodDetail = ({ onNavigate }: any) => {
                 <button
                   key={idx}
                   onClick={() => setActiveImg(idx)}
-                  className={`relative w-24 h-24 rounded-2xl overflow-hidden border-2 transition-all ${
-                    activeImg === idx ? 'border-accent scale-105 shadow-md' : 'border-transparent opacity-60 hover:opacity-100'
-                  }`}
+                  className={`relative w-24 h-24 rounded-2xl overflow-hidden border-2 transition-all ${activeImg === idx ? 'border-accent scale-105 shadow-md' : 'border-transparent opacity-60 hover:opacity-100'
+                    }`}
                 >
                   <img src={img} alt={`${foodData.name} ${idx}`} className="w-full h-full object-cover" />
                 </button>
@@ -125,9 +126,9 @@ export const FoodDetail = ({ onNavigate }: any) => {
                   Homemade
                 </span>
               </div>
-              
+
               <h1 className="text-5xl font-display font-bold text-primary mb-4 leading-tight">{foodData.name}</h1>
-              
+
               <div className="flex items-center gap-4 mb-8">
                 <div className="flex items-center gap-1 text-amber-500">
                   {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 fill-current" />)}
