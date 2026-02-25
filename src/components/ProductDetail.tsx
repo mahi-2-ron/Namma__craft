@@ -39,6 +39,25 @@ export const ProductDetail = ({ onNavigate }: any) => {
     { id: 104, name: 'Dhokra Art Figurine', artisan: 'Sunita Murmu', price: 2100, image: 'https://picsum.photos/seed/dhokra/600/800' },
   ];
 
+  const [isWishlisted, setIsWishlisted] = useState(false);
+
+  const handleShare = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: product.name,
+          text: `Check out this amazing ${product.name} on NammaCraft!`,
+          url: window.location.href,
+        });
+      } catch (err) {
+        console.error('Error sharing:', err);
+      }
+    } else {
+      alert('Link copied to clipboard!');
+      navigator.clipboard.writeText(window.location.href);
+    }
+  };
+
   return (
     <div className="bg-cream min-h-screen pb-20 selection:bg-accent/20">
       <div className="container mx-auto px-6 py-12">
@@ -55,7 +74,7 @@ export const ProductDetail = ({ onNavigate }: any) => {
           {/* Left: Image Gallery */}
           <div className="lg:col-span-7 space-y-6 relative">
             <div className="absolute top-8 left-8 z-10">
-              <motion.span 
+              <motion.span
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 className="badge-indian shadow-premium backdrop-blur-md bg-white/80 border-white/50"
@@ -63,24 +82,24 @@ export const ProductDetail = ({ onNavigate }: any) => {
                 Handcrafted in {product.location}
               </motion.span>
             </div>
-            
+
             <div className="relative aspect-[4/5] rounded-[40px] overflow-hidden shadow-premium bg-white group">
               <AnimatePresence mode="wait">
-                <motion.img 
+                <motion.img
                   key={activeImage}
                   initial={{ opacity: 0, scale: 1.05 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                  src={product.images[activeImage]} 
-                  alt={product.name} 
+                  src={product.images[activeImage]}
+                  alt={product.name}
                   className="w-full h-full object-cover"
                   referrerPolicy="no-referrer"
                 />
               </AnimatePresence>
-              
+
               <div className="absolute inset-y-0 left-6 flex items-center opacity-0 group-hover:opacity-100 transition-opacity">
-                <button 
+                <button
                   onClick={() => setActiveImage((prev) => (prev === 0 ? product.images.length - 1 : prev - 1))}
                   className="p-4 bg-white/90 backdrop-blur-md rounded-full hover:bg-white transition-all shadow-xl hover:scale-110"
                 >
@@ -88,28 +107,28 @@ export const ProductDetail = ({ onNavigate }: any) => {
                 </button>
               </div>
               <div className="absolute inset-y-0 right-6 flex items-center opacity-0 group-hover:opacity-100 transition-opacity">
-                <button 
+                <button
                   onClick={() => setActiveImage((prev) => (prev === product.images.length - 1 ? 0 : prev + 1))}
                   className="p-4 bg-white/90 backdrop-blur-md rounded-full hover:bg-white transition-all shadow-xl hover:scale-110"
                 >
                   <ChevronRight className="w-6 h-6 text-primary" />
                 </button>
               </div>
-              
+
               {/* Image Indicators */}
               <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2">
                 {product.images.map((_, idx) => (
-                  <div 
+                  <div
                     key={idx}
                     className={`h-1.5 rounded-full transition-all duration-300 ${activeImage === idx ? 'w-8 bg-white' : 'w-1.5 bg-white/40'}`}
                   />
                 ))}
               </div>
             </div>
-            
+
             <div className="flex gap-4 overflow-x-auto pb-4 no-scrollbar">
               {product.images.map((img, idx) => (
-                <button 
+                <button
                   key={idx}
                   onClick={() => setActiveImage(idx)}
                   className={`flex-shrink-0 w-24 h-24 rounded-2xl overflow-hidden border-2 transition-all duration-300 ${activeImage === idx ? 'border-accent scale-105 shadow-lg' : 'border-transparent opacity-50 hover:opacity-100'}`}
@@ -127,7 +146,7 @@ export const ProductDetail = ({ onNavigate }: any) => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
             >
-              <button 
+              <button
                 onClick={() => onNavigate('artisan')}
                 className="group inline-flex items-center gap-3 mb-6"
               >
@@ -139,13 +158,13 @@ export const ProductDetail = ({ onNavigate }: any) => {
                   <p className="text-primary font-display font-bold text-lg leading-none group-hover:text-accent transition-colors">{product.artisan}</p>
                 </div>
               </button>
-              
+
               <h1 className="text-5xl md:text-6xl font-display font-bold text-primary mb-4 leading-[1.1] tracking-tight">
                 {product.name}
               </h1>
 
               <div className="flex items-center gap-4 mb-8">
-                <button 
+                <button
                   onClick={() => setIsCertificateOpen(true)}
                   className="flex items-center gap-2 px-4 py-2 bg-accent/5 hover:bg-accent/10 text-accent rounded-full border border-accent/20 transition-all group"
                 >
@@ -158,7 +177,7 @@ export const ProductDetail = ({ onNavigate }: any) => {
                 <span className="badge-indian !bg-accent/10 !text-accent !border-accent/20">Handmade</span>
                 <span className="badge-indian !bg-primary/5 !text-primary !border-primary/10">Traditional Craft</span>
               </div>
-              
+
               <div className="flex items-center gap-6 mb-8">
                 <div className="flex items-center gap-1 text-accent">
                   {[...Array(5)].map((_, i) => (
@@ -169,7 +188,7 @@ export const ProductDetail = ({ onNavigate }: any) => {
                 <div className="h-4 w-[1px] bg-highlight/30" />
                 <span className="text-text-soft text-sm font-medium">{product.reviews} Patrons</span>
               </div>
-              
+
               <div className="mb-10">
                 <p className="text-5xl font-display font-bold text-primary">₹{product.price.toLocaleString()}</p>
                 <p className="text-text-soft text-sm mt-2">Inclusive of all taxes • Free shipping in India</p>
@@ -179,14 +198,14 @@ export const ProductDetail = ({ onNavigate }: any) => {
                 <div className="flex items-center gap-8">
                   <span className="font-bold text-primary uppercase tracking-widest text-xs">Quantity</span>
                   <div className="flex items-center border-2 border-highlight/20 rounded-full p-1.5 bg-white/50 backdrop-blur-sm shadow-sm">
-                    <button 
+                    <button
                       onClick={() => setQuantity(Math.max(1, quantity - 1))}
                       className="p-2.5 hover:bg-accent/10 rounded-full transition-all text-primary"
                     >
                       <Minus className="w-4 h-4" />
                     </button>
                     <span className="w-12 text-center font-display font-bold text-xl text-primary">{quantity}</span>
-                    <button 
+                    <button
                       onClick={() => setQuantity(quantity + 1)}
                       className="p-2.5 hover:bg-accent/10 rounded-full transition-all text-primary"
                     >
@@ -196,25 +215,34 @@ export const ProductDetail = ({ onNavigate }: any) => {
                 </div>
 
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <button className="flex-1 btn-primary flex items-center justify-center gap-3 !py-5 text-lg shadow-xl shadow-primary/20 group">
-                    <Zap className="w-6 h-6 group-hover:scale-110 transition-transform" /> 
+                  <button
+                    onClick={() => onNavigate('checkout')}
+                    className="flex-1 btn-primary flex items-center justify-center gap-3 !py-5 text-lg shadow-xl shadow-primary/20 group"
+                  >
+                    <Zap className="w-6 h-6 group-hover:scale-110 transition-transform" />
                     Buy Now
                   </button>
-                  <button 
+                  <button
                     onClick={() => onNavigate('auction')}
                     className="flex-1 btn-secondary flex items-center justify-center gap-3 !py-5 text-lg shadow-xl group"
                   >
-                    <Gavel className="w-6 h-6 group-hover:scale-110 transition-transform" /> 
+                    <Gavel className="w-6 h-6 group-hover:scale-110 transition-transform" />
                     Join Auction
                   </button>
                 </div>
 
                 <div className="flex items-center justify-between pt-8 border-t border-highlight/20">
                   <div className="flex gap-8">
-                    <button className="flex items-center gap-2 text-text-soft hover:text-accent transition-all text-xs font-bold uppercase tracking-widest">
-                      <Heart className="w-4 h-4" /> Wishlist
+                    <button
+                      onClick={() => setIsWishlisted(!isWishlisted)}
+                      className={`flex items-center gap-2 transition-all text-xs font-bold uppercase tracking-widest ${isWishlisted ? 'text-accent' : 'text-text-soft hover:text-accent'}`}
+                    >
+                      <Heart className={`w-4 h-4 ${isWishlisted ? 'fill-accent' : ''}`} /> Wishlist
                     </button>
-                    <button className="flex items-center gap-2 text-text-soft hover:text-accent transition-all text-xs font-bold uppercase tracking-widest">
+                    <button
+                      onClick={handleShare}
+                      className="flex items-center gap-2 text-text-soft hover:text-accent transition-all text-xs font-bold uppercase tracking-widest"
+                    >
                       <Share2 className="w-4 h-4" /> Share
                     </button>
                   </div>
@@ -231,7 +259,7 @@ export const ProductDetail = ({ onNavigate }: any) => {
         {/* Craft Story Section */}
         <section className="mb-32 relative overflow-hidden rounded-[60px] bg-cream-dark p-12 md:p-24 border border-highlight/20">
           <div className="absolute inset-0 mandala-bg opacity-[0.02] pointer-events-none" />
-          
+
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center relative z-10">
             <div>
               <div className="flex items-center gap-4 mb-8">
@@ -253,17 +281,17 @@ export const ProductDetail = ({ onNavigate }: any) => {
                 </div>
               </div>
             </div>
-            
+
             <div className="relative">
               <div className="aspect-square rounded-[40px] overflow-hidden shadow-premium">
-                <img 
-                  src="https://picsum.photos/seed/artisan-working/800/800" 
-                  alt="Artisan at work" 
+                <img
+                  src="https://picsum.photos/seed/artisan-working/800/800"
+                  alt="Artisan at work"
                   className="w-full h-full object-cover"
                   referrerPolicy="no-referrer"
                 />
               </div>
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 className="absolute -bottom-10 -left-10 right-10 glass-premium p-10 rounded-[32px] border-white/40"
@@ -347,7 +375,7 @@ export const ProductDetail = ({ onNavigate }: any) => {
                 </div>
               </div>
             </div>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {[
                 { user: 'Priya M.', initial: 'PM', comment: "The blue pottery is exquisite. The colors are so vibrant and the finish is perfect. It looks stunning in my living room." },
@@ -384,7 +412,7 @@ export const ProductDetail = ({ onNavigate }: any) => {
               </div>
               <h2 className="text-4xl font-display font-bold text-primary">Artisan's Collection</h2>
             </div>
-            <button 
+            <button
               onClick={() => onNavigate('artisan')}
               className="text-accent font-bold uppercase tracking-widest text-sm hover:tracking-[0.2em] transition-all"
             >
@@ -399,7 +427,7 @@ export const ProductDetail = ({ onNavigate }: any) => {
         </section>
       </div>
 
-      <AuthenticityCertificate 
+      <AuthenticityCertificate
         isOpen={isCertificateOpen}
         onClose={() => setIsCertificateOpen(false)}
         productName={product.name}
@@ -424,7 +452,12 @@ export const ProductDetail = ({ onNavigate }: any) => {
               Every purchase supports a local artisan and helps preserve traditional techniques for future generations.
             </p>
             <div className="flex justify-center gap-6">
-              <button className="btn-accent px-12 py-5 text-lg shadow-2xl shadow-accent/20">Explore More Crafts</button>
+              <button
+                onClick={() => onNavigate('marketplace')}
+                className="btn-accent px-12 py-5 text-lg shadow-2xl shadow-accent/20"
+              >
+                Explore More Crafts
+              </button>
             </div>
           </motion.div>
         </div>
