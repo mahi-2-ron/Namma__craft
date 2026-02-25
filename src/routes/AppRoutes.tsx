@@ -1,20 +1,20 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { HomePage } from '../pages/HomePage';
-import { Marketplace } from '../components/Marketplace';
-import { ProductDetail } from '../components/ProductDetail';
-import { AuctionListing } from '../components/AuctionListing';
-import { LiveAuction } from '../components/LiveAuction';
-import { ArtisanProfile } from '../components/ArtisanProfile';
-import { CreatorDashboard } from '../components/CreatorDashboard';
-import { AdminDashboard } from '../components/AdminDashboard';
-import { CreateAuction } from '../components/CreateAuction';
-import { Login } from '../components/Login';
-import { Checkout } from '../components/Checkout';
-import { FoodDetail } from '../components/FoodDetail';
-import { AddFoodItem } from '../components/AddFoodItem';
-import { CulturalDiscovery } from '../components/CulturalDiscovery';
-import { FestivalHome } from '../components/FestivalHome';
+import { Marketplace } from '../pages/Marketplace';
+import { ProductDetail } from '../pages/ProductDetail';
+import { AuctionListing } from '../pages/AuctionListing';
+import { LiveAuction } from '../pages/LiveAuction';
+import { ArtisanProfile } from '../pages/ArtisanProfile';
+import { CreatorDashboard } from '../pages/CreatorDashboard';
+import { AdminDashboard } from '../pages/AdminDashboard';
+import { CreateAuction } from '../pages/CreateAuction';
+import { Login } from '../pages/Login';
+import { Checkout } from '../pages/Checkout';
+import { FoodDetail } from '../pages/FoodDetail';
+import { AddFoodItem } from '../pages/AddFoodItem';
+import { CulturalDiscovery } from '../pages/CulturalDiscovery';
+import { FestivalHome } from '../pages/FestivalHome';
 
 export const AppRoutes = () => {
     return (
