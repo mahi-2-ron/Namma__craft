@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { ChevronRight, Heart, Utensils } from 'lucide-react';
 
@@ -37,11 +38,12 @@ const foods = [
   }
 ];
 
-export const TraditionalFoods = ({ onNavigate }: any) => {
+export const TraditionalFoods = () => {
+  const navigate = useNavigate();
   return (
     <section className="py-24 bg-cream relative overflow-hidden">
       <div className="absolute inset-0 mandala-bg opacity-[0.03] pointer-events-none" />
-      
+
       <div className="container-custom relative z-10">
         <div className="flex flex-col md:flex-row justify-between items-end gap-6 mb-16">
           <motion.div
@@ -56,9 +58,10 @@ export const TraditionalFoods = ({ onNavigate }: any) => {
             <h2 className="text-5xl font-display font-bold text-primary mb-4">Taste India’s Traditional Foods</h2>
             <p className="text-text-soft text-lg max-w-xl">Homemade specialties from local communities, crafted with recipes passed down through generations.</p>
           </motion.div>
-          
-          <motion.button 
+
+          <motion.button
             whileHover={{ gap: '1.5rem' }}
+            onClick={() => navigate('/marketplace')}
             className="flex items-center gap-4 text-accent font-bold uppercase tracking-widest text-xs group"
           >
             Explore All Flavors <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -77,9 +80,9 @@ export const TraditionalFoods = ({ onNavigate }: any) => {
               className="group bg-white rounded-[32px] overflow-hidden border border-highlight/10 shadow-sm hover:shadow-premium transition-all"
             >
               <div className="relative h-64 overflow-hidden">
-                <img 
-                  src={food.image} 
-                  alt={food.name} 
+                <img
+                  src={food.image}
+                  alt={food.name}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                 />
                 <div className="absolute top-4 left-4">
@@ -91,7 +94,7 @@ export const TraditionalFoods = ({ onNavigate }: any) => {
                   <Heart className="w-4 h-4" />
                 </button>
               </div>
-              
+
               <div className="p-8">
                 <div className="flex items-center gap-2 mb-2">
                   <Utensils className="w-3 h-3 text-accent" />
@@ -99,9 +102,9 @@ export const TraditionalFoods = ({ onNavigate }: any) => {
                 </div>
                 <h3 className="text-xl font-display font-bold text-primary mb-3 group-hover:text-accent transition-colors">{food.name}</h3>
                 <p className="text-text-soft text-sm line-clamp-2 mb-6 leading-relaxed italic">"{food.desc}"</p>
-                
-                <button 
-                  onClick={() => onNavigate('food-detail')}
+
+                <button
+                  onClick={() => navigate(`/food-detail/${food.id}`)}
                   className="w-full py-4 bg-cream/50 rounded-2xl text-primary font-bold text-[10px] uppercase tracking-widest hover:bg-primary hover:text-white transition-all"
                 >
                   View Details
