@@ -3,7 +3,7 @@ import { motion } from 'motion/react';
 import { MapPin, Star, Heart, MessageCircle, Share2, Palette, Hammer, Scissors, Coffee, Gem } from 'lucide-react';
 import { ProductCard } from './FeaturedProducts';
 
-export const ArtisanProfile = ({ onNavigate }: any) => {
+export const ArtisanProfile = () => {
   const artisanProducts = [
     { id: 1, name: 'Hand-Painted Blue Pottery Vase', artisan: 'Ananya Sharma', price: 2450, image: 'https://picsum.photos/seed/jaipur-pottery/600/800' },
     { id: 5, name: 'Cobalt Blue Ceramic Bowl', artisan: 'Ananya Sharma', price: 1250, image: 'https://picsum.photos/seed/blue-bowl/600/800' },
