@@ -1,8 +1,10 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { ChevronRight, Sparkles } from 'lucide-react';
 
-export const Hero = ({ onNavigate }: any) => {
+export const Hero = () => {
+  const navigate = useNavigate();
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden bg-cream selection:bg-accent/20">
       {/* Background Elements */}
@@ -12,7 +14,7 @@ export const Hero = ({ onNavigate }: any) => {
 
       <div className="container-custom relative z-10 py-32">
         <div className="flex flex-col lg:flex-row items-center gap-24">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
@@ -22,7 +24,7 @@ export const Hero = ({ onNavigate }: any) => {
               <span className="w-2 h-2 bg-accent rounded-full animate-pulse" />
               Heritage in every stitch
             </div>
-            
+
             <h1 className="text-[72px] md:text-[100px] font-display font-bold leading-[0.85] mb-10 text-primary tracking-tight">
               Discover the <br />
               <span className="italic font-normal text-accent relative">
@@ -33,21 +35,21 @@ export const Hero = ({ onNavigate }: any) => {
               </span> of <br />
               Handmade Culture.
             </h1>
-            
+
             <p className="text-2xl leading-relaxed text-text-soft mb-14 max-w-xl mx-auto lg:mx-0 font-light">
               A curated treasury of India's timeless artistry, where every piece carries the legacy of generations and the warmth of human touch.
             </p>
-            
+
             <div className="flex flex-wrap justify-center lg:justify-start gap-8">
-              <button 
-                onClick={() => onNavigate('discovery')}
+              <button
+                onClick={() => navigate('/discovery')}
                 className="btn-primary !px-12 !py-6 text-lg shadow-2xl shadow-primary/20 group flex items-center gap-4"
               >
                 Cultural Discovery
                 <Sparkles className="w-5 h-5 group-hover:rotate-12 transition-transform" />
               </button>
-              <button 
-                onClick={() => onNavigate('marketplace')}
+              <button
+                onClick={() => navigate('/marketplace')}
                 className="btn-secondary !px-12 !py-6 text-lg group flex items-center gap-3"
               >
                 Marketplace
@@ -55,7 +57,7 @@ export const Hero = ({ onNavigate }: any) => {
             </div>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
@@ -64,13 +66,13 @@ export const Hero = ({ onNavigate }: any) => {
             {/* Collage Layout */}
             <div className="relative w-full h-full">
               {/* Main Image */}
-              <motion.div 
+              <motion.div
                 whileHover={{ scale: 1.02 }}
                 className="absolute top-0 right-0 w-4/5 aspect-[4/5] rounded-[40px] overflow-hidden shadow-premium z-10"
               >
-                <img 
-                  src="https://picsum.photos/seed/indian-pottery/800/1000" 
-                  alt="Indian Pottery" 
+                <img
+                  src="https://picsum.photos/seed/indian-pottery/800/1000"
+                  alt="Indian Pottery"
                   className="w-full h-full object-cover"
                   referrerPolicy="no-referrer"
                 />
@@ -78,37 +80,37 @@ export const Hero = ({ onNavigate }: any) => {
               </motion.div>
 
               {/* Secondary Image 1 */}
-              <motion.div 
+              <motion.div
                 initial={{ x: 20, y: 20 }}
                 animate={{ x: 0, y: 0 }}
                 whileHover={{ scale: 1.05, zIndex: 20 }}
                 className="absolute bottom-10 left-0 w-1/2 aspect-square rounded-[32px] overflow-hidden shadow-premium z-20 border-4 border-cream"
               >
-                <img 
-                  src="https://picsum.photos/seed/indian-textile/600/600" 
-                  alt="Indian Textile" 
+                <img
+                  src="https://picsum.photos/seed/indian-textile/600/600"
+                  alt="Indian Textile"
                   className="w-full h-full object-cover"
                   referrerPolicy="no-referrer"
                 />
               </motion.div>
 
               {/* Secondary Image 2 */}
-              <motion.div 
+              <motion.div
                 initial={{ x: -20, y: -20 }}
                 animate={{ x: 0, y: 0 }}
                 whileHover={{ scale: 1.05, zIndex: 20 }}
                 className="absolute top-20 -left-10 w-2/5 aspect-square rounded-[24px] overflow-hidden shadow-premium z-0 border-4 border-cream"
               >
-                <img 
-                  src="https://picsum.photos/seed/indian-woodcraft/400/400" 
-                  alt="Indian Woodcraft" 
+                <img
+                  src="https://picsum.photos/seed/indian-woodcraft/400/400"
+                  alt="Indian Woodcraft"
                   className="w-full h-full object-cover"
                   referrerPolicy="no-referrer"
                 />
               </motion.div>
 
               {/* Floating Badge */}
-              <motion.div 
+              <motion.div
                 animate={{ y: [0, -10, 0] }}
                 transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                 className="absolute -bottom-4 right-10 glass-premium px-6 py-3 rounded-full border border-white/50 shadow-xl z-30"
@@ -120,6 +122,5 @@ export const Hero = ({ onNavigate }: any) => {
         </div>
       </div>
     </section>
-
   );
 };
