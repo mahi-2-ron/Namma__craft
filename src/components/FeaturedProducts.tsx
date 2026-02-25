@@ -21,7 +21,6 @@ export const ProductCard = ({ image, name, artisan, price, region, rarity, stock
     }
   };
 
-  return (
   const [isFavorite, setIsFavorite] = React.useState(false);
 
   return (
