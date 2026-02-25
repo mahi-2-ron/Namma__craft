@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, ScrollRestoration } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { Sparkles, ChevronRight } from 'lucide-react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
@@ -30,9 +30,9 @@ import { Footer } from './components/Footer';
 
 const HomePage = () => (
   <>
-    <Hero onNavigate={() => { }} />
+    <Hero />
     {/* Festival Banner */}
-    <a href="/festival-home" className="block bg-primary py-4 relative overflow-hidden group">
+    <Link to="/festival-home" className="block bg-primary py-4 relative overflow-hidden group">
       <div className="absolute inset-0 mandala-bg opacity-[0.05]" />
       <div className="container-custom relative z-10 flex items-center justify-center gap-6">
         <Sparkles className="w-5 h-5 text-accent animate-pulse" />
@@ -41,16 +41,16 @@ const HomePage = () => (
         </p>
         <ChevronRight className="w-5 h-5 text-accent group-hover:translate-x-2 transition-transform" />
       </div>
-    </a>
-    <CategoryGrid onNavigate={() => { }} />
-    <CulturalMap onNavigate={() => { }} />
-    <FeaturedProducts onNavigate={() => { }} />
-    <GiftBundles onNavigate={() => { }} />
-    <ArtisanStory onNavigate={() => { }} />
-    <TraditionalFoods onNavigate={() => { }} />
-    <ArtisanSpotlight onNavigate={() => { }} />
+    </Link>
+    <CategoryGrid />
+    <CulturalMap />
+    <FeaturedProducts />
+    <GiftBundles />
+    <ArtisanStory />
+    <TraditionalFoods />
+    <ArtisanSpotlight />
     <FuturePlans />
-    <Recommendations onNavigate={() => { }} />
+    <Recommendations />
   </>
 );
 
