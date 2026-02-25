@@ -1,4 +1,3 @@
-```javascript
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'motion/react';
@@ -41,7 +40,7 @@ export const Checkout = () => {
         >
           <div className="absolute top-0 left-0 w-full h-2 bg-emerald-500" />
           <div className="w-24 h-24 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-8">
-            <CheckCircle2Icon className="w-12 h-12" />
+            <CheckCircle2 className="w-12 h-12" />
           </div>
           <h1 className="text-4xl font-display font-bold text-primary mb-4">Payment Successful!</h1>
           <p className="text-text-soft text-lg mb-12">Your order <span className="text-primary font-bold">#NC-84291</span> has been placed successfully. The artisan has been notified.</p>
@@ -56,12 +55,12 @@ export const Checkout = () => {
                 { status: 'Delivered', time: 'Estimated: Feb 28', done: false },
               ].map((item, i) => (
                 <div key={i} className="flex gap-4 relative">
-                  {i < 3 && <div className={`absolute left - [11px] top - 6 w - [2px] h - 8 ${ item.done ? 'bg-emerald-500' : 'bg-highlight/20' } `} />}
-                  <div className={`w - 6 h - 6 rounded - full flex items - center justify - center shrink - 0 z - 10 ${ item.done ? 'bg-emerald-500 text-white' : 'bg-highlight/20 text-white' } `}>
-                    <CheckCircle2Icon className="w-3.5 h-3.5" />
+                  {i < 3 && <div className={`absolute left-[11px] top-6 w-[2px] h-8 ${item.done ? 'bg-emerald-500' : 'bg-highlight/20'}`} />}
+                  <div className={`w-6 h-6 rounded-full flex items-center justify-center shrink-0 z-10 ${item.done ? 'bg-emerald-500 text-white' : 'bg-highlight/20 text-white'}`}>
+                    <CheckCircle2 className="w-3.5 h-3.5" />
                   </div>
                   <div>
-                    <p className={`text - sm font - bold ${ item.done ? 'text-primary' : 'text-text-soft' } `}>{item.status}</p>
+                    <p className={`text-sm font-bold ${item.done ? 'text-primary' : 'text-text-soft'}`}>{item.status}</p>
                     <p className="text-[10px] text-text-soft/60 uppercase tracking-widest">{item.time}</p>
                   </div>
                 </div>
@@ -90,7 +89,7 @@ export const Checkout = () => {
           onClick={() => navigate('/auction/1')}
           className="flex items-center gap-2 text-text-soft hover:text-accent transition-all text-xs font-bold uppercase tracking-widest mb-10"
         >
-          <ArrowLeftIcon className="w-4 h-4" /> Back to Auction
+          <ArrowLeft className="w-4 h-4" /> Back to Auction
         </button>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
@@ -98,14 +97,14 @@ export const Checkout = () => {
           <div className="lg:col-span-7 space-y-8">
             <div className="bg-white rounded-[40px] p-10 border border-highlight/10 shadow-sm">
               <div className="flex items-center gap-6 mb-10">
-                <div className={`w - 12 h - 12 rounded - 2xl flex items - center justify - center transition - colors ${ step >= 1 ? 'bg-accent text-white' : 'bg-cream text-text-soft' } `}>
-                  <MapPinIcon className="w-6 h-6" />
+                <div className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-colors ${step >= 1 ? 'bg-accent text-white' : 'bg-cream text-text-soft'}`}>
+                  <MapPin className="w-6 h-6" />
                 </div>
                 <div className="h-[2px] flex-1 bg-highlight/10 relative">
-                  <div className={`absolute inset - 0 bg - accent transition - all duration - 500 ${ step >= 2 ? 'w-full' : 'w-0' } `} />
+                  <div className={`absolute inset-0 bg-accent transition-all duration-500 ${step >= 2 ? 'w-full' : 'w-0'}`} />
                 </div>
-                <div className={`w - 12 h - 12 rounded - 2xl flex items - center justify - center transition - colors ${ step >= 2 ? 'bg-accent text-white' : 'bg-cream text-text-soft' } `}>
-                  <CreditCardIcon className="w-6 h-6" />
+                <div className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-colors ${step >= 2 ? 'bg-accent text-white' : 'bg-cream text-text-soft'}`}>
+                  <CreditCard className="w-6 h-6" />
                 </div>
               </div>
 
@@ -138,7 +137,7 @@ export const Checkout = () => {
                   </div>
                   <button onClick={() => setStep(2)} className="w-full btn-primary !py-5 text-sm shadow-xl shadow-primary/20 flex items-center justify-center gap-3 group">
                     Continue to Payment
-                    <ChevronRightIcon className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </button>
                 </div>
               ) : (
@@ -160,7 +159,7 @@ export const Checkout = () => {
                     ))}
                   </div>
                   <div className="bg-emerald-50 p-6 rounded-2xl border border-emerald-100 flex items-start gap-4">
-                    <ShieldCheckIcon className="w-6 h-6 text-emerald-600 shrink-0" />
+                    <ShieldCheck className="w-6 h-6 text-emerald-600 shrink-0" />
                     <div>
                       <p className="text-sm font-bold text-emerald-900">Secure Transaction</p>
                       <p className="text-xs text-emerald-700 mt-1 leading-relaxed">Your payment is protected by our artisan trust guarantee. Funds are held in escrow until delivery is confirmed.</p>
@@ -186,7 +185,7 @@ export const Checkout = () => {
                   <h4 className="font-bold text-primary mb-1">{product.name}</h4>
                   <p className="text-xs text-text-soft mb-2">Artisan: {product.artisan}</p>
                   <div className="flex items-center gap-2 text-accent">
-                    <ClockIcon className="w-3.5 h-3.5" />
+                    <Clock className="w-3.5 h-3.5" />
                     <span className="text-[10px] font-bold uppercase tracking-widest">Auction Item</span>
                   </div>
                 </div>
@@ -214,11 +213,11 @@ export const Checkout = () => {
 
               <div className="space-y-4">
                 <div className="flex items-center gap-3 text-[10px] font-bold uppercase tracking-widest text-text-soft/60">
-                  <TruckIcon className="w-4 h-4" />
+                  <Truck className="w-4 h-4" />
                   Estimated Delivery: Feb 28, 2024
                 </div>
                 <div className="flex items-center gap-3 text-[10px] font-bold uppercase tracking-widest text-text-soft/60">
-                  <PackageIcon className="w-4 h-4" />
+                  <Package className="w-4 h-4" />
                   Eco-friendly Packaging Included
                 </div>
               </div>
