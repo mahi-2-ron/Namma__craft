@@ -4,14 +4,9 @@ import { motion, AnimatePresence } from 'motion/react';
 import {
   Plus,
   Package,
-  DollarSign,
   Eye,
-  MessageSquare,
   Settings,
-  MoreVertical,
   Edit3,
-  Trash2,
-  ChevronRight,
   LayoutDashboard,
   Gavel,
   ShoppingBag,
@@ -19,7 +14,6 @@ import {
   Bell,
   User,
   Search,
-  ChevronDown,
   Clock,
   ArrowUpRight,
   ArrowDownRight,
@@ -28,18 +22,15 @@ import {
   AlertCircle
 } from 'lucide-react';
 import {
-  BarChart,
-  Bar,
+  AreaChart,
+  Area,
   XAxis,
   YAxis,
   CartesianGrid,
   Tooltip,
-  ResponsiveContainer,
-  AreaChart,
-  Area,
-  LineChart,
-  Line
+  ResponsiveContainer
 } from 'recharts';
+import { craftProducts, auctions } from '../data/db';
 
 const salesData = [
   { day: 'Mon', bids: 12, revenue: 1200 },
@@ -51,22 +42,7 @@ const salesData = [
   { day: 'Sun', bids: 28, revenue: 2800 },
 ];
 
-const products = [
-  { id: 1, name: 'Hand-Painted Blue Pottery Vase', price: 2450, stock: 12, sales: 45, status: 'Active', image: 'https://picsum.photos/seed/jaipur-pottery/100/100' },
-  { id: 2, name: 'Cobalt Blue Ceramic Bowl', price: 1250, stock: 8, sales: 28, status: 'Active', image: 'https://picsum.photos/seed/blue-bowl/100/100' },
-];
-
-const activeAuctions = [
-  { id: 1, name: 'Antique Dhokra Chariot', currentBid: 28500, bidders: 14, timeLeft: '00:45:12', status: 'Active', image: 'https://picsum.photos/seed/dhokra-1/100/100' },
-  { id: 2, name: 'Hand-Woven Pashmina Shawl', currentBid: 42000, bidders: 8, timeLeft: '02:15:30', status: 'Ending Soon', image: 'https://picsum.photos/seed/pashmina-1/100/100' },
-];
-
-const completedAuctions = [
-  { id: 3, name: 'Terracotta Horse Figurine', winningBid: 12500, winner: 'Rahul M.', date: 'Feb 20, 2024', status: 'Pending Shipping', image: 'https://picsum.photos/seed/horse/100/100' },
-  { id: 4, name: 'Blue Pottery Platter', winningBid: 4800, winner: 'Sita R.', date: 'Feb 18, 2024', status: 'Shipped', image: 'https://picsum.photos/seed/pottery/100/100' },
-];
-
-const StatCard = ({ title, value, change, icon: Icon, trend, label }: any) => (
+const StatCard = ({ title, value, change, icon: Icon, trend, label }) => (
   <motion.div
     whileHover={{ y: -5 }}
     className="bg-white p-6 rounded-3xl border border-highlight/10 shadow-sm relative overflow-hidden group"
@@ -160,13 +136,13 @@ export const CreatorDashboard = () => {
             </button>
             <div className="h-8 w-[1px] bg-highlight/10" />
             <button
-              onClick={() => navigate('/seller/add-item')}
+              onClick={() => navigate('/add-food')}
               className="btn-secondary !py-2.5 !px-6 text-[10px] uppercase tracking-widest shadow-lg shadow-primary/5"
             >
               Add Food Item
             </button>
             <button
-              onClick={() => navigate('/seller/create-auction')}
+              onClick={() => navigate('/create-auction')}
               className="btn-primary !py-2.5 !px-6 text-[10px] uppercase tracking-widest shadow-lg shadow-primary/20"
             >
               Start Auction
@@ -209,7 +185,7 @@ export const CreatorDashboard = () => {
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-highlight/5">
-                      {activeAuctions.map((auc) => (
+                      {auctions.map((auc) => (
                         <tr key={auc.id} className="hover:bg-cream/10 transition-colors group">
                           <td className="px-8 py-5">
                             <div className="flex items-center gap-4">
@@ -221,7 +197,7 @@ export const CreatorDashboard = () => {
                             <p className="text-sm font-bold text-primary">₹{auc.currentBid.toLocaleString()}</p>
                           </td>
                           <td className="px-8 py-5">
-                            <p className="text-sm text-text-soft">{auc.bidders} Bidders</p>
+                            <p className="text-sm text-text-soft">{auc.bidders || 5} Bidders</p>
                           </td>
                           <td className="px-8 py-5">
                             <div className="flex items-center gap-2 text-text-soft">
@@ -230,76 +206,15 @@ export const CreatorDashboard = () => {
                             </div>
                           </td>
                           <td className="px-8 py-5">
-                            <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest ${auc.status === 'Active' ? 'bg-emerald-50 text-emerald-600' : 'bg-amber-50 text-amber-600'
-                              }`}>
-                              <div className={`w-1 h-1 rounded-full ${auc.status === 'Active' ? 'bg-emerald-600' : 'bg-amber-600'}`} />
-                              {auc.status}
+                            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest bg-emerald-50 text-emerald-600">
+                              <div className="w-1 h-1 rounded-full bg-emerald-600" />
+                              Active
                             </span>
                           </td>
                           <td className="px-8 py-5 text-right">
                             <button className="p-2 hover:bg-primary hover:text-white rounded-lg transition-all text-text-soft">
                               <Edit3 className="w-4 h-4" />
                             </button>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-
-              {/* Completed Auctions Section */}
-              <div className="bg-white rounded-[32px] border border-highlight/10 shadow-sm overflow-hidden">
-                <div className="p-8 border-b border-highlight/10 flex justify-between items-center">
-                  <h3 className="text-xl font-display font-bold text-primary">Completed Auctions</h3>
-                  <button className="text-accent text-xs font-bold uppercase tracking-widest hover:tracking-[0.2em] transition-all">History</button>
-                </div>
-                <div className="overflow-x-auto">
-                  <table className="w-full text-left">
-                    <thead>
-                      <tr className="bg-cream/20">
-                        <th className="px-8 py-5 text-[10px] font-bold uppercase tracking-widest text-text-soft/60">Product</th>
-                        <th className="px-8 py-5 text-[10px] font-bold uppercase tracking-widest text-text-soft/60">Winning Bid</th>
-                        <th className="px-8 py-5 text-[10px] font-bold uppercase tracking-widest text-text-soft/60">Winner</th>
-                        <th className="px-8 py-5 text-[10px] font-bold uppercase tracking-widest text-text-soft/60">Date</th>
-                        <th className="px-8 py-5 text-[10px] font-bold uppercase tracking-widest text-text-soft/60">Status</th>
-                        <th className="px-8 py-5 text-[10px] font-bold uppercase tracking-widest text-text-soft/60 text-right">Action</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-highlight/5">
-                      {completedAuctions.map((auc) => (
-                        <tr key={auc.id} className="hover:bg-cream/10 transition-colors group">
-                          <td className="px-8 py-5">
-                            <div className="flex items-center gap-4">
-                              <img src={auc.image} alt={auc.name} className="w-12 h-12 rounded-xl object-cover" />
-                              <p className="font-bold text-primary text-sm">{auc.name}</p>
-                            </div>
-                          </td>
-                          <td className="px-8 py-5">
-                            <p className="text-sm font-bold text-primary">₹{auc.winningBid.toLocaleString()}</p>
-                          </td>
-                          <td className="px-8 py-5">
-                            <p className="text-sm text-text-soft">{auc.winner}</p>
-                          </td>
-                          <td className="px-8 py-5">
-                            <p className="text-xs text-text-soft font-mono">{auc.date}</p>
-                          </td>
-                          <td className="px-8 py-5">
-                            <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest ${auc.status === 'Shipped' ? 'bg-emerald-50 text-emerald-600' : 'bg-primary/5 text-primary'
-                              }`}>
-                              {auc.status}
-                            </span>
-                          </td>
-                          <td className="px-8 py-5 text-right">
-                            {auc.status === 'Pending Shipping' ? (
-                              <button className="btn-primary !py-1.5 !px-4 text-[9px] uppercase tracking-widest">
-                                Ship Now
-                              </button>
-                            ) : (
-                              <button className="text-text-soft hover:text-primary transition-colors">
-                                <Eye className="w-4 h-4" />
-                              </button>
-                            )}
                           </td>
                         </tr>
                       ))}
@@ -397,39 +312,6 @@ export const CreatorDashboard = () => {
                     </div>
                   </div>
                 </div>
-              </div>
-
-              {/* Recent Payments */}
-              <div className="bg-white p-8 rounded-[32px] border border-highlight/10 shadow-sm">
-                <h3 className="text-lg font-display font-bold text-primary mb-6">Recent Payments</h3>
-                <div className="space-y-4">
-                  {[
-                    { id: '#PAY-901', amount: '₹18,200', date: 'Feb 20', status: 'Paid' },
-                    { id: '#PAY-898', amount: '₹12,500', date: 'Feb 18', status: 'Paid' },
-                  ].map((pay, i) => (
-                    <div key={i} className="flex justify-between items-center p-3 bg-cream/20 rounded-xl">
-                      <div>
-                        <p className="text-xs font-bold text-primary">{pay.id}</p>
-                        <p className="text-[10px] text-text-soft uppercase tracking-widest">{pay.date}</p>
-                      </div>
-                      <div className="text-right">
-                        <p className="text-sm font-bold text-primary">{pay.amount}</p>
-                        <p className="text-[9px] text-emerald-600 font-bold uppercase tracking-widest">{pay.status}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Quick Tips */}
-              <div className="bg-accent/5 p-8 rounded-[32px] border border-accent/10">
-                <div className="flex items-center gap-3 text-accent mb-4">
-                  <AlertCircle className="w-5 h-5" />
-                  <h4 className="font-display font-bold">Seller Tip</h4>
-                </div>
-                <p className="text-sm text-primary/70 leading-relaxed italic">
-                  "Items with 'Ending Soon' status see a 60% spike in bid activity. Ensure your product descriptions are detailed to convert these last-minute bidders!"
-                </p>
               </div>
             </div>
           </div>
