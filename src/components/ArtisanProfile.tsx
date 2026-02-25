@@ -16,36 +16,55 @@ export const ArtisanProfile = ({ onNavigate }: any) => {
     { id: 2, user: 'Amit S.', rating: 4, comment: 'Beautiful craftsmanship. It arrived safely in very secure packaging.', date: '1 week ago' },
   ];
 
+  const [isFollowing, setIsFollowing] = React.useState(false);
+
+  const handleShare = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: "Ananya Sharma - Master Artisan",
+          text: "Discover the amazing craft of Ananya Sharma on NammaCraft!",
+          url: window.location.href,
+        });
+      } catch (err) {
+        console.error('Error sharing:', err);
+      }
+    } else {
+      alert('Link copied to clipboard!');
+      navigator.clipboard.writeText(window.location.href);
+    }
+  };
+
   return (
     <div className="bg-cream min-h-screen pb-20 selection:bg-accent/20">
       {/* Header Section */}
       <div className="relative">
         <div className="h-64 md:h-[450px] w-full overflow-hidden relative">
-          <img 
-            src="https://picsum.photos/seed/rajasthan-landscape/1920/800" 
-            alt="Artisan Workshop" 
+          <img
+            src="https://picsum.photos/seed/rajasthan-landscape/1920/800"
+            alt="Artisan Workshop"
             className="w-full h-full object-cover brightness-[0.85]"
             referrerPolicy="no-referrer"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-cream via-transparent to-transparent opacity-60" />
           <div className="absolute inset-0 mandala-bg opacity-[0.03]" />
         </div>
-        
+
         <div className="container mx-auto px-6">
           <div className="relative -mt-32 md:-mt-48 flex flex-col md:flex-row items-end gap-8 mb-16">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               className="w-48 h-48 md:w-72 md:h-72 rounded-full border-[12px] border-cream overflow-hidden shadow-premium z-10"
             >
-              <img 
-                src="https://picsum.photos/seed/indian-face/600/600" 
-                alt="Ananya Sharma" 
+              <img
+                src="https://picsum.photos/seed/indian-face/600/600"
+                alt="Ananya Sharma"
                 className="w-full h-full object-cover"
                 referrerPolicy="no-referrer"
               />
             </motion.div>
-            
+
             <div className="flex-1 pb-6">
               <div className="flex flex-wrap items-end justify-between gap-6">
                 <motion.div
@@ -61,7 +80,7 @@ export const ArtisanProfile = ({ onNavigate }: any) => {
                   <h1 className="text-5xl md:text-7xl font-display font-bold text-primary mb-4 tracking-tight">Ananya Sharma</h1>
                   <div className="flex flex-wrap items-center gap-6 text-text-soft">
                     <span className="flex items-center gap-2 font-medium bg-white/50 px-4 py-2 rounded-full border border-highlight/20 shadow-sm">
-                      <MapPin className="w-5 h-5 text-accent" /> 
+                      <MapPin className="w-5 h-5 text-accent" />
                       <span className="text-primary">Jaipur, Rajasthan, India</span>
                     </span>
                     <div className="flex items-center gap-2">
@@ -75,22 +94,28 @@ export const ArtisanProfile = ({ onNavigate }: any) => {
                     </div>
                   </div>
                 </motion.div>
-                
-                <motion.div 
+
+                <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3 }}
                   className="flex flex-wrap items-center gap-4"
                 >
-                  <button className="btn-primary group">
-                    <Heart className="w-5 h-5 group-hover:fill-white transition-colors" />
-                    Follow Artisan
+                  <button
+                    onClick={() => setIsFollowing(!isFollowing)}
+                    className={`btn-primary group ${isFollowing ? '!bg-white !text-primary border-2 border-primary' : ''}`}
+                  >
+                    <Heart className={`w-5 h-5 transition-colors ${isFollowing ? 'fill-accent text-accent' : 'group-hover:fill-white'}`} />
+                    {isFollowing ? 'Following' : 'Follow Artisan'}
                   </button>
-                  <button className="btn-secondary !px-6 flex items-center gap-2 group">
+                  <button
+                    onClick={() => alert('Launching Messenger...')}
+                    className="btn-secondary !px-6 flex items-center gap-2 group"
+                  >
                     <MessageCircle className="w-5 h-5 group-hover:text-accent" />
                     Contact
                   </button>
-                  <button 
+                  <button
                     onClick={() => {
                       const el = document.getElementById('artisan-collection');
                       el?.scrollIntoView({ behavior: 'smooth' });
@@ -99,7 +124,10 @@ export const ArtisanProfile = ({ onNavigate }: any) => {
                   >
                     View Products
                   </button>
-                  <button className="p-4 bg-white/80 backdrop-blur-md border border-highlight/30 rounded-full hover:bg-white hover:shadow-lg transition-all">
+                  <button
+                    onClick={handleShare}
+                    className="p-4 bg-white/80 backdrop-blur-md border border-highlight/30 rounded-full hover:bg-white hover:shadow-lg transition-all"
+                  >
                     <Share2 className="w-5 h-5 text-primary" />
                   </button>
                 </motion.div>
@@ -132,7 +160,7 @@ export const ArtisanProfile = ({ onNavigate }: any) => {
                   I've spent the last 15 years perfecting the traditional floral motifs while introducing contemporary designs that appeal to a global audience. For me, blue pottery is not just a craft; it's a legacy that I am proud to carry forward. Each brushstroke is a conversation with history, and each kiln firing is a prayer for perfection.
                 </p>
               </div>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
                 <div className="bg-white p-8 rounded-2xl border border-highlight/20 shadow-sm relative overflow-hidden group">
                   <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:scale-110 transition-transform">
@@ -226,12 +254,15 @@ export const ArtisanProfile = ({ onNavigate }: any) => {
                   </div>
                 </div>
               </div>
-              
-              <button className="w-full mt-10 btn-primary py-5 text-lg shadow-xl shadow-primary/20 flex items-center justify-center gap-3">
-                <MessageCircle className="w-6 h-6" /> 
+
+              <button
+                onClick={() => alert('Launching Messenger...')}
+                className="w-full mt-10 btn-primary py-5 text-lg shadow-xl shadow-primary/20 flex items-center justify-center gap-3"
+              >
+                <MessageCircle className="w-6 h-6" />
                 Message Artisan
               </button>
-              
+
               <div className="mt-12">
                 <h4 className="text-sm font-bold text-primary mb-6 uppercase tracking-widest">Recent Reviews</h4>
                 <div className="space-y-6">
@@ -248,7 +279,10 @@ export const ArtisanProfile = ({ onNavigate }: any) => {
                       <p className="text-sm text-text-soft italic">"{review.comment}"</p>
                     </div>
                   ))}
-                  <button className="w-full py-2 text-accent text-sm font-bold hover:tracking-widest transition-all uppercase">
+                  <button
+                    onClick={() => alert('Loading more reviews...')}
+                    className="w-full py-2 text-accent text-sm font-bold hover:tracking-widest transition-all uppercase"
+                  >
                     View All Reviews →
                   </button>
                 </div>
@@ -273,8 +307,18 @@ export const ArtisanProfile = ({ onNavigate }: any) => {
               By following Ananya, you're not just supporting an artist; you're helping preserve a 14th-century craft for future generations.
             </p>
             <div className="flex flex-wrap justify-center gap-6">
-              <button className="btn-primary px-12 py-5 text-lg">Follow Ananya</button>
-              <button className="btn-secondary px-12 py-5 text-lg">Share Her Story</button>
+              <button
+                onClick={() => setIsFollowing(!isFollowing)}
+                className="btn-primary px-12 py-5 text-lg"
+              >
+                {isFollowing ? 'Following' : 'Follow Ananya'}
+              </button>
+              <button
+                onClick={handleShare}
+                className="btn-secondary px-12 py-5 text-lg"
+              >
+                Share Her Story
+              </button>
             </div>
           </motion.div>
         </div>
