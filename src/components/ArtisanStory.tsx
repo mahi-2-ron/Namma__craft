@@ -1,31 +1,33 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { Play, MapPin, Quote, ChevronRight, User, Palette } from 'lucide-react';
 
-export const ArtisanStory = ({ onNavigate }: any) => {
+export const ArtisanStory = () => {
+  const navigate = useNavigate();
   return (
     <section className="section-spacing bg-cream relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 mandala-bg opacity-[0.03] pointer-events-none" />
-      
+
       <div className="container-custom relative z-10">
         <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
-          
+
           {/* Video Section */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             className="w-full lg:w-1/2 relative"
           >
             <div className="relative aspect-video rounded-[48px] overflow-hidden shadow-premium group cursor-pointer">
-              <img 
-                src="https://picsum.photos/seed/artisan-video-bg/1200/800" 
-                alt="Artisan at work" 
+              <img
+                src="https://picsum.photos/seed/artisan-video-bg/1200/800"
+                alt="Artisan at work"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-primary/20 group-hover:bg-primary/10 transition-colors" />
-              
+
               {/* Play Button Overlay */}
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="w-20 h-20 bg-white/90 backdrop-blur-md rounded-full flex items-center justify-center text-accent shadow-2xl group-hover:scale-110 transition-transform">
@@ -46,7 +48,7 @@ export const ArtisanStory = ({ onNavigate }: any) => {
           </motion.div>
 
           {/* Story Content */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -57,11 +59,11 @@ export const ArtisanStory = ({ onNavigate }: any) => {
                 <div className="h-[1px] w-8 bg-accent" />
                 <span className="text-accent font-bold text-[10px] uppercase tracking-widest">Meet the Artisan</span>
               </div>
-              
+
               <div className="flex items-center gap-6 mb-8">
-                <img 
-                  src="https://picsum.photos/seed/artisan-ananya-profile/200/200" 
-                  alt="Ananya Sharma" 
+                <img
+                  src="https://picsum.photos/seed/artisan-ananya-profile/200/200"
+                  alt="Ananya Sharma"
                   className="w-24 h-24 rounded-3xl object-cover shadow-xl border-4 border-white"
                 />
                 <div>
@@ -101,8 +103,8 @@ export const ArtisanStory = ({ onNavigate }: any) => {
                 </div>
               </div>
 
-              <button 
-                onClick={() => onNavigate('artisan')}
+              <button
+                onClick={() => navigate('/artisan/1')}
                 className="btn-primary !px-10 !py-5 group flex items-center gap-3 shadow-xl shadow-primary/20"
               >
                 View Full Profile
