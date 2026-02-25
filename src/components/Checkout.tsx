@@ -1,3 +1,4 @@
+```javascript
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'motion/react';
@@ -11,17 +12,6 @@ import {
   Package,
   Clock,
   ArrowLeft
-} from 'lucide-center';
-import {
-  CreditCard as CreditCardIcon,
-  Truck as TruckIcon,
-  MapPin as MapPinIcon,
-  ShieldCheck as ShieldCheckIcon,
-  ChevronRight as ChevronRightIcon,
-  CheckCircle2 as CheckCircle2Icon,
-  Package as PackageIcon,
-  Clock as ClockIcon,
-  ArrowLeft as ArrowLeftIcon
 } from 'lucide-react';
 
 export const Checkout = () => {
@@ -66,12 +56,12 @@ export const Checkout = () => {
                 { status: 'Delivered', time: 'Estimated: Feb 28', done: false },
               ].map((item, i) => (
                 <div key={i} className="flex gap-4 relative">
-                  {i < 3 && <div className={`absolute left-[11px] top-6 w-[2px] h-8 ${item.done ? 'bg-emerald-500' : 'bg-highlight/20'}`} />}
-                  <div className={`w-6 h-6 rounded-full flex items-center justify-center shrink-0 z-10 ${item.done ? 'bg-emerald-500 text-white' : 'bg-highlight/20 text-white'}`}>
+                  {i < 3 && <div className={`absolute left - [11px] top - 6 w - [2px] h - 8 ${ item.done ? 'bg-emerald-500' : 'bg-highlight/20' } `} />}
+                  <div className={`w - 6 h - 6 rounded - full flex items - center justify - center shrink - 0 z - 10 ${ item.done ? 'bg-emerald-500 text-white' : 'bg-highlight/20 text-white' } `}>
                     <CheckCircle2Icon className="w-3.5 h-3.5" />
                   </div>
                   <div>
-                    <p className={`text-sm font-bold ${item.done ? 'text-primary' : 'text-text-soft'}`}>{item.status}</p>
+                    <p className={`text - sm font - bold ${ item.done ? 'text-primary' : 'text-text-soft' } `}>{item.status}</p>
                     <p className="text-[10px] text-text-soft/60 uppercase tracking-widest">{item.time}</p>
                   </div>
                 </div>
@@ -108,13 +98,13 @@ export const Checkout = () => {
           <div className="lg:col-span-7 space-y-8">
             <div className="bg-white rounded-[40px] p-10 border border-highlight/10 shadow-sm">
               <div className="flex items-center gap-6 mb-10">
-                <div className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-colors ${step >= 1 ? 'bg-accent text-white' : 'bg-cream text-text-soft'}`}>
+                <div className={`w - 12 h - 12 rounded - 2xl flex items - center justify - center transition - colors ${ step >= 1 ? 'bg-accent text-white' : 'bg-cream text-text-soft' } `}>
                   <MapPinIcon className="w-6 h-6" />
                 </div>
                 <div className="h-[2px] flex-1 bg-highlight/10 relative">
-                  <div className={`absolute inset-0 bg-accent transition-all duration-500 ${step >= 2 ? 'w-full' : 'w-0'}`} />
+                  <div className={`absolute inset - 0 bg - accent transition - all duration - 500 ${ step >= 2 ? 'w-full' : 'w-0' } `} />
                 </div>
-                <div className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-colors ${step >= 2 ? 'bg-accent text-white' : 'bg-cream text-text-soft'}`}>
+                <div className={`w - 12 h - 12 rounded - 2xl flex items - center justify - center transition - colors ${ step >= 2 ? 'bg-accent text-white' : 'bg-cream text-text-soft' } `}>
                   <CreditCardIcon className="w-6 h-6" />
                 </div>
               </div>
