@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { Star, Minus, Plus, ShoppingCart, Zap, Heart, Share2, ChevronLeft, ChevronRight, MapPin, Gavel, ShieldCheck, Truck, Package, Gem, Award } from 'lucide-react';
 import { ProductCard } from './FeaturedProducts';
 import { AuthenticityCertificate } from './AuthenticityCertificate';
 
-export const ProductDetail = ({ onNavigate }: any) => {
+export const ProductDetail = () => {
+  const navigate = useNavigate();
   const [quantity, setQuantity] = useState(1);
   const [activeTab, setActiveTab] = useState('description');
   const [activeImage, setActiveImage] = useState(0);
@@ -63,9 +65,9 @@ export const ProductDetail = ({ onNavigate }: any) => {
       <div className="container mx-auto px-6 py-12">
         {/* Breadcrumbs */}
         <div className="flex items-center gap-3 text-xs uppercase tracking-widest text-text-soft/60 mb-12">
-          <button onClick={() => onNavigate('home')} className="hover:text-accent transition-colors">Home</button>
+          <button onClick={() => navigate('/')} className="hover:text-accent transition-colors">Home</button>
           <span className="text-[8px]">/</span>
-          <button onClick={() => onNavigate('marketplace')} className="hover:text-accent transition-colors">Marketplace</button>
+          <button onClick={() => navigate('/marketplace')} className="hover:text-accent transition-colors">Marketplace</button>
           <span className="text-[8px]">/</span>
           <span className="text-primary font-bold">{product.name}</span>
         </div>
@@ -147,7 +149,7 @@ export const ProductDetail = ({ onNavigate }: any) => {
               transition={{ delay: 0.2 }}
             >
               <button
-                onClick={() => onNavigate('artisan')}
+                onClick={() => navigate('/artisan/1')}
                 className="group inline-flex items-center gap-3 mb-6"
               >
                 <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-accent/20 group-hover:border-accent transition-colors">
@@ -216,14 +218,14 @@ export const ProductDetail = ({ onNavigate }: any) => {
 
                 <div className="flex flex-col sm:flex-row gap-4">
                   <button
-                    onClick={() => onNavigate('checkout')}
+                    onClick={() => navigate('/checkout')}
                     className="flex-1 btn-primary flex items-center justify-center gap-3 !py-5 text-lg shadow-xl shadow-primary/20 group"
                   >
                     <Zap className="w-6 h-6 group-hover:scale-110 transition-transform" />
                     Buy Now
                   </button>
                   <button
-                    onClick={() => onNavigate('auction')}
+                    onClick={() => navigate('/auction/1')}
                     className="flex-1 btn-secondary flex items-center justify-center gap-3 !py-5 text-lg shadow-xl group"
                   >
                     <Gavel className="w-6 h-6 group-hover:scale-110 transition-transform" />
@@ -413,7 +415,7 @@ export const ProductDetail = ({ onNavigate }: any) => {
               <h2 className="text-4xl font-display font-bold text-primary">Artisan's Collection</h2>
             </div>
             <button
-              onClick={() => onNavigate('artisan')}
+              onClick={() => navigate('/artisan/1')}
               className="text-accent font-bold uppercase tracking-widest text-sm hover:tracking-[0.2em] transition-all"
             >
               View Studio →
@@ -421,7 +423,7 @@ export const ProductDetail = ({ onNavigate }: any) => {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
             {relatedProducts.map(product => (
-              <ProductCard key={product.id} {...product} onNavigate={onNavigate} />
+              <ProductCard key={product.id} {...product} />
             ))}
           </div>
         </section>
@@ -453,7 +455,7 @@ export const ProductDetail = ({ onNavigate }: any) => {
             </p>
             <div className="flex justify-center gap-6">
               <button
-                onClick={() => onNavigate('marketplace')}
+                onClick={() => navigate('/marketplace')}
                 className="btn-accent px-12 py-5 text-lg shadow-2xl shadow-accent/20"
               >
                 Explore More Crafts
@@ -463,6 +465,5 @@ export const ProductDetail = ({ onNavigate }: any) => {
         </div>
       </section>
     </div>
-
   );
 };
