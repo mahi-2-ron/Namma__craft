@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'motion/react';
 import {
   Upload,
@@ -16,7 +17,8 @@ import {
 import { SmartPricingPanel } from './SmartPricingPanel';
 import { VoiceAssistant } from './VoiceAssistant';
 
-export const CreateAuction = ({ onNavigate }: any) => {
+export const CreateAuction = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
     category: 'Pottery',
@@ -64,7 +66,7 @@ export const CreateAuction = ({ onNavigate }: any) => {
         {/* Header */}
         <div className="flex items-center justify-between mb-12">
           <button
-            onClick={() => onNavigate('creator')}
+            onClick={() => navigate('/seller/dashboard')}
             className="flex items-center gap-2 text-text-soft hover:text-primary transition-all group"
           >
             <ChevronLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
@@ -80,7 +82,7 @@ export const CreateAuction = ({ onNavigate }: any) => {
             <button
               onClick={() => {
                 alert('Auction published successfully! Your craft is now live.');
-                onNavigate('creator');
+                navigate('/seller/dashboard');
               }}
               className="btn-primary !py-3 !px-10 text-xs uppercase tracking-widest shadow-xl shadow-primary/20"
             >
