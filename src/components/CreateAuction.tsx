@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
-import { 
-  Upload, 
-  ChevronLeft, 
-  Info, 
-  Gavel, 
-  Clock, 
-  Tag, 
+import {
+  Upload,
+  ChevronLeft,
+  Info,
+  Gavel,
+  Clock,
+  Tag,
   Image as ImageIcon,
   CheckCircle2,
   AlertCircle,
   HelpCircle,
   Plus
 } from 'lucide-react';
-import { AIPricingPanel } from './AIPricingPanel';
+import { SmartPricingPanel } from './SmartPricingPanel';
 import { VoiceAssistant } from './VoiceAssistant';
 
 export const CreateAuction = ({ onNavigate }: any) => {
@@ -59,11 +59,11 @@ export const CreateAuction = ({ onNavigate }: any) => {
   return (
     <div className="bg-cream min-h-screen relative overflow-hidden p-6 md:p-12">
       <div className="absolute inset-0 mandala-bg opacity-[0.03] pointer-events-none" />
-      
+
       <div className="container-custom relative z-10">
         {/* Header */}
         <div className="flex items-center justify-between mb-12">
-          <button 
+          <button
             onClick={() => onNavigate('creator')}
             className="flex items-center gap-2 text-text-soft hover:text-primary transition-all group"
           >
@@ -80,7 +80,7 @@ export const CreateAuction = ({ onNavigate }: any) => {
           {/* Form Section */}
           <div className="lg:col-span-7 space-y-10">
             <VoiceAssistant onDataExtracted={handleVoiceData} />
-            
+
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -107,20 +107,20 @@ export const CreateAuction = ({ onNavigate }: any) => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <label className="text-[10px] font-bold uppercase tracking-widest text-text-soft ml-2">Product Name</label>
-                    <input 
-                      type="text" 
+                    <input
+                      type="text"
                       placeholder="e.g. Hand-Painted Blue Pottery Vase"
                       className="w-full px-6 py-4 bg-cream/30 rounded-2xl border-2 border-transparent focus:border-accent focus:bg-white outline-none transition-all text-sm font-medium"
                       value={formData.name}
-                      onChange={(e) => setFormData({...formData, name: e.target.value})}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     />
                   </div>
                   <div className="space-y-2">
                     <label className="text-[10px] font-bold uppercase tracking-widest text-text-soft ml-2">Category</label>
-                    <select 
+                    <select
                       className="w-full px-6 py-4 bg-cream/30 rounded-2xl border-2 border-transparent focus:border-accent focus:bg-white outline-none transition-all text-sm font-medium appearance-none"
                       value={formData.category}
-                      onChange={(e) => setFormData({...formData, category: e.target.value})}
+                      onChange={(e) => setFormData({ ...formData, category: e.target.value })}
                     >
                       <option>Pottery</option>
                       <option>Textiles</option>
@@ -133,12 +133,12 @@ export const CreateAuction = ({ onNavigate }: any) => {
 
                 <div className="space-y-2">
                   <label className="text-[10px] font-bold uppercase tracking-widest text-text-soft ml-2">Origin Region</label>
-                  <input 
-                    type="text" 
+                  <input
+                    type="text"
                     placeholder="e.g. Jaipur, Rajasthan"
                     className="w-full px-6 py-4 bg-cream/30 rounded-2xl border-2 border-transparent focus:border-accent focus:bg-white outline-none transition-all text-sm font-medium"
                     value={formData.origin}
-                    onChange={(e) => setFormData({...formData, origin: e.target.value})}
+                    onChange={(e) => setFormData({ ...formData, origin: e.target.value })}
                   />
                 </div>
 
@@ -146,8 +146,8 @@ export const CreateAuction = ({ onNavigate }: any) => {
                 <div className="space-y-2">
                   <label className="text-[10px] font-bold uppercase tracking-widest text-text-soft ml-2">Product Images</label>
                   <div className="relative group">
-                    <input 
-                      type="file" 
+                    <input
+                      type="file"
                       accept="image/*"
                       onChange={handleImageUpload}
                       className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
@@ -166,7 +166,7 @@ export const CreateAuction = ({ onNavigate }: any) => {
                     <div className="flex gap-4 mt-4">
                       <div className="relative w-24 h-24 rounded-2xl overflow-hidden border-2 border-accent shadow-lg">
                         <img src={previewImage} alt="Preview" className="w-full h-full object-cover" />
-                        <button 
+                        <button
                           onClick={() => setPreviewImage(null)}
                           className="absolute top-1 right-1 w-6 h-6 bg-rose-500 text-white rounded-full flex items-center justify-center shadow-md hover:bg-rose-600 transition-colors"
                         >
@@ -199,12 +199,12 @@ export const CreateAuction = ({ onNavigate }: any) => {
                     </label>
                     <div className="relative">
                       <span className="absolute left-6 top-1/2 -translate-y-1/2 font-bold text-primary">₹</span>
-                      <input 
-                        type="number" 
+                      <input
+                        type="number"
                         placeholder="0.00"
                         className="w-full pl-12 pr-6 py-4 bg-cream/30 rounded-2xl border-2 border-transparent focus:border-accent focus:bg-white outline-none transition-all text-sm font-medium"
                         value={formData.startPrice}
-                        onChange={(e) => setFormData({...formData, startPrice: e.target.value})}
+                        onChange={(e) => setFormData({ ...formData, startPrice: e.target.value })}
                       />
                     </div>
                   </div>
@@ -212,12 +212,12 @@ export const CreateAuction = ({ onNavigate }: any) => {
                     <label className="text-[10px] font-bold uppercase tracking-widest text-text-soft ml-2">Min. Bid Increment</label>
                     <div className="relative">
                       <span className="absolute left-6 top-1/2 -translate-y-1/2 font-bold text-primary">₹</span>
-                      <input 
-                        type="number" 
+                      <input
+                        type="number"
                         placeholder="500"
                         className="w-full pl-12 pr-6 py-4 bg-cream/30 rounded-2xl border-2 border-transparent focus:border-accent focus:bg-white outline-none transition-all text-sm font-medium"
                         value={formData.minIncrement}
-                        onChange={(e) => setFormData({...formData, minIncrement: e.target.value})}
+                        onChange={(e) => setFormData({ ...formData, minIncrement: e.target.value })}
                       />
                     </div>
                   </div>
@@ -226,10 +226,10 @@ export const CreateAuction = ({ onNavigate }: any) => {
                 <div className="space-y-6">
                   <div className="space-y-2">
                     <label className="text-[10px] font-bold uppercase tracking-widest text-text-soft ml-2">Auction Duration</label>
-                    <select 
+                    <select
                       className="w-full px-6 py-4 bg-cream/30 rounded-2xl border-2 border-transparent focus:border-accent focus:bg-white outline-none transition-all text-sm font-medium appearance-none"
                       value={formData.duration}
-                      onChange={(e) => setFormData({...formData, duration: e.target.value})}
+                      onChange={(e) => setFormData({ ...formData, duration: e.target.value })}
                     >
                       <option>1 day</option>
                       <option>3 days</option>
@@ -241,12 +241,12 @@ export const CreateAuction = ({ onNavigate }: any) => {
                     <label className="text-[10px] font-bold uppercase tracking-widest text-text-soft ml-2">Reserve Price (Optional)</label>
                     <div className="relative">
                       <span className="absolute left-6 top-1/2 -translate-y-1/2 font-bold text-primary">₹</span>
-                      <input 
-                        type="number" 
+                      <input
+                        type="number"
                         placeholder="Hidden from buyers"
                         className="w-full pl-12 pr-6 py-4 bg-cream/30 rounded-2xl border-2 border-transparent focus:border-accent focus:bg-white outline-none transition-all text-sm font-medium"
                         value={formData.reservePrice}
-                        onChange={(e) => setFormData({...formData, reservePrice: e.target.value})}
+                        onChange={(e) => setFormData({ ...formData, reservePrice: e.target.value })}
                       />
                     </div>
                   </div>
@@ -259,15 +259,15 @@ export const CreateAuction = ({ onNavigate }: any) => {
                     <h4 className="font-bold text-primary">Add "Buy Now" Option</h4>
                     <p className="text-xs text-text-soft">Allow buyers to skip the auction and purchase instantly.</p>
                   </div>
-                  <button 
-                    onClick={() => setFormData({...formData, buyNow: !formData.buyNow})}
+                  <button
+                    onClick={() => setFormData({ ...formData, buyNow: !formData.buyNow })}
                     className={`w-14 h-8 rounded-full transition-all relative ${formData.buyNow ? 'bg-accent' : 'bg-highlight/20'}`}
                   >
                     <div className={`absolute top-1 w-6 h-6 bg-white rounded-full shadow-md transition-all ${formData.buyNow ? 'left-7' : 'left-1'}`} />
                   </button>
                 </div>
                 {formData.buyNow && (
-                  <motion.div 
+                  <motion.div
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: 'auto' }}
                     className="mt-6 space-y-2"
@@ -275,12 +275,12 @@ export const CreateAuction = ({ onNavigate }: any) => {
                     <label className="text-[10px] font-bold uppercase tracking-widest text-text-soft ml-2">Buy Now Price</label>
                     <div className="relative">
                       <span className="absolute left-6 top-1/2 -translate-y-1/2 font-bold text-primary">₹</span>
-                      <input 
-                        type="number" 
+                      <input
+                        type="number"
                         placeholder="Must be higher than starting price"
                         className="w-full pl-12 pr-6 py-4 bg-cream/30 rounded-2xl border-2 border-transparent focus:border-accent focus:bg-white outline-none transition-all text-sm font-medium"
                         value={formData.buyNowPrice}
-                        onChange={(e) => setFormData({...formData, buyNowPrice: e.target.value})}
+                        onChange={(e) => setFormData({ ...formData, buyNowPrice: e.target.value })}
                       />
                     </div>
                   </motion.div>
@@ -301,12 +301,12 @@ export const CreateAuction = ({ onNavigate }: any) => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <label className="text-[10px] font-bold uppercase tracking-widest text-text-soft ml-2">The Craft Story</label>
-                    <textarea 
+                    <textarea
                       rows={6}
                       placeholder="Describe the tradition, materials, and cultural significance of this piece..."
                       className="w-full px-6 py-4 bg-cream/30 rounded-2xl border-2 border-transparent focus:border-accent focus:bg-white outline-none transition-all text-sm font-medium resize-none"
                       value={formData.craftStory}
-                      onChange={(e) => setFormData({...formData, craftStory: e.target.value})}
+                      onChange={(e) => setFormData({ ...formData, craftStory: e.target.value })}
                     />
                   </div>
                   <div className="space-y-2">
@@ -322,14 +322,13 @@ export const CreateAuction = ({ onNavigate }: any) => {
                   <label className="text-[10px] font-bold uppercase tracking-widest text-text-soft ml-2">Authenticity Badge</label>
                   <div className="flex flex-wrap gap-3">
                     {['Handmade', 'Traditional Craft', 'Limited Edition', 'Eco-Friendly'].map((badge) => (
-                      <button 
+                      <button
                         key={badge}
-                        onClick={() => setFormData({...formData, badge})}
-                        className={`px-6 py-3 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all border-2 ${
-                          formData.badge === badge 
-                            ? 'bg-primary text-white border-primary shadow-lg shadow-primary/20' 
+                        onClick={() => setFormData({ ...formData, badge })}
+                        className={`px-6 py-3 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all border-2 ${formData.badge === badge
+                            ? 'bg-primary text-white border-primary shadow-lg shadow-primary/20'
                             : 'bg-cream/50 text-text-soft border-transparent hover:border-accent/20'
-                        }`}
+                          }`}
                       >
                         {badge}
                       </button>
@@ -353,9 +352,9 @@ export const CreateAuction = ({ onNavigate }: any) => {
 
               <div className="bg-white rounded-[40px] border border-highlight/10 shadow-2xl overflow-hidden group">
                 <div className="aspect-[4/5] relative overflow-hidden">
-                  <img 
-                    src={previewImage || 'https://picsum.photos/seed/placeholder/800/1000'} 
-                    alt="Preview" 
+                  <img
+                    src={previewImage || 'https://picsum.photos/seed/placeholder/800/1000'}
+                    alt="Preview"
                     className={`w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 ${!previewImage && 'opacity-20 grayscale'}`}
                   />
                   <div className="absolute top-6 left-6 flex flex-col gap-2">
@@ -395,8 +394,8 @@ export const CreateAuction = ({ onNavigate }: any) => {
                 </div>
               </div>
 
-              {/* AI Pricing Panel */}
-              <AIPricingPanel name={formData.name} category={formData.category} />
+              {/* Smart Pricing Panel */}
+              <SmartPricingPanel name={formData.name} category={formData.category} />
 
               {/* Tips Card */}
               <div className="bg-accent/5 p-8 rounded-[32px] border border-accent/10 space-y-4">
@@ -418,10 +417,10 @@ export const CreateAuction = ({ onNavigate }: any) => {
 
 const Palette = ({ className }: { className?: string }) => (
   <svg className={className} width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/>
-    <circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/>
-    <circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/>
-    <circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/>
-    <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.9 0 1.6-.7 1.6-1.6 0-.4-.2-.8-.5-1.1-.3-.3-.4-.7-.4-1.1 0-.9.7-1.6 1.6-1.6H16c3.3 0 6-2.7 6-6 0-4.4-4.5-8-10-8z"/>
+    <circle cx="13.5" cy="6.5" r=".5" fill="currentColor" />
+    <circle cx="17.5" cy="10.5" r=".5" fill="currentColor" />
+    <circle cx="8.5" cy="7.5" r=".5" fill="currentColor" />
+    <circle cx="6.5" cy="12.5" r=".5" fill="currentColor" />
+    <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.9 0 1.6-.7 1.6-1.6 0-.4-.2-.8-.5-1.1-.3-.3-.4-.7-.4-1.1 0-.9.7-1.6 1.6-1.6H16c3.3 0 6-2.7 6-6 0-4.4-4.5-8-10-8z" />
   </svg>
 );
