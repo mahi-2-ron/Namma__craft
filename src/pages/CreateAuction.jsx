@@ -33,9 +33,9 @@ export const CreateAuction = () => {
     badge: 'Handmade'
   });
 
-  const [previewImage, setPreviewImage] = useState<string | null>(null);
+  const [previewImage, setPreviewImage] = useState(null);
 
-  const handleVoiceData = (data: any) => {
+  const handleVoiceData = (data) => {
     setFormData(prev => ({
       ...prev,
       name: data.name || prev.name,
@@ -47,7 +47,7 @@ export const CreateAuction = () => {
     }));
   };
 
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageUpload = (e) => {
     const file = e.target.files?.[0];
     if (file) {
       const reader = new FileReader();
@@ -430,7 +430,7 @@ export const CreateAuction = () => {
   );
 };
 
-const Palette = ({ className }: { className?: string }) => (
+const Palette = ({ className }) => (
   <svg className={className} width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <circle cx="13.5" cy="6.5" r=".5" fill="currentColor" />
     <circle cx="17.5" cy="10.5" r=".5" fill="currentColor" />
