@@ -27,6 +27,7 @@ export const AppRoutes = () => {
             <Route path="/auction/:id" element={<LiveAuction />} />
             <Route path="/artisan/:id" element={<ArtisanProfile />} />
             <Route path="/seller" element={<CreatorDashboard />} />
+            <Route path="/seller/dashboard" element={<Navigate to="/seller" replace />} />
             <Route path="/admin" element={<AdminDashboard />} />
             <Route path="/create-auction" element={<CreateAuction />} />
             <Route path="/login" element={<Login />} />
