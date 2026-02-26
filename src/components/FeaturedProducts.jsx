@@ -72,7 +72,7 @@ export const ProductCard = ({ id, image, name, artisan, price, region, rarity, s
           <button
             onClick={(e) => {
               e.stopPropagation();
-              alert(`${name} added to your collection!`);
+              navigate('/checkout');
             }}
             className="w-full btn-primary !py-3 text-xs flex items-center justify-center gap-2 shadow-xl"
           >
