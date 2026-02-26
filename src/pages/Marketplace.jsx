@@ -48,7 +48,7 @@ const FoodCard = ({ id, image, name, creator, price, region, tag }) => {
           <button
             onClick={(e) => {
               e.stopPropagation();
-              alert(`${name} added to your cart!`);
+              navigate('/checkout');
             }}
             className="w-full btn-primary !py-3 text-xs flex items-center justify-center gap-2 shadow-xl"
           >
