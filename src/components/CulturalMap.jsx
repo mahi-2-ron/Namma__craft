@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { MapPin, Utensils, Palette, User, X, ChevronRight, Sparkles, Star } from 'lucide-react';
 
-const regionData: Record<string, any> = {
+const regionData = {
   'Rajasthan': {
     crafts: ['Blue Pottery', 'Meenakari Jewelry', 'Hand-block Printing'],
     foods: ['Ghevar', 'Dal Baati Churma', 'Ker Sangri'],
@@ -43,7 +43,7 @@ const regionData: Record<string, any> = {
 
 export const CulturalMap = () => {
   const navigate = useNavigate();
-  const [selectedRegion, setSelectedRegion] = useState<string | null>(null);
+  const [selectedRegion, setSelectedRegion] = useState(null);
 
   // Simplified India Map SVG paths (Representative)
   const regions = [
@@ -164,7 +164,7 @@ export const CulturalMap = () => {
                         <h4 className="text-sm font-bold uppercase tracking-widest">Signature Crafts</h4>
                       </div>
                       <div className="flex flex-wrap gap-2">
-                        {regionData[selectedRegion].crafts.map((craft: string) => (
+                        {regionData[selectedRegion].crafts.map((craft) => (
                           <span key={craft} className="px-3 py-1 bg-cream rounded-lg text-[11px] font-medium text-primary border border-highlight/20">
                             {craft}
                           </span>
@@ -179,7 +179,7 @@ export const CulturalMap = () => {
                         <h4 className="text-sm font-bold uppercase tracking-widest">Traditional Flavors</h4>
                       </div>
                       <div className="flex flex-wrap gap-2">
-                        {regionData[selectedRegion].foods.map((food: string) => (
+                        {regionData[selectedRegion].foods.map((food) => (
                           <span key={food} className="px-3 py-1 bg-accent/5 rounded-lg text-[11px] font-medium text-accent border border-accent/10">
                             {food}
                           </span>
@@ -194,7 +194,7 @@ export const CulturalMap = () => {
                         <h4 className="text-sm font-bold uppercase tracking-widest">Featured Artisans</h4>
                       </div>
                       <div className="space-y-2">
-                        {regionData[selectedRegion].artisans.map((artisan: string) => (
+                        {regionData[selectedRegion].artisans.map((artisan) => (
                           <div
                             key={artisan}
                             onClick={() => navigate('/artisan/1')}
