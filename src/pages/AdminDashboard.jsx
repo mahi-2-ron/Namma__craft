@@ -11,7 +11,6 @@ import {
   ArrowUpRight,
   ArrowDownRight,
   Search,
-  Filter,
   LayoutDashboard,
   Gavel,
   Palette,
@@ -22,7 +21,6 @@ import {
   ChevronDown,
   MoreVertical,
   Pause,
-  Play,
   XCircle,
   Eye,
   ShieldAlert,
@@ -52,7 +50,7 @@ const data = [
   { name: 'Sun', bids: 349, revenue: 4300 },
 ];
 
-const StatCard = ({ title, value, change, icon: Icon, trend }: any) => (
+const StatCard = ({ title, value, change, icon: Icon, trend }) => (
   <motion.div
     whileHover={{ y: -5 }}
     className="bg-white p-6 rounded-3xl border border-highlight/10 shadow-sm relative overflow-hidden group"
@@ -74,7 +72,7 @@ const StatCard = ({ title, value, change, icon: Icon, trend }: any) => (
 export const AdminDashboard = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('dashboard');
-  const [selectedAuction, setSelectedAuction] = useState<any>(null);
+  const [selectedAuction, setSelectedAuction] = useState(null);
 
   const auctions = [
     { id: 'AUC-101', name: 'Antique Dhokra Chariot', artisan: 'Suresh Murmu', currentBid: 28500, startPrice: 15000, timeLeft: '00:45:12', status: 'Active', image: 'https://picsum.photos/seed/dhokra-1/100/100' },
@@ -231,7 +229,7 @@ export const AdminDashboard = () => {
                     <div className="flex gap-3">
                       <button className="btn-secondary !py-2 !px-4 text-xs">Export CSV</button>
                       <button
-                        onClick={() => navigate('/admin/create-auction')}
+                        onClick={() => navigate('/create-auction')}
                         className="btn-primary !py-2 !px-6 text-xs"
                       >
                         Create Auction
@@ -425,26 +423,6 @@ export const AdminDashboard = () => {
                           <XCircle className="w-5 h-5" /> Cancel Auction
                         </button>
                       </div>
-                      <div className="mt-8 pt-8 border-t border-highlight/10">
-                        <p className="text-[10px] text-text-soft uppercase tracking-widest font-bold mb-4">Quick Actions</p>
-                        <div className="grid grid-cols-2 gap-3">
-                          <button className="p-3 bg-cream/50 rounded-xl text-[10px] font-bold uppercase tracking-widest text-primary hover:bg-accent hover:text-white transition-all">Extend 1h</button>
-                          <button className="p-3 bg-cream/50 rounded-xl text-[10px] font-bold uppercase tracking-widest text-primary hover:bg-accent hover:text-white transition-all">Flag Bids</button>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="bg-rose-50 p-8 rounded-[40px] border border-rose-100">
-                      <div className="flex items-center gap-3 mb-4 text-rose-600">
-                        <ShieldAlert className="w-6 h-6" />
-                        <h4 className="font-display font-bold">Trust & Safety</h4>
-                      </div>
-                      <p className="text-sm text-rose-700/80 leading-relaxed mb-6">
-                        Our system has detected unusual bidding activity from 2 participants. Manual review is recommended before approval.
-                      </p>
-                      <button className="w-full py-3 bg-rose-600 text-white rounded-xl text-xs font-bold uppercase tracking-widest shadow-lg shadow-rose-200">
-                        Resolve Dispute
-                      </button>
                     </div>
                   </div>
                 </div>
