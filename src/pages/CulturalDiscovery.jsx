@@ -235,7 +235,7 @@ export const CulturalDiscovery = () => {
                     <div className="flex justify-between items-center">
                       <span className="text-2xl font-display font-bold text-accent">₹{food.price}</span>
                       <button
-                        onClick={() => navigate('/food/1')}
+                        onClick={() => navigate(`/food-detail/${food.id}`)}
                         className="px-6 py-3 bg-cream rounded-xl text-[10px] font-bold uppercase tracking-widest text-primary hover:bg-primary hover:text-white transition-all"
                       >
                         View Details
