@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { MapPin, Star, Heart, MessageCircle, Share2, Palette, Hammer, Scissors, Coffee, Gem } from 'lucide-react';
 import { ProductCard } from '../components/FeaturedProducts';
+import { useNavigate } from 'react-router-dom';
 
 export const ArtisanProfile = () => {
+  const navigate = useNavigate();
   const artisanProducts = [
     { id: 1, name: 'Hand-Painted Blue Pottery Vase', artisan: 'Ananya Sharma', price: 2450, image: 'https://picsum.photos/seed/jaipur-pottery/600/800' },
     { id: 5, name: 'Cobalt Blue Ceramic Bowl', artisan: 'Ananya Sharma', price: 1250, image: 'https://picsum.photos/seed/blue-bowl/600/800' },
@@ -16,7 +18,7 @@ export const ArtisanProfile = () => {
     { id: 2, user: 'Amit S.', rating: 4, comment: 'Beautiful craftsmanship. It arrived safely in very secure packaging.', date: '1 week ago' },
   ];
 
-  const [isFollowing, setIsFollowing] = React.useState(false);
+  const [isFollowing, setIsFollowing] = useState(false);
 
   const handleShare = async () => {
     if (navigator.share) {
@@ -50,174 +52,105 @@ export const ArtisanProfile = () => {
           <div className="absolute inset-0 mandala-bg opacity-[0.03]" />
         </div>
 
-        <div className="container mx-auto px-6">
-          <div className="relative -mt-32 md:-mt-48 flex flex-col md:flex-row items-end gap-8 mb-16">
+        <div className="container-custom relative -mt-32 md:-mt-48 z-10">
+          <div className="bg-white/80 backdrop-blur-2xl rounded-[60px] p-8 md:p-16 border border-white shadow-premium flex flex-col md:flex-row items-center md:items-end gap-10 md:gap-16">
             <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="w-48 h-48 md:w-72 md:h-72 rounded-full border-[12px] border-cream overflow-hidden shadow-premium z-10"
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+              className="relative"
             >
-              <img
-                src="https://picsum.photos/seed/indian-face/600/600"
-                alt="Ananya Sharma"
-                className="w-full h-full object-cover"
-                referrerPolicy="no-referrer"
-              />
+              <div className="w-48 h-48 md:w-64 md:h-64 rounded-[48px] overflow-hidden border-[8px] border-white shadow-2xl relative">
+                <img
+                  src="https://picsum.photos/seed/artisan-ananya/600/600"
+                  alt="Ananya Sharma"
+                  className="w-full h-full object-cover"
+                  referrerPolicy="no-referrer"
+                />
+              </div>
+              <div className="absolute -bottom-4 -right-4 w-16 h-16 bg-accent rounded-3xl flex items-center justify-center text-white shadow-xl border-4 border-white group cursor-pointer hover:rotate-12 transition-transform">
+                <Palette className="w-8 h-8" />
+              </div>
             </motion.div>
 
-            <div className="flex-1 pb-6">
-              <div className="flex flex-wrap items-end justify-between gap-6">
-                <motion.div
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.2 }}
-                >
-                  <div className="flex items-center gap-3 mb-3">
-                    <span className="badge-indian">Master Artisan</span>
-                    <span className="badge-indian !bg-accent/10 !text-accent !border-accent/20">Traditional Craft</span>
-                    <span className="text-accent font-medium text-sm tracking-widest uppercase ml-2">Est. 2008</span>
-                  </div>
-                  <h1 className="text-5xl md:text-7xl font-display font-bold text-primary mb-4 tracking-tight">Ananya Sharma</h1>
-                  <div className="flex flex-wrap items-center gap-6 text-text-soft">
-                    <span className="flex items-center gap-2 font-medium bg-white/50 px-4 py-2 rounded-full border border-highlight/20 shadow-sm">
-                      <MapPin className="w-5 h-5 text-accent" />
-                      <span className="text-primary">Jaipur, Rajasthan, India</span>
-                    </span>
-                    <div className="flex items-center gap-2">
-                      <div className="flex gap-0.5">
-                        {[...Array(5)].map((_, i) => (
-                          <Star key={i} className="w-4 h-4 fill-accent text-accent" />
-                        ))}
-                      </div>
-                      <span className="font-bold text-primary">4.9</span>
-                      <span className="text-sm">(1.2k+ reviews)</span>
-                    </div>
-                  </div>
-                </motion.div>
-
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3 }}
-                  className="flex flex-wrap items-center gap-4"
-                >
-                  <button
-                    onClick={() => setIsFollowing(!isFollowing)}
-                    className={`btn-primary group ${isFollowing ? '!bg-white !text-primary border-2 border-primary' : ''}`}
-                  >
-                    <Heart className={`w-5 h-5 transition-colors ${isFollowing ? 'fill-accent text-accent' : 'group-hover:fill-white'}`} />
-                    {isFollowing ? 'Following' : 'Follow Artisan'}
-                  </button>
-                  <button
-                    onClick={() => alert('Launching Messenger...')}
-                    className="btn-secondary !px-6 flex items-center gap-2 group"
-                  >
-                    <MessageCircle className="w-5 h-5 group-hover:text-accent" />
-                    Contact
-                  </button>
-                  <button
-                    onClick={() => {
-                      const el = document.getElementById('artisan-collection');
-                      el?.scrollIntoView({ behavior: 'smooth' });
-                    }}
-                    className="text-primary font-bold uppercase tracking-widest text-sm hover:text-accent transition-colors"
-                  >
-                    View Products
-                  </button>
-                  <button
-                    onClick={handleShare}
-                    className="p-4 bg-white/80 backdrop-blur-md border border-highlight/30 rounded-full hover:bg-white hover:shadow-lg transition-all"
-                  >
-                    <Share2 className="w-5 h-5 text-primary" />
-                  </button>
-                </motion.div>
+            <div className="flex-1 text-center md:text-left">
+              <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 mb-6">
+                <span className="badge-indian shadow-sm">Master Artisan</span>
+                <span className="badge-indian !bg-primary/5 !text-primary !border-primary/20">15+ Years Exp.</span>
+                <span className="badge-indian !bg-emerald-50 !text-emerald-600 !border-emerald-200">Verified Heritage</span>
               </div>
+              <h1 className="text-5xl md:text-7xl font-display font-bold text-primary mb-6 leading-tight">Ananya Sharma</h1>
+              <div className="flex flex-wrap items-center justify-center md:justify-start gap-8 text-text-soft">
+                <div className="flex items-center gap-2">
+                  <MapPin className="w-5 h-5 text-accent" />
+                  <span className="font-bold text-sm uppercase tracking-widest">Jaipur, Rajasthan</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Star className="w-5 h-5 text-accent fill-accent" />
+                  <span className="font-bold text-sm uppercase tracking-widest">4.9 (1240 Reviews)</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex gap-4">
+              <button
+                onClick={() => setIsFollowing(!isFollowing)}
+                className={`flex-1 md:flex-none btn-primary !py-4 !px-10 text-xs uppercase tracking-widest shadow-xl transition-all ${isFollowing ? '!bg-text-soft' : ''}`}
+              >
+                {isFollowing ? 'Following' : 'Follow Artisan'}
+              </button>
+              <button
+                onClick={handleShare}
+                className="w-14 h-14 rounded-2xl bg-cream flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all border border-highlight/10 shadow-sm"
+              >
+                <Share2 className="w-5 h-5" />
+              </button>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Content Section */}
-      <div className="container mx-auto px-6">
+      <div className="container-custom mt-20">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
           {/* Left Column: Story & Process */}
-          <div className="lg:col-span-8 space-y-20">
-            <section className="relative p-10 rounded-[40px] bg-white/40 border border-white/60 shadow-sm overflow-hidden">
+          <div className="lg:col-span-8 space-y-16">
+            <section className="bg-white rounded-[48px] p-10 md:p-16 border border-highlight/10 shadow-sm relative overflow-hidden">
               <div className="absolute inset-0 mandala-bg opacity-[0.02] pointer-events-none" />
-              <div className="absolute -left-10 top-0 text-[120px] font-display text-primary/5 select-none pointer-events-none">
-                Story
-              </div>
-              <h2 className="text-4xl font-display font-bold mb-8 text-primary flex items-center gap-4">
-                <Palette className="w-8 h-8 text-accent" />
-                The Journey of Blue Pottery
-                <div className="h-[1px] flex-1 bg-gradient-to-r from-accent/30 to-transparent" />
-              </h2>
-              <div className="prose prose-lg max-w-none text-text-soft leading-relaxed space-y-6 font-light">
-                <p className="first-letter:text-7xl first-letter:font-display first-letter:text-primary first-letter:mr-3 first-letter:float-left">
-                  Growing up in the vibrant streets of Jaipur, I was always surrounded by the mesmerizing blue pottery that our city is famous for. My journey began in my father's workshop, where I learned the delicate art of mixing quartz, glass, and multani mitti.
-                </p>
-                <p>
-                  I've spent the last 15 years perfecting the traditional floral motifs while introducing contemporary designs that appeal to a global audience. For me, blue pottery is not just a craft; it's a legacy that I am proud to carry forward. Each brushstroke is a conversation with history, and each kiln firing is a prayer for perfection.
-                </p>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
-                <div className="bg-white p-8 rounded-2xl border border-highlight/20 shadow-sm relative overflow-hidden group">
-                  <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:scale-110 transition-transform">
-                    <Palette className="w-12 h-12" />
+              <div className="relative z-10">
+                <div className="flex items-center gap-4 mb-8">
+                  <div className="h-[1px] w-12 bg-accent" />
+                  <span className="text-accent font-bold text-[10px] tracking-[0.3em] uppercase">The Story</span>
+                </div>
+                <div className="relative mb-12">
+                  <div className="absolute -left-10 top-0 text-[120px] font-display text-primary/5 select-none pointer-events-none">
+                    Story
                   </div>
-                  <h4 className="font-display font-bold text-xl mb-3 text-primary">Natural Pigments</h4>
-                  <p className="text-text-soft text-sm leading-relaxed">
-                    We use only natural mineral oxides to achieve our signature cobalt blue and turquoise hues, ensuring each piece is eco-friendly and unique.
+                  <p className="text-2xl md:text-3xl font-light text-text-soft/80 leading-relaxed italic relative z-10">
+                    "Growing up in the pink city of Jaipur, pottery wasn't just a craft I saw - it was the rhythm of our street, the dust in my clothes and the colors in my dreams."
                   </p>
                 </div>
-                <div className="bg-white p-8 rounded-2xl border border-highlight/20 shadow-sm relative overflow-hidden group">
-                  <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:scale-110 transition-transform">
-                    <Hammer className="w-12 h-12" />
-                  </div>
-                  <h4 className="font-display font-bold text-xl mb-3 text-primary">Hand-Painted</h4>
-                  <p className="text-text-soft text-sm leading-relaxed">
-                    Every motif is painted by hand using fine squirrel-hair brushes, a technique that requires years of practice and a steady hand.
+                <div className="prose prose-lg text-text-soft font-light leading-relaxed max-w-none first-letter:text-7xl first-letter:font-display first-letter:text-primary first-letter:mr-3 first-letter:float-left">
+                  <p className="mb-6">
+                    Ananya Sharma is one of the few remaining master artisans specializing in the authentic Turko-Persian Blue Pottery of Jaipur. Unlike traditional ceramics, this craft uses no clay. Instead, Ananya meticulously prepares a mixture of Egyptian paste, powdered glass, and borax, hand-shaping each piece before painting them with cobalt and turquoise pigments extracted from natural minerals.
+                  </p>
+                  <p>
+                    Her studio, 'Virasat Pottery', has become a beacon for preserving this 17th-century art form. Each piece she creates takes 15 to 20 days to complete, involving multiple stages of shaping, drying, painting, and a precise kiln firing process that she has perfected over two decades.
                   </p>
                 </div>
               </div>
             </section>
 
-            {/* Crafting Process */}
             <section>
-              <h2 className="text-4xl font-display font-bold mb-10 text-primary flex items-center gap-4">
-                <Hammer className="w-8 h-8 text-accent" />
-                The Crafting Process
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                {[
-                  { step: "01", title: "Molding", desc: "The unique dough is hand-molded into shapes without a potter's wheel." },
-                  { step: "02", title: "Painting", desc: "Intricate floral and geometric patterns are hand-painted with cobalt blue." },
-                  { step: "03", title: "Glazing", desc: "A special glass-based glaze is applied before firing at low temperatures." }
-                ].map((item, idx) => (
-                  <div key={idx} className="relative group">
-                    <div className="text-6xl font-display text-accent/10 absolute -top-6 -left-2 group-hover:text-accent/20 transition-colors">
-                      {item.step}
-                    </div>
-                    <div className="relative pt-4">
-                      <h4 className="font-bold text-primary mb-2">{item.title}</h4>
-                      <p className="text-text-soft text-sm leading-relaxed">{item.desc}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </section>
-
-            {/* Products Grid */}
-            <section id="artisan-collection">
-              <div className="flex justify-between items-end mb-10">
+              <div className="flex justify-between items-end mb-12 px-4">
                 <div>
-                  <h2 className="text-4xl font-display font-bold text-primary">The Collection</h2>
-                  <p className="text-text-soft mt-2">Curated pieces from Ananya's studio</p>
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="h-[1px] w-8 bg-accent/30" />
+                    <span className="text-accent font-bold text-[10px] tracking-widest uppercase">The Collection</span>
+                  </div>
+                  <h2 className="text-4xl font-display font-bold text-primary">Masterpieces from the Studio</h2>
                 </div>
-                <span className="text-accent font-bold text-sm tracking-widest uppercase">{artisanProducts.length} Masterpieces</span>
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
                 {artisanProducts.map(product => (
                   <ProductCard key={product.id} {...product} />
                 ))}
@@ -225,105 +158,82 @@ export const ArtisanProfile = () => {
             </section>
           </div>
 
-          {/* Right Column: Stats & Reviews */}
-          <div className="lg:col-span-4 space-y-12">
-            <div className="glass-premium p-10 rounded-3xl border border-white/50 shadow-premium sticky top-24">
-              <h3 className="text-2xl font-display font-bold mb-8 text-primary">Artisan Stats</h3>
-              <div className="space-y-8">
-                <div className="flex justify-between items-center group">
-                  <span className="text-text-soft group-hover:text-primary transition-colors">Total Sales</span>
-                  <div className="flex flex-col items-end">
-                    <span className="text-2xl font-display font-bold text-primary">1,240</span>
-                    <span className="text-[10px] text-accent uppercase tracking-widest">Global Orders</span>
-                  </div>
+          {/* Right Column: Details & Contact */}
+          <div className="lg:col-span-4 space-y-8">
+            <div className="bg-primary rounded-[48px] p-10 text-cream relative overflow-hidden shadow-2xl">
+              <div className="absolute inset-0 mandala-bg opacity-[0.05]" />
+              <div className="relative z-10 text-center">
+                <div className="w-20 h-20 bg-accent rounded-[28px] flex items-center justify-center mx-auto mb-8 shadow-xl">
+                  <MessageCircle className="w-10 h-10 text-white" />
                 </div>
-                <div className="h-[1px] w-full bg-highlight/20" />
-                <div className="flex justify-between items-center group">
-                  <span className="text-text-soft group-hover:text-primary transition-colors">Experience</span>
-                  <div className="flex flex-col items-end">
-                    <span className="text-2xl font-display font-bold text-primary">15+</span>
-                    <span className="text-[10px] text-accent uppercase tracking-widest">Years in Craft</span>
+                <h3 className="text-2xl font-display font-bold mb-4">Inquire About Commisions</h3>
+                <p className="text-cream/70 text-sm mb-8 leading-relaxed">
+                  Looking for a custom blue pottery set for your home or a special gift? Ananya takes limited private commissions throughout the year.
+                </p>
+                <button
+                  onClick={() => alert('Message feature coming soon!')}
+                  className="w-full py-5 bg-white text-primary rounded-2xl font-bold uppercase tracking-widest text-xs hover:bg-accent hover:text-white transition-all shadow-lg"
+                >
+                  Send a Message
+                </button>
+              </div>
+            </div>
+
+            <div className="bg-white rounded-[40px] p-10 border border-highlight/10 shadow-sm space-y-8">
+              <h4 className="text-[10px] font-bold uppercase tracking-widest text-accent text-center mb-4">Artisan's Specialities</h4>
+              <div className="space-y-4">
+                {[
+                  { icon: Palette, label: 'Hand-Painting', desc: 'Natural mineral pigments' },
+                  { icon: Hammer, label: 'Traditional Kiln', desc: 'Slow wood-fired process' },
+                  { icon: Scissors, label: 'Egyptian Paste', desc: 'Clay-free ancient formula' },
+                  { icon: Coffee, label: 'Functional Art', desc: 'Safe for daily heritage use' }
+                ].map((spec, i) => (
+                  <div key={i} className="flex items-center gap-4 p-4 rounded-2xl bg-cream/30 border border-highlight/5 group hover:border-accent/20 transition-all">
+                    <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center text-accent shadow-sm group-hover:scale-110 transition-transform">
+                      <spec.icon className="w-6 h-6" />
+                    </div>
+                    <div>
+                      <p className="text-primary font-bold text-sm tracking-tight">{spec.label}</p>
+                      <p className="text-text-soft text-[10px] uppercase font-medium">{spec.desc}</p>
+                    </div>
                   </div>
-                </div>
-                <div className="h-[1px] w-full bg-highlight/20" />
-                <div className="flex justify-between items-center group">
-                  <span className="text-text-soft group-hover:text-primary transition-colors">Response Rate</span>
-                  <div className="flex flex-col items-end">
-                    <span className="text-2xl font-display font-bold text-primary">98%</span>
-                    <span className="text-[10px] text-accent uppercase tracking-widest">Within 24 Hours</span>
-                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="bg-white rounded-[40px] p-10 border border-highlight/10 shadow-sm">
+              <div className="flex justify-between items-center mb-10">
+                <h4 className="text-[10px] font-bold uppercase tracking-widest text-accent">Patron Reviews</h4>
+                <div className="flex items-center gap-1 text-accent">
+                  <Star className="w-3 h-3 fill-accent" />
+                  <span className="text-xs font-bold">4.9</span>
                 </div>
               </div>
 
-              <button
-                onClick={() => alert('Launching Messenger...')}
-                className="w-full mt-10 btn-primary py-5 text-lg shadow-xl shadow-primary/20 flex items-center justify-center gap-3"
-              >
-                <MessageCircle className="w-6 h-6" />
-                Message Artisan
-              </button>
-
-              <div className="mt-12">
-                <h4 className="text-sm font-bold text-primary mb-6 uppercase tracking-widest">Recent Reviews</h4>
-                <div className="space-y-6">
-                  {reviews.map(review => (
-                    <div key={review.id} className="bg-white/50 p-6 rounded-2xl border border-white/80 shadow-sm">
-                      <div className="flex justify-between items-center mb-3">
-                        <span className="font-bold text-primary">{review.user}</span>
-                        <div className="flex gap-0.5">
-                          {[...Array(review.rating)].map((_, i) => (
-                            <Star key={i} className="w-3 h-3 fill-accent text-accent" />
-                          ))}
-                        </div>
-                      </div>
-                      <p className="text-sm text-text-soft italic">"{review.comment}"</p>
+              <div className="space-y-8">
+                {reviews.map((review) => (
+                  <div key={review.id} className="space-y-4 relative">
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm font-bold text-primary">{review.user}</span>
+                      <span className="text-[9px] text-text-soft uppercase tracking-widest">{review.date}</span>
                     </div>
-                  ))}
-                  <button
-                    onClick={() => alert('Loading more reviews...')}
-                    className="w-full py-2 text-accent text-sm font-bold hover:tracking-widest transition-all uppercase"
-                  >
-                    View All Reviews →
-                  </button>
-                </div>
+                    <p className="text-text-soft italic text-xs leading-relaxed">
+                      "{review.comment}"
+                    </p>
+                    <div className="h-[1px] w-full bg-highlight/10" />
+                  </div>
+                ))}
+                <button
+                  onClick={() => alert('View all reviews!')}
+                  className="w-full py-4 text-primary font-bold uppercase tracking-widest text-[9px] hover:text-accent transition-colors flex items-center justify-center gap-2"
+                >
+                  View All Reviews <ChevronRight className="w-3 h-3" />
+                </button>
               </div>
             </div>
           </div>
         </div>
       </div>
-
-      {/* CTA Section */}
-      <section className="section-spacing mt-32 relative overflow-hidden">
-        <div className="absolute inset-0 bg-primary/5 -z-10" />
-        <div className="absolute inset-0 mandala-bg opacity-[0.05] -z-10" />
-        <div className="container-custom text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-5xl font-display font-bold mb-6 text-primary">Support the Craft</h2>
-            <p className="text-text-soft mb-12 max-w-2xl mx-auto text-lg">
-              By following Ananya, you're not just supporting an artist; you're helping preserve a 14th-century craft for future generations.
-            </p>
-            <div className="flex flex-wrap justify-center gap-6">
-              <button
-                onClick={() => setIsFollowing(!isFollowing)}
-                className="btn-primary px-12 py-5 text-lg"
-              >
-                {isFollowing ? 'Following' : 'Follow Ananya'}
-              </button>
-              <button
-                onClick={handleShare}
-                className="btn-secondary px-12 py-5 text-lg"
-              >
-                Share Her Story
-              </button>
-            </div>
-          </motion.div>
-        </div>
-      </section>
     </div>
-
   );
 };
