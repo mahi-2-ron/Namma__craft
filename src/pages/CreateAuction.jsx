@@ -52,7 +52,7 @@ export const CreateAuction = () => {
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setPreviewImage(reader.result as string);
+        setPreviewImage(reader.result);
       };
       reader.readAsDataURL(file);
     }
