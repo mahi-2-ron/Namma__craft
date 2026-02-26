@@ -2,16 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Mic, MicOff, Sparkles, RefreshCw, Check, X, Languages, Volume2 } from 'lucide-react';
 
-interface VoiceAssistantProps {
-  onDataExtracted: (data: any) => void;
-}
-
-export const VoiceAssistant = ({ onDataExtracted }: VoiceAssistantProps) => {
+export const VoiceAssistant = ({ onDataExtracted }) => {
   const [isListening, setIsListening] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const [transcript, setTranscript] = useState('');
-  const [extractedData, setExtractedData] = useState<any>(null);
-  const [error, setError] = useState<string | null>(null);
+  const [extractedData, setExtractedData] = useState(null);
+  const [error, setError] = useState(null);
 
   // Simulated voice recording for demo purposes
   const startListening = () => {
@@ -34,13 +30,13 @@ export const VoiceAssistant = ({ onDataExtracted }: VoiceAssistantProps) => {
     }, 3000);
   };
 
-  const processWithAI = async (text: string) => {
+  const processWithAI = async (text) => {
     setIsProcessing(true);
     try {
       // Local processing logic to simulate extraction
       await new Promise(resolve => setTimeout(resolve, 1500));
 
-      const mockData: Record<string, any> = {
+      const mockData = {
         "I want to sell a hand-painted blue pottery vase from Jaipur. It's a traditional craft with floral motifs. I want to start the auction at 2500 rupees and it should last for 5 days.": {
           name: "Hand-Painted Blue Pottery Vase",
           category: "Pottery",
