@@ -2,12 +2,7 @@ import React from 'react';
 import { Sparkles, TrendingUp, Info, ShieldCheck, Zap } from 'lucide-react';
 import { motion } from 'motion/react';
 
-interface SmartPricingPanelProps {
-  name: string;
-  category?: string;
-}
-
-export const SmartPricingPanel = ({ name, category }: SmartPricingPanelProps) => {
+export const SmartPricingPanel = ({ name, category }) => {
   // Mock logic for demonstration
   const getSuggestedRange = () => {
     if (!name || name.length < 3) return { min: 1500, max: 3500 };
