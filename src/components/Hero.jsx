@@ -40,19 +40,25 @@ export const Hero = () => {
               A curated treasury of India's timeless artistry, where every piece carries the legacy of generations and the warmth of human touch.
             </p>
 
-            <div className="flex flex-wrap justify-center lg:justify-start gap-8">
+            <div className="flex flex-wrap justify-center lg:justify-start gap-6">
               <button
                 onClick={() => navigate('/discovery')}
-                className="btn-primary !px-12 !py-6 text-lg shadow-2xl shadow-primary/20 group flex items-center gap-4"
+                className="btn-primary !px-10 !py-6 text-lg shadow-2xl shadow-primary/20 group flex items-center gap-4"
               >
                 Cultural Discovery
                 <Sparkles className="w-5 h-5 group-hover:rotate-12 transition-transform" />
               </button>
               <button
                 onClick={() => navigate('/marketplace')}
-                className="btn-secondary !px-12 !py-6 text-lg group flex items-center gap-3"
+                className="btn-secondary !px-10 !py-6 text-lg group flex items-center gap-3"
               >
                 Marketplace
+              </button>
+              <button
+                onClick={() => navigate('/seller')}
+                className="w-full sm:w-auto px-10 py-6 border-2 border-accent text-accent rounded-full font-bold uppercase tracking-widest text-sm hover:bg-accent hover:text-white transition-all shadow-xl shadow-accent/10"
+              >
+                Become an Artisan
               </button>
             </div>
           </motion.div>
