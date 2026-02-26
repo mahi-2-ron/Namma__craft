@@ -14,8 +14,8 @@ import {
   HelpCircle,
   Plus
 } from 'lucide-react';
-import { SmartPricingPanel } from './SmartPricingPanel';
-import { VoiceAssistant } from './VoiceAssistant';
+import { SmartPricingPanel } from '../components/SmartPricingPanel';
+import { VoiceAssistant } from '../components/VoiceAssistant';
 
 export const CreateAuction = () => {
   const navigate = useNavigate();
