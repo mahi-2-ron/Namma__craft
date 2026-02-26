@@ -188,7 +188,7 @@ export const AdminDashboard = () => {
                       <div className="bg-white p-8 rounded-[32px] border border-highlight/10 shadow-sm">
                         <h3 className="text-xl font-display font-bold text-primary mb-6">Bidding Trends</h3>
                         <div className="h-64">
-                          <ResponsiveContainer width="100%" height="100%">
+                          <ResponsiveContainer width="100%" height={256}>
                             <AreaChart data={data}>
                               <defs>
                                 <linearGradient id="colorBids" x1="0" y1="0" x2="0" y2="1">
@@ -208,7 +208,7 @@ export const AdminDashboard = () => {
                       <div className="bg-white p-8 rounded-[32px] border border-highlight/10 shadow-sm">
                         <h3 className="text-xl font-display font-bold text-primary mb-6">Revenue Growth</h3>
                         <div className="h-64">
-                          <ResponsiveContainer width="100%" height="100%">
+                          <ResponsiveContainer width="100%" height={256}>
                             <BarChart data={data}>
                               <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f0f0f0" />
                               <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fontSize: 10 }} />
