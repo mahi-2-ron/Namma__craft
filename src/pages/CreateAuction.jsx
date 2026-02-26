@@ -66,7 +66,7 @@ export const CreateAuction = () => {
         {/* Header */}
         <div className="flex items-center justify-between mb-12">
           <button
-            onClick={() => navigate('/seller/dashboard')}
+            onClick={() => navigate('/seller')}
             className="flex items-center gap-2 text-text-soft hover:text-primary transition-all group"
           >
             <ChevronLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
@@ -82,7 +82,7 @@ export const CreateAuction = () => {
             <button
               onClick={() => {
                 alert('Auction published successfully! Your craft is now live.');
-                navigate('/seller/dashboard');
+                navigate('/seller');
               }}
               className="btn-primary !py-3 !px-10 text-xs uppercase tracking-widest shadow-xl shadow-primary/20"
             >
