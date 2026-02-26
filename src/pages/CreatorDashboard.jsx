@@ -142,6 +142,12 @@ export const CreatorDashboard = () => {
               Add Food Item
             </button>
             <button
+              onClick={() => navigate('/add-craft')}
+              className="btn-accent !py-2.5 !px-6 text-[10px] uppercase tracking-widest shadow-lg shadow-accent/20"
+            >
+              List New Craft
+            </button>
+            <button
               onClick={() => navigate('/create-auction')}
               className="btn-primary !py-2.5 !px-6 text-[10px] uppercase tracking-widest shadow-lg shadow-primary/20"
             >
@@ -159,69 +165,132 @@ export const CreatorDashboard = () => {
           {/* Stats Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
             <StatCard title="Active Auctions" value="12" change="+2" icon={Gavel} trend="up" label="Current Listings" />
-            <StatCard title="Total Bids" value="1,240" change="+18%" icon={TrendingUp} trend="up" label="Received Today" />
+            <StatCard title="Active Products" value="28" change="+5" icon={Package} trend="up" label="Store Items" />
             <StatCard title="Earnings (Feb)" value="₹45,200" change="+12.5%" icon={Wallet} trend="up" label="Monthly Revenue" />
-            <StatCard title="Auctions Won" value="8" change="+3" icon={CheckCircle2} trend="up" label="Pending Checkout" />
+            <StatCard title="Total Bids" value="1,240" change="+18%" icon={TrendingUp} trend="up" label="Received Today" />
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 mb-10">
-            {/* Active Auctions Section */}
+            {/* Main Content Area based on Tab */}
             <div className="lg:col-span-8 space-y-8">
-              <div className="bg-white rounded-[32px] border border-highlight/10 shadow-sm overflow-hidden">
-                <div className="p-8 border-b border-highlight/10 flex justify-between items-center">
-                  <h3 className="text-xl font-display font-bold text-primary">Active Auctions</h3>
-                  <button className="text-accent text-xs font-bold uppercase tracking-widest hover:tracking-[0.2em] transition-all">View All</button>
-                </div>
-                <div className="overflow-x-auto">
-                  <table className="w-full text-left">
-                    <thead>
-                      <tr className="bg-cream/20">
-                        <th className="px-8 py-5 text-[10px] font-bold uppercase tracking-widest text-text-soft/60">Product</th>
-                        <th className="px-8 py-5 text-[10px] font-bold uppercase tracking-widest text-text-soft/60">Highest Bid</th>
-                        <th className="px-8 py-5 text-[10px] font-bold uppercase tracking-widest text-text-soft/60">Bidders</th>
-                        <th className="px-8 py-5 text-[10px] font-bold uppercase tracking-widest text-text-soft/60">Time Left</th>
-                        <th className="px-8 py-5 text-[10px] font-bold uppercase tracking-widest text-text-soft/60">Status</th>
-                        <th className="px-8 py-5 text-[10px] font-bold uppercase tracking-widest text-text-soft/60 text-right">Action</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-highlight/5">
-                      {auctions.map((auc) => (
-                        <tr key={auc.id} className="hover:bg-cream/10 transition-colors group">
-                          <td className="px-8 py-5">
-                            <div className="flex items-center gap-4">
-                              <img src={auc.image} alt={auc.name} className="w-12 h-12 rounded-xl object-cover" />
-                              <p className="font-bold text-primary text-sm">{auc.name}</p>
-                            </div>
-                          </td>
-                          <td className="px-8 py-5">
-                            <p className="text-sm font-bold text-primary">₹{auc.currentBid.toLocaleString()}</p>
-                          </td>
-                          <td className="px-8 py-5">
-                            <p className="text-sm text-text-soft">{auc.bidders || 5} Bidders</p>
-                          </td>
-                          <td className="px-8 py-5">
-                            <div className="flex items-center gap-2 text-text-soft">
-                              <Clock className="w-3.5 h-3.5" />
-                              <span className="text-xs font-mono">{auc.timeLeft}</span>
-                            </div>
-                          </td>
-                          <td className="px-8 py-5">
-                            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest bg-emerald-50 text-emerald-600">
-                              <div className="w-1 h-1 rounded-full bg-emerald-600" />
-                              Active
-                            </span>
-                          </td>
-                          <td className="px-8 py-5 text-right">
-                            <button className="p-2 hover:bg-primary hover:text-white rounded-lg transition-all text-text-soft">
-                              <Edit3 className="w-4 h-4" />
-                            </button>
-                          </td>
+              {activeTab === 'dashboard' || activeTab === 'auctions' ? (
+                <div className="bg-white rounded-[32px] border border-highlight/10 shadow-sm overflow-hidden">
+                  <div className="p-8 border-b border-highlight/10 flex justify-between items-center">
+                    <h3 className="text-xl font-display font-bold text-primary">Active Auctions</h3>
+                    <button className="text-accent text-xs font-bold uppercase tracking-widest hover:tracking-[0.2em] transition-all">View All</button>
+                  </div>
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-left">
+                      <thead>
+                        <tr className="bg-cream/20">
+                          <th className="px-8 py-5 text-[10px] font-bold uppercase tracking-widest text-text-soft/60">Product</th>
+                          <th className="px-8 py-5 text-[10px] font-bold uppercase tracking-widest text-text-soft/60">Highest Bid</th>
+                          <th className="px-8 py-5 text-[10px] font-bold uppercase tracking-widest text-text-soft/60">Bidders</th>
+                          <th className="px-8 py-5 text-[10px] font-bold uppercase tracking-widest text-text-soft/60">Time Left</th>
+                          <th className="px-8 py-5 text-[10px] font-bold uppercase tracking-widest text-text-soft/60">Status</th>
+                          <th className="px-8 py-5 text-[10px] font-bold uppercase tracking-widest text-text-soft/60 text-right">Action</th>
                         </tr>
-                      ))}
-                    </tbody>
-                  </table>
+                      </thead>
+                      <tbody className="divide-y divide-highlight/5">
+                        {auctions.map((auc) => (
+                          <tr key={auc.id} className="hover:bg-cream/10 transition-colors group">
+                            <td className="px-8 py-5">
+                              <div className="flex items-center gap-4">
+                                <img src={auc.image} alt={auc.name} className="w-12 h-12 rounded-xl object-cover" />
+                                <p className="font-bold text-primary text-sm">{auc.name}</p>
+                              </div>
+                            </td>
+                            <td className="px-8 py-5">
+                              <p className="text-sm font-bold text-primary">₹{auc.currentBid.toLocaleString()}</p>
+                            </td>
+                            <td className="px-8 py-5">
+                              <p className="text-sm text-text-soft">{auc.bidders || 5} Bidders</p>
+                            </td>
+                            <td className="px-8 py-5">
+                              <div className="flex items-center gap-2 text-text-soft">
+                                <Clock className="w-3.5 h-3.5" />
+                                <span className="text-xs font-mono">{auc.timeLeft}</span>
+                              </div>
+                            </td>
+                            <td className="px-8 py-5">
+                              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest bg-emerald-50 text-emerald-600">
+                                <div className="w-1 h-1 rounded-full bg-emerald-600" />
+                                Active
+                              </span>
+                            </td>
+                            <td className="px-8 py-5 text-right">
+                              <button className="p-2 hover:bg-primary hover:text-white rounded-lg transition-all text-text-soft">
+                                <Edit3 className="w-4 h-4" />
+                              </button>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
-              </div>
+              ) : activeTab === 'products' ? (
+                <div className="bg-white rounded-[32px] border border-highlight/10 shadow-sm overflow-hidden">
+                  <div className="p-8 border-b border-highlight/10 flex justify-between items-center">
+                    <h3 className="text-xl font-display font-bold text-primary">Managed Products</h3>
+                    <button
+                      onClick={() => navigate('/add-craft')}
+                      className="text-accent text-xs font-bold uppercase tracking-widest hover:tracking-[0.2em] transition-all"
+                    >
+                      + List New
+                    </button>
+                  </div>
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-left">
+                      <thead>
+                        <tr className="bg-cream/20">
+                          <th className="px-8 py-5 text-[10px] font-bold uppercase tracking-widest text-text-soft/60">Item</th>
+                          <th className="px-8 py-5 text-[10px] font-bold uppercase tracking-widest text-text-soft/60">Price</th>
+                          <th className="px-8 py-5 text-[10px] font-bold uppercase tracking-widest text-text-soft/60">Stock</th>
+                          <th className="px-8 py-5 text-[10px] font-bold uppercase tracking-widest text-text-soft/60">Category</th>
+                          <th className="px-8 py-5 text-[10px] font-bold uppercase tracking-widest text-text-soft/60 text-right">Action</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-highlight/5">
+                        {craftProducts.slice(0, 5).map((prod) => (
+                          <tr key={prod.id} className="hover:bg-cream/10 transition-colors group">
+                            <td className="px-8 py-5">
+                              <div className="flex items-center gap-4">
+                                <img src={prod.image} alt={prod.name} className="w-12 h-12 rounded-xl object-cover" />
+                                <p className="font-bold text-primary text-sm">{prod.name}</p>
+                              </div>
+                            </td>
+                            <td className="px-8 py-5">
+                              <p className="text-sm font-bold text-primary">₹{prod.price.toLocaleString()}</p>
+                            </td>
+                            <td className="px-8 py-5">
+                              <p className="text-sm text-text-soft">12 Units</p>
+                            </td>
+                            <td className="px-8 py-5">
+                              <span className="px-3 py-1 bg-primary/5 text-primary text-[10px] font-bold uppercase rounded-full tracking-widest">
+                                {prod.category || 'Craft'}
+                              </span>
+                            </td>
+                            <td className="px-8 py-5 text-right">
+                              <button className="p-2 hover:bg-primary hover:text-white rounded-lg transition-all text-text-soft">
+                                <Edit3 className="w-4 h-4" />
+                              </button>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              ) : (
+                <div className="bg-white p-20 rounded-[32px] border border-highlight/10 shadow-sm text-center">
+                  <div className="w-20 h-20 bg-cream rounded-full flex items-center justify-center mx-auto mb-8 text-text-soft/40">
+                    <AlertCircle className="w-10 h-10" />
+                  </div>
+                  <h3 className="text-2xl font-display font-bold text-primary mb-2">No active {activeTab}</h3>
+                  <p className="text-text-soft">You don't have any items in this category yet.</p>
+                </div>
+              )}
 
               {/* Bid Insights Panel */}
               <div className="bg-white p-8 rounded-[32px] border border-highlight/10 shadow-sm">
