@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { MapPin, Star, Heart, MessageCircle, Share2, Palette, Hammer, Scissors, Coffee, Gem } from 'lucide-react';
-import { ProductCard } from './FeaturedProducts';
+import { ProductCard } from '../components/FeaturedProducts';
 
 export const ArtisanProfile = () => {
   const artisanProducts = [
