@@ -40,7 +40,7 @@ export const LiveAuction = () => {
     }, 5000);
 
     // Simulate being outbid after 10 seconds if user bid
-    let outbidTimeout: any;
+    let outbidTimeout;
     if (lastBidByMe && !isWon) {
       outbidTimeout = setTimeout(() => {
         const newBid = {
@@ -63,7 +63,7 @@ export const LiveAuction = () => {
     };
   }, [lastBidByMe, isWon, bids]);
 
-  const formatTime = (seconds: number) => {
+  const formatTime = (seconds) => {
     const h = Math.floor(seconds / 3600);
     const m = Math.floor((seconds % 3600) / 60);
     const s = seconds % 60;
