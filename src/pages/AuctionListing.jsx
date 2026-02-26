@@ -128,7 +128,12 @@ export const AuctionListing = () => {
           <p className="text-text-soft mb-10 max-w-xl mx-auto">
             Join our exclusive network of master artisans and collectors. List your authentic handcrafted items for auction.
           </p>
-          <button className="btn-accent px-12 py-5 text-lg">Apply as Artisan</button>
+          <button
+            onClick={() => navigate('/seller')}
+            className="btn-accent px-12 py-5 text-lg"
+          >
+            Apply as Artisan
+          </button>
         </div>
       </section>
     </div>
