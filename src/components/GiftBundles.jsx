@@ -143,7 +143,10 @@ export const GiftBundles = () => {
                 Mix and match your favorite crafts and flavors to create a personalized gift that tells a unique story.
               </p>
             </div>
-            <button className="btn-accent !px-12 !py-5 whitespace-nowrap shadow-2xl shadow-accent/20">
+            <button
+              onClick={() => navigate('/marketplace')}
+              className="btn-accent !px-12 !py-5 whitespace-nowrap shadow-2xl shadow-accent/20"
+            >
               Start Customizing
             </button>
           </div>
