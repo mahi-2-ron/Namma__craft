@@ -32,11 +32,11 @@ export const AddFoodItem = () => {
     type: 'Veg' // Veg, Non-veg, Vegan
   });
 
-  const [image, setImage] = useState<string | null>(null);
+  const [image, setImage] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
-  const handleVoiceData = (data: any) => {
+  const handleVoiceData = (data) => {
     setFormData(prev => ({
       ...prev,
       name: data.name || prev.name,
@@ -46,18 +46,18 @@ export const AddFoodItem = () => {
     }));
   };
 
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageUpload = (e) => {
     const file = e.target.files?.[0];
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setImage(reader.result as string);
+        setImage(reader.result);
       };
       reader.readAsDataURL(file);
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     setIsSubmitting(true);
     // Simulate API call
