@@ -60,7 +60,7 @@ export const Navbar = () => {
 
         <div className="flex items-center gap-4">
           <button
-            onClick={() => alert('Opening your collection...')}
+            onClick={() => navigate('/checkout')}
             className="p-3.5 hover:bg-accent/10 rounded-2xl transition-all relative group"
           >
             <ShoppingBag className="w-6 h-6 text-primary group-hover:text-accent transition-colors" />
