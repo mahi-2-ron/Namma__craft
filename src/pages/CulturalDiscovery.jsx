@@ -16,7 +16,7 @@ import {
   Filter,
   Calendar
 } from 'lucide-react';
-import { ProductCard } from './FeaturedProducts';
+import { ProductCard } from '../components/FeaturedProducts';
 
 const regions = [
   'Rajasthan', 'Karnataka', 'Kerala', 'West Bengal', 'Odisha', 'Gujarat', 'Uttar Pradesh', 'Tamil Nadu'
