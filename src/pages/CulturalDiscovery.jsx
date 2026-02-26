@@ -66,10 +66,10 @@ export const CulturalDiscovery = () => {
   const navigate = useNavigate();
   const [selectedRegion, setSelectedRegion] = useState('Rajasthan');
   const [selectedFestival, setSelectedFestival] = useState('Diwali');
-  const [activeInterests, setActiveInterests] = useState<string[]>(['decor', 'foods']);
+  const [activeInterests, setActiveInterests] = useState(['decor', 'foods']);
   const [searchQuery, setSearchQuery] = useState('');
 
-  const toggleInterest = (id: string) => {
+  const toggleInterest = (id) => {
     setActiveInterests(prev =>
       prev.includes(id) ? prev.filter(i => i !== id) : [...prev, id]
     );
@@ -159,8 +159,8 @@ export const CulturalDiscovery = () => {
                   key={interest.id}
                   onClick={() => toggleInterest(interest.id)}
                   className={`flex items-center gap-3 px-8 py-4 rounded-2xl text-xs font-bold uppercase tracking-widest transition-all border-2 ${activeInterests.includes(interest.id)
-                      ? 'bg-primary text-white border-primary shadow-lg'
-                      : 'bg-cream/30 text-text-soft border-transparent hover:bg-cream/50'
+                    ? 'bg-primary text-white border-primary shadow-lg'
+                    : 'bg-cream/30 text-text-soft border-transparent hover:bg-cream/50'
                     }`}
                 >
                   <interest.icon className="w-4 h-4" />
