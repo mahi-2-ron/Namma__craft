@@ -13,6 +13,7 @@ import { Login } from '../pages/Login';
 import { Checkout } from '../pages/Checkout';
 import { FoodDetail } from '../pages/FoodDetail';
 import { AddFoodItem } from '../pages/AddFoodItem';
+import { AddCraftItem } from '../pages/AddCraftItem';
 import { CulturalDiscovery } from '../pages/CulturalDiscovery';
 import { FestivalHome } from '../pages/FestivalHome';
 
@@ -32,6 +33,7 @@ export const AppRoutes = () => {
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/food-detail/:id" element={<FoodDetail />} />
             <Route path="/add-food" element={<AddFoodItem />} />
+            <Route path="/add-craft" element={<AddCraftItem />} />
             <Route path="/discovery" element={<CulturalDiscovery />} />
             <Route path="/festival-home" element={<FestivalHome />} />
         </Routes>
