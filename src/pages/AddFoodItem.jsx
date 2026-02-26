@@ -82,7 +82,7 @@ export const AddFoodItem = () => {
           <h2 className="text-3xl font-display font-bold text-primary mb-4">Listing Published!</h2>
           <p className="text-text-soft mb-10">Your traditional food item is now live in the marketplace. Local foodies can now discover your heritage recipe.</p>
           <div className="space-y-4">
-            <button onClick={() => navigate('/seller/dashboard')} className="w-full btn-primary !py-4">Back to Dashboard</button>
+            <button onClick={() => navigate('/seller')} className="w-full btn-primary !py-4">Back to Studio</button>
             <button onClick={() => setIsSuccess(false)} className="w-full py-4 text-accent font-bold uppercase tracking-widest text-xs">Add Another Item</button>
           </div>
         </motion.div>
@@ -96,10 +96,10 @@ export const AddFoodItem = () => {
 
       <div className="container-custom max-w-6xl mx-auto relative z-10">
         <button
-          onClick={() => navigate('/seller/dashboard')}
+          onClick={() => navigate('/seller')}
           className="flex items-center gap-2 text-text-soft hover:text-accent transition-all text-xs font-bold uppercase tracking-widest mb-10"
         >
-          <ArrowLeft className="w-4 h-4" /> Back to Dashboard
+          <ArrowLeft className="w-4 h-4" /> Back to Studio
         </button>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
