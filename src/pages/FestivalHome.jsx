@@ -78,8 +78,18 @@ export const FestivalHome = () => {
               {festivalData.description}
             </p>
             <div className="flex gap-6">
-              <button className="btn-accent !px-10 !py-5">Shop Collection</button>
-              <button className="btn-secondary !bg-white/10 !text-white !border-white/20 !px-10 !py-5">View Gift Guide</button>
+              <button
+                onClick={() => navigate('/marketplace')}
+                className="btn-accent !px-10 !py-5"
+              >
+                Shop Collection
+              </button>
+              <button
+                onClick={() => navigate('/discovery')}
+                className="btn-secondary !bg-white/10 !text-white !border-white/20 !px-10 !py-5"
+              >
+                View Gift Guide
+              </button>
             </div>
           </motion.div>
         </div>
@@ -112,7 +122,12 @@ export const FestivalHome = () => {
               </div>
               <h2 className="text-4xl font-display font-bold text-primary">Light Up Your Home</h2>
             </div>
-            <button className="text-accent font-bold text-[10px] uppercase tracking-widest hover:tracking-[0.2em] transition-all mb-8">View All Decor</button>
+            <button
+              onClick={() => navigate('/marketplace')}
+              className="text-accent font-bold text-[10px] uppercase tracking-widest hover:tracking-[0.2em] transition-all mb-8"
+            >
+              View All Decor
+            </button>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -139,7 +154,12 @@ export const FestivalHome = () => {
                   <p className="text-text-soft text-sm mb-6">By {craft.artisan}</p>
                   <div className="flex justify-between items-center">
                     <span className="text-2xl font-display font-bold text-accent">₹{craft.price}</span>
-                    <button className="btn-primary !py-3 !px-6 text-[10px]">Add to Cart</button>
+                    <button
+                      onClick={() => navigate('/checkout')}
+                      className="btn-primary !py-3 !px-6 text-[10px]"
+                    >
+                      Add to Cart
+                    </button>
                   </div>
                 </div>
               </motion.div>
@@ -159,7 +179,10 @@ export const FestivalHome = () => {
               <p className="text-text-soft text-lg mb-10 leading-relaxed">
                 Homemade sweets and savories prepared with traditional recipes and pure ingredients, just like at home.
               </p>
-              <button className="btn-secondary group flex items-center gap-3">
+              <button
+                onClick={() => navigate('/marketplace')}
+                className="btn-secondary group flex items-center gap-3"
+              >
                 Explore All Foods <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </button>
             </div>
@@ -180,7 +203,12 @@ export const FestivalHome = () => {
                     <p className="text-text-soft text-sm mb-6 italic">By {food.creator}</p>
                     <div className="flex justify-between items-center mt-auto">
                       <span className="text-xl font-display font-bold text-primary">₹{food.price}</span>
-                      <button className="text-primary font-bold text-[10px] uppercase tracking-widest hover:text-accent transition-colors">Order Now</button>
+                      <button
+                        onClick={() => navigate('/checkout')}
+                        className="text-primary font-bold text-[10px] uppercase tracking-widest hover:text-accent transition-colors"
+                      >
+                        Order Now
+                      </button>
                     </div>
                   </div>
                 </motion.div>
@@ -216,7 +244,12 @@ export const FestivalHome = () => {
                       <p className="text-cream/50 text-sm mb-6">{bundle.items}</p>
                       <div className="flex justify-between items-center mt-auto">
                         <span className="text-2xl font-display font-bold text-accent">₹{bundle.price}</span>
-                        <button className="btn-accent !py-3 !px-8 text-[10px]">Gift This</button>
+                        <button
+                          onClick={() => navigate('/checkout')}
+                          className="btn-accent !py-3 !px-8 text-[10px]"
+                        >
+                          Gift This
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -265,7 +298,12 @@ export const FestivalHome = () => {
                     <span className="text-primary font-bold">15+ Years of Heritage Crafting</span>
                   </div>
                 </div>
-                <button className="btn-primary !px-10 !py-5">View Ananya's Collection</button>
+                <button
+                  onClick={() => navigate('/artisan/1')}
+                  className="btn-primary !px-10 !py-5"
+                >
+                  View Ananya's Collection
+                </button>
               </div>
             </div>
           </div>
