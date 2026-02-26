@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { Star, Minus, Plus, ShoppingCart, Zap, Heart, Share2, ChevronLeft, ChevronRight, MapPin, Gavel, ShieldCheck, Truck, Package, Gem, Award } from 'lucide-react';
-import { ProductCard } from './FeaturedProducts';
+import { ProductCard } from '../components/FeaturedProducts';
 import { AuthenticityCertificate } from '../components/AuthenticityCertificate';
 
 export const ProductDetail = () => {
