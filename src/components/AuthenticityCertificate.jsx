@@ -2,25 +2,15 @@ import React from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, ShieldCheck, Award, MapPin, User, Calendar, Hash, Sparkles, Package } from 'lucide-react';
 
-interface AuthenticityCertificateProps {
-  isOpen: boolean;
-  onClose: () => void;
-  productName: string;
-  artisan: string;
-  region: string;
-  certificateId: string;
-  dateIssued: string;
-}
-
-export const AuthenticityCertificate = ({ 
-  isOpen, 
-  onClose, 
-  productName, 
-  artisan, 
-  region, 
-  certificateId, 
-  dateIssued 
-}: AuthenticityCertificateProps) => {
+export const AuthenticityCertificate = ({
+  isOpen,
+  onClose,
+  productName,
+  artisan,
+  region,
+  certificateId,
+  dateIssued
+}) => {
   return (
     <AnimatePresence>
       {isOpen && (
@@ -32,7 +22,7 @@ export const AuthenticityCertificate = ({
             onClick={onClose}
             className="absolute inset-0 bg-primary/40 backdrop-blur-md"
           />
-          
+
           <motion.div
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -42,9 +32,9 @@ export const AuthenticityCertificate = ({
             {/* Certificate Background Pattern */}
             <div className="absolute inset-0 mandala-bg opacity-[0.05] pointer-events-none" />
             <div className="absolute inset-0 border-[20px] border-accent/5 pointer-events-none" />
-            
+
             <div className="relative z-10 p-12 flex flex-col items-center text-center">
-              <button 
+              <button
                 onClick={onClose}
                 className="absolute top-6 right-6 p-2 hover:bg-accent/10 rounded-full transition-colors"
               >
@@ -55,7 +45,7 @@ export const AuthenticityCertificate = ({
               <div className="mb-8 flex flex-col items-center">
                 <div className="w-20 h-20 bg-accent/10 rounded-full flex items-center justify-center text-accent mb-6 relative">
                   <Award className="w-10 h-10" />
-                  <motion.div 
+                  <motion.div
                     animate={{ rotate: 360 }}
                     transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
                     className="absolute inset-0 border-2 border-dashed border-accent/30 rounded-full"
