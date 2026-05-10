@@ -8,7 +8,7 @@ A premium marketplace for authentic handmade crafts, empowering local artisans g
 - **Story-Driven Commerce**: Learn about the history and technique behind every piece.
 - **Secure Auctions**: Real-time bidding system for exclusive items.
 - **Smart Listings**: Assisted product upload for artisans.
-- **Modern UI**: Clean, responsive design inspired by traditional Indian aesthetics.
+
 
 ## Tech Stack
 
