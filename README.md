@@ -1,4 +1,5 @@
-# NammaCraft - Artisan Marketplace
+# NammaCraft - Artisan Marketplace ....
+
 
 A premium marketplace for authentic handmade crafts, empowering local artisans globally. NammaCraft provides a platform for artisans to showcase their work, share their stories, and connect with collectors through a modern, secure auction system.
 
